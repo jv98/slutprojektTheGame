@@ -1,13 +1,19 @@
-class Star extends FallingObject{
+class Star {
+
+    public size: number
+    public color: number
+    //public soundeffect: boolean
+    public img = p5.Image
+    public position: p5.Vector
+    public speed: p5.Vector
 
     constructor() {
-        super()
-        this.size = 10 //number
-        this.color = (250) //string
+        this.size = 10
+        this.color = (250)
         //this.soundeffect = boolean
-        //this.img = string
-        //this.position = p5.Vector
-        //this.speed = p5.Vector
+        this.img = loadImage('assets/star.png');
+        this.position = new p5.Vector()
+        this.speed = new p5.Vector()
     }
 
     update() {
@@ -15,7 +21,8 @@ class Star extends FallingObject{
     }
 
     draw() {
-    // ritar ut stjärnan
+        
+
     }
 
     falling() {

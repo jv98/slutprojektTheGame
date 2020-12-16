@@ -1,23 +1,24 @@
-
 abstract class FallingObject {
 
-    public size: number
-    public color: number
-    public soundeffect: boolean
-    public img: string
-    public position: p5.Vector
-    public speed: p5.Vector
+    public star: Star
+    // public size: number
+    // public color: number
+    // public soundeffect: boolean
+    // public img: p5.Image
+    // public position: p5.Vector
+    // public speed: p5.Vector
 
     constructor() {
-
+        this.star = new Star()
     }
 
     update() {
-
+        this.star.update()
     }
 
     draw() {
-
+        clear()
+        this.star.update()
     }
 
     falling() {
