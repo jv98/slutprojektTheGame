@@ -14,6 +14,7 @@ class TheGame {
     update() {
         this.star.update();
         this.badthing.update();
+        this.checkCollision()
     }
 
     draw() {
@@ -26,6 +27,13 @@ class TheGame {
     }
 
     checkCollision() {
+        let distance = dist(this.star.position.x, this.star.position.y, this.badthing.position.x, this.badthing.position.y)
+
+        if(distance < this.star.size + this.badthing.size) {
+            this.badthing.position.y = 0
+        } else {
+            
+        }
 
     }
 

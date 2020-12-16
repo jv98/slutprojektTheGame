@@ -12,7 +12,8 @@ class Star {
         //this.soundeffect = boolean
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width)
-        this.position = new p5.Vector(this.startRandom, 0)
+        //this.startRandom = 90
+        this.position = new p5.Vector(this.startRandom, 400)
         this.speed = 4
     }
 

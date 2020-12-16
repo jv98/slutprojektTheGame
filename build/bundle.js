@@ -68,7 +68,7 @@ class Star {
         this.size = 10;
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width);
-        this.position = new p5.Vector(this.startRandom, 0);
+        this.position = new p5.Vector(this.startRandom, 400);
         this.speed = 4;
     }
     update() {
@@ -97,6 +97,7 @@ class TheGame {
     update() {
         this.star.update();
         this.badthing.update();
+        this.checkCollision();
     }
     draw() {
         this.star.draw();
@@ -105,6 +106,12 @@ class TheGame {
     spawnNewObject() {
     }
     checkCollision() {
+        let distance = dist(this.star.position.x, this.star.position.y, this.badthing.position.x, this.badthing.position.y);
+        if (distance < this.star.size + this.badthing.size) {
+            this.badthing.position.y = 0;
+        }
+        else {
+        }
     }
 }
 //# sourceMappingURL=bundle.js.map
