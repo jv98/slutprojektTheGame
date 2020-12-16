@@ -1,5 +1,5 @@
 //---- GLOBAL VARIABLES ----//
-// let game: Game;
+let game: TheGame;
 
 /**
  * Built in preload function in P5
@@ -26,7 +26,7 @@ function setup() {
     // noCursor();
     
     
-    game = new Game();
+    game = new TheGame();
 }
 
 

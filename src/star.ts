@@ -1,36 +1,44 @@
 class Star {
 
     public size: number
-    public color: number
     //public soundeffect: boolean
     public img = p5.Image
     public position: p5.Vector
-    public speed: p5.Vector
+    public speed: number
+    public startRandom: number
 
     constructor() {
         this.size = 10
-        this.color = (250)
         //this.soundeffect = boolean
         this.img = loadImage('assets/star.png');
-        this.position = new p5.Vector()
-        this.speed = new p5.Vector()
+        this.startRandom = random(0, width)
+        this.position = new p5.Vector(this.startRandom, 0)
+        this.speed = 4
     }
 
     update() {
+        this.falling()
     
     }
 
     draw() {
-        fill(this.color)
-        image(this.img, this.position.x, this.position.y, 150, 150);
+        image(this.img, this.position.x, this.position.y, 40, 60);
 
     }
 
     falling() {
-        // för att få ett objekt att falla använd:
-        // ex. höjden - framerate/10 = -6/sekund
+        if(this.position.y <= height) {
+            if (this.position.y > height-5) {
+                this.position.y = this.size/2;
+               
+                this.position.x = random(0, width);
+            } else {
+                this.position.y += this.speed               
+            }
+        }
     }
 
+}
     // pointsIncrease(points) {
     //     if(this.posX >= characterPosition) {
     //         points++
@@ -39,4 +47,4 @@ class Star {
     //         //display none
     //     } 
     // }
-}
+
