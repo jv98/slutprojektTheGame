@@ -1,6 +1,4 @@
-import p5 from "p5"
-
-class FallingObject {
+abstract class FallingObject {
 
     public size: number
     public color: string
@@ -21,7 +19,7 @@ class FallingObject {
 
     }
 
-    fallen() {
+    falling() {
     // fallande function
     }
 

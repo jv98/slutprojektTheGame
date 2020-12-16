@@ -1,4 +1,22 @@
 "use strict";
+class FallingObject {
+    constructor() {
+    }
+    update() {
+    }
+    draw() {
+    }
+    falling() {
+    }
+    getPoints() {
+    }
+    random() {
+    }
+    loop() {
+    }
+}
+class Badthings extends FallingObject {
+}
 function preload() {
 }
 function setup() {
@@ -14,5 +32,23 @@ function draw() {
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+}
+class Star extends FallingObject {
+    constructor() {
+        super();
+    }
+    update() {
+    }
+    draw() {
+    }
+    falling() {
+    }
+    pointsIncrease(points) {
+        if (this.posX >= characterPosition) {
+            points++;
+        }
+        else if (this.posX >= gamePlanPosition) {
+        }
+    }
 }
 //# sourceMappingURL=bundle.js.map

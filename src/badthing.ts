@@ -1,0 +1,3 @@
+class Badthings extends FallingObject {
+    
+}
