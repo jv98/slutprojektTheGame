@@ -1,6 +1,6 @@
 abstract class FallingObject {
 
-    public star: Star
+    //public star: Star
     // public size: number
     // public color: number
     // public soundeffect: boolean
@@ -9,16 +9,16 @@ abstract class FallingObject {
     // public speed: p5.Vector
 
     constructor() {
-        this.star = new Star()
+        //this.star = new Star()
     }
 
     update() {
-        this.star.update()
+        //this.star.update()
     }
 
     draw() {
-        clear()
-        this.star.update()
+        //clear()
+        //this.star.update()
     }
 
     falling() {

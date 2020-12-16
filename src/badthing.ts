@@ -1,3 +1,3 @@
-class Badthings extends FallingObject {
-    
-}
+//class Badthings extends FallingObject {
+//    
+//}

@@ -26,7 +26,7 @@ function setup() {
     // noCursor();
     
     
-    // game = new Game();
+    game = new Game();
 }
 
 
@@ -45,8 +45,8 @@ function draw() {
 
     
 
-    // game.update();
-    // game.draw();
+    game.update();
+    game.draw();
 }
 
 

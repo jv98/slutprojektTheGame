@@ -21,7 +21,8 @@ class Star {
     }
 
     draw() {
-        
+        fill(this.color)
+        image(this.img, this.position.x, this.position.y, 150, 150);
 
     }
 
