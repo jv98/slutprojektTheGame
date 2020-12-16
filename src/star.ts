@@ -1,7 +1,13 @@
-class Star extends FallingObject {
+class Star extends FallingObject{
 
     constructor() {
         super()
+        this.size = 10 //number
+        this.color = (250) //string
+        //this.soundeffect = boolean
+        //this.img = string
+        //this.position = p5.Vector
+        //this.speed = p5.Vector
     }
 
     update() {
@@ -17,12 +23,12 @@ class Star extends FallingObject {
         // ex. höjden - framerate/10 = -6/sekund
     }
 
-    pointsIncrease(points) {
-        if(this.posX >= characterPosition) {
-            points++
-        } 
-        else if(this.posX >= gamePlanPosition) {
-            //display none
-        } 
-    }
+    // pointsIncrease(points) {
+    //     if(this.posX >= characterPosition) {
+    //         points++
+    //     } 
+    //     else if(this.posX >= gamePlanPosition) {
+    //         //display none
+    //     } 
+    // }
 }

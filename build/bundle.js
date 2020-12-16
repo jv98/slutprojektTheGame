@@ -1,20 +1,4 @@
 "use strict";
-class FallingObject {
-    constructor() {
-    }
-    update() {
-    }
-    draw() {
-    }
-    falling() {
-    }
-    getPoints() {
-    }
-    random() {
-    }
-    loop() {
-    }
-}
 class Badthings extends FallingObject {
 }
 function preload() {
@@ -22,6 +6,7 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
+    star = new Star();
 }
 function draw() {
     background('blue');
@@ -33,6 +18,7 @@ function draw() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+let star;
 class Star extends FallingObject {
     constructor() {
         super();

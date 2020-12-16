@@ -1,7 +1,8 @@
+
 abstract class FallingObject {
 
     public size: number
-    public color: string
+    public color: number
     public soundeffect: boolean
     public img: string
     public position: p5.Vector
@@ -36,3 +37,4 @@ abstract class FallingObject {
     }
 
 }
+
