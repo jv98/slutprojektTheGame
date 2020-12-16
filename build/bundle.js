@@ -11,6 +11,7 @@ class Player {
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
+        this.hitBoxBucketPosition = this.position.x + 42;
     }
     setupImages() {
         const playerImgCount = 6;
@@ -26,11 +27,13 @@ class Player {
             this.position.x -= this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgLeft[current];
+            this.hitBoxBucketPosition = this.position.x + 42;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgRight[current];
+            this.hitBoxBucketPosition = this.position.x + 108;
         }
     }
     update() {
@@ -39,6 +42,8 @@ class Player {
     draw() {
         this.frameCounter += 1;
         image(this.img, this.position.x, this.position.y, 150, 150);
+        ellipse(this.hitBoxBucketPosition, this.position.y + 50, 70, 15);
+        circle(50, 40, 20);
     }
 }
 let game;

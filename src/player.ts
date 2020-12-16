@@ -3,12 +3,11 @@ class Player {
     private playerImgRight: p5.Image[];
     private frameCounter: number;
     private img: p5.Image;
-    //private size: p5.Vector;
     private speed: p5.Vector;
     private characterHP: Number;
     private position: p5.Vector;
-    // private hitBoxPlayer: p5.Vector;
-    // private hitBoxBucket: p5.Vector;
+    //private hitBoxPlayer: p5.Vector;
+    private hitBoxBucketPosition: number;
 
     constructor() {  
         this.playerImgLeft = [];
@@ -21,6 +20,8 @@ class Player {
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
+        this.hitBoxBucketPosition = this.position.x + 42;
+        //this.hitBoxPlayer = ;
 
     }
 
@@ -40,11 +41,13 @@ class Player {
             this.position.x -= this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgLeft[current];
+            this.hitBoxBucketPosition = this.position.x + 42;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgRight[current];
+            this.hitBoxBucketPosition = this.position.x + 108;
         }
     }
 
@@ -57,6 +60,7 @@ class Player {
         this.frameCounter += 1;
 
         image(this.img, this.position.x, this.position.y, 150, 150);
-
+        ellipse(this.hitBoxBucketPosition, this.position.y + 50, 70, 15);
+        circle(50, 40, 20);
     }
 }
