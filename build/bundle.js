@@ -16,5 +16,7 @@ function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
 class Sound {
+    soundet() {
+    }
 }
 //# sourceMappingURL=bundle.js.map
