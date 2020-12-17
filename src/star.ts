@@ -1,5 +1,3 @@
-let drawStar = []
-
 class Star extends FallingObject{
 
     public size: number
@@ -16,7 +14,7 @@ class Star extends FallingObject{
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width)
         //this.startRandom = 90
-        this.position = createVector(this.startRandom, 400)
+        this.position = createVector(this.startRandom, 0)
         this.speed = 4
     }
 
@@ -33,7 +31,7 @@ class Star extends FallingObject{
     falling() {
         if(this.position.y <= height) {
             if (this.position.y > height-5) {
-                this.position.y = this.size/2;
+                //this.position.y = this.size/2;
                
                 this.position.x = random(0, width);
             } else {

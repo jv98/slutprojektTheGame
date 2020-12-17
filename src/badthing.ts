@@ -1,7 +1,3 @@
-//class Badthings extends FallingObject {
-//    
-//}
-let drawBad = []
 
 class BadThing extends FallingObject{
 

@@ -30,6 +30,7 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
         }
+        console.log(this.fallingObjects)
     }
 
     spawnNewObject() {
@@ -43,16 +44,23 @@ class TheGame {
     }
 
     checkCollision() {
-        let distance = dist(this.star.position.x, this.star.position.y, this.badthing.position.x, this.badthing.position.y)
+        //let distance = dist(this.star.position.x, this.star.position.y, this.badthing.position.x, this.badthing.position.y)
 
-        // for (const fallingObj of this.fallingObjects) {
-        //     if(fallingObj instanceof Star) {
-        //         this.badthing.position.x = 200   
-        // }
-
-        if(distance < this.star.size + this.badthing.size) {
-            this.badthing.position.y = 0
+        for (const fallingObj of this.fallingObjects) {
+            
+            if(fallingObj instanceof Star) {                
+                if(fallingObj.position.y >= height/2) {
+                    this.fallingObjects.splice(0, 1)
+                }            
+            }
+        }
+        for (const fallingObj of this.fallingObjects) {
+            
+            if(fallingObj instanceof BadThing) {                
+                if(fallingObj.position.y >= height/2) {
+                    this.fallingObjects.splice(0, 1)
+                }            
+            }
         }
     }
-
 }

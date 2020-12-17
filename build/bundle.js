@@ -15,7 +15,6 @@ class FallingObject {
     loop() {
     }
 }
-let drawBad = [];
 class BadThing extends FallingObject {
     constructor() {
         super();
@@ -63,14 +62,13 @@ function draw() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
-let drawStar = [];
 class Star extends FallingObject {
     constructor() {
         super();
         this.size = 10;
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width);
-        this.position = createVector(this.startRandom, 400);
+        this.position = createVector(this.startRandom, 0);
         this.speed = 4;
     }
     update() {
@@ -82,7 +80,6 @@ class Star extends FallingObject {
     falling() {
         if (this.position.y <= height) {
             if (this.position.y > height - 5) {
-                this.position.y = this.size / 2;
                 this.position.x = random(0, width);
             }
             else {
@@ -113,6 +110,7 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw();
         }
+        console.log(this.fallingObjects);
     }
     spawnNewObject() {
         if (this.spawnTimer > 1000) {
@@ -123,9 +121,19 @@ class TheGame {
         this.spawnTimer += deltaTime;
     }
     checkCollision() {
-        let distance = dist(this.star.position.x, this.star.position.y, this.badthing.position.x, this.badthing.position.y);
-        if (distance < this.star.size + this.badthing.size) {
-            this.badthing.position.y = 0;
+        for (const fallingObj of this.fallingObjects) {
+            if (fallingObj instanceof Star) {
+                if (fallingObj.position.y >= height / 2) {
+                    this.fallingObjects.splice(0, 1);
+                }
+            }
+        }
+        for (const fallingObj of this.fallingObjects) {
+            if (fallingObj instanceof BadThing) {
+                if (fallingObj.position.y >= height / 2) {
+                    this.fallingObjects.splice(0, 1);
+                }
+            }
         }
     }
 }
