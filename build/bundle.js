@@ -15,4 +15,6 @@ function draw() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
+class Sound {
+}
 //# sourceMappingURL=bundle.js.map
