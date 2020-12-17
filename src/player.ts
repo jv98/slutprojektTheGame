@@ -61,11 +61,12 @@ class Player {
     draw() {
         this.frameCounter += 1;
 
-        image(this.img, this.position.x, this.position.y, 150, 150);
-        fill('#ffffff');
-        ellipse(this.hitBoxBucketPosition, this.position.y + 48, 70, 18);
+        image(this.img, this.position.x, this.position.y + 630, 150, 150);
+        noFill();
+        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
         //circle(50, 40, 20);
         noFill();
-        rect(this.hitBoxPlayerPosition, this.position.y, 70, 100);
+        noStroke();
+        rect(this.hitBoxPlayerPosition, this.position.y + 630, 70, 100);
     }
 }
