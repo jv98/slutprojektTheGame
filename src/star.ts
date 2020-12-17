@@ -1,19 +1,22 @@
-class Star {
+let drawStar = []
+
+class Star extends FallingObject{
 
     public size: number
     //public soundeffect: boolean
-    public img = p5.Image
+    public img: p5.Image
     public position: p5.Vector
     public speed: number
     public startRandom: number
 
     constructor() {
+        super()
         this.size = 10
         //this.soundeffect = boolean
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width)
         //this.startRandom = 90
-        this.position = new p5.Vector(this.startRandom, 400)
+        this.position = createVector(this.startRandom, 400)
         this.speed = 4
     }
 

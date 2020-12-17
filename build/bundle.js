@@ -15,13 +15,14 @@ class FallingObject {
     loop() {
     }
 }
-class BadThing {
+let drawBad = [];
+class BadThing extends FallingObject {
     constructor() {
-        this.img = p5.Image;
+        super();
         this.size = 10;
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width);
-        this.position = new p5.Vector(this.startRandom, 0);
+        this.position = createVector(this.startRandom, 0);
         this.speed = 5;
     }
     update() {
@@ -62,13 +63,14 @@ function draw() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
-class Star {
+let drawStar = [];
+class Star extends FallingObject {
     constructor() {
-        this.img = p5.Image;
+        super();
         this.size = 10;
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width);
-        this.position = new p5.Vector(this.startRandom, 400);
+        this.position = createVector(this.startRandom, 400);
         this.speed = 4;
     }
     update() {
@@ -93,24 +95,37 @@ class TheGame {
     constructor() {
         this.star = new Star();
         this.badthing = new BadThing();
+        this.fallingObjects = [];
+        this.spawnTimer = 0;
     }
     update() {
         this.star.update();
         this.badthing.update();
         this.checkCollision();
+        this.spawnNewObject();
+        for (const fallingObj of this.fallingObjects) {
+            fallingObj.update();
+        }
     }
     draw() {
         this.star.draw();
         this.badthing.draw();
+        for (const fallingObj of this.fallingObjects) {
+            fallingObj.draw();
+        }
     }
     spawnNewObject() {
+        if (this.spawnTimer > 1000) {
+            this.spawnTimer = 0;
+            this.fallingObjects.push(new Star());
+            this.fallingObjects.push(new BadThing());
+        }
+        this.spawnTimer += deltaTime;
     }
     checkCollision() {
         let distance = dist(this.star.position.x, this.star.position.y, this.badthing.position.x, this.badthing.position.y);
         if (distance < this.star.size + this.badthing.size) {
             this.badthing.position.y = 0;
-        }
-        else {
         }
     }
 }

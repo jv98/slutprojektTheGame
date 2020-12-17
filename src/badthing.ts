@@ -1,23 +1,25 @@
 //class Badthings extends FallingObject {
 //    
 //}
+let drawBad = []
 
-class BadThing {
+class BadThing extends FallingObject{
 
     public size: number
     //public soundeffect: boolean
-    public img = p5.Image
+    public img: p5.Image
     public position: p5.Vector
     public speed: number
     public startRandom: number
 
     constructor() {
+        super()
         this.size = 10
         //this.soundeffect = boolean
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width)
         //this.startRandom = 100
-        this.position = new p5.Vector(this.startRandom, 0)
+        this.position = createVector(this.startRandom, 0)
         this.speed = 5
     }
 
