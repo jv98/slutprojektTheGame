@@ -46,7 +46,7 @@ class Player {
         this.frameCounter += 1;
         image(this.img, this.position.x, this.position.y, 150, 150);
         fill('#ffffff');
-        ellipse(this.hitBoxBucketPosition, this.position.y + 50, 70, 15);
+        ellipse(this.hitBoxBucketPosition, this.position.y + 48, 70, 18);
         noFill();
         rect(this.hitBoxPlayerPosition, this.position.y, 70, 100);
     }
