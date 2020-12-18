@@ -28,42 +28,52 @@ class TheGame {
     }
 
     draw() {
-        this.star.draw();
-        this.badthing.draw();
-        this.extraLife.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
         }
-        console.log(this.fallingObjects)
     }
 
     spawnNewObject() {
-        if (this.spawnTimer > 1000) {
+        if (this.spawnTimer > 2500) {
             this.spawnTimer = 0;
             this.fallingObjects.push(new Star());
             this.fallingObjects.push(new BadThing());
+            this.fallingObjects.push(new ExtraLife());
         }
                 
         this.spawnTimer += deltaTime
     }
 
     checkCollision() {
-        //let distance = dist(this.star.position.x, this.star.position.y, this.badthing.position.x, this.badthing.position.y)
-
-        for (const fallingObj of this.fallingObjects) {
+        for (const fallingObj of this.fallingObjects) {                 
+        let i = this.fallingObjects.indexOf(fallingObj)
             
-            if(fallingObj instanceof Star) {                
-                if(fallingObj.position.y >= height/2) {
-                    this.fallingObjects.splice(0, 1)
-                }            
-            }
-        }
-        for (const fallingObj of this.fallingObjects) {
-            
+            if(fallingObj instanceof Star) {     
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
+                if(distance < fallingObj.size + this.extraLife.size) {
+                    this.fallingObjects.splice(i, 1)
+                    console.log("Poäng")
+                }  else if (fallingObj.position.y > windowHeight) {
+                    this.fallingObjects.splice(i, 1)
+                }   
+            }   
             if(fallingObj instanceof BadThing) {                
-                if(fallingObj.position.y >= height/2) {
-                    this.fallingObjects.splice(0, 1)
-                }            
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
+                if(distance < fallingObj.size + this.extraLife.size) {
+                    this.fallingObjects.splice(i, 1)
+                    console.log("Skada")
+                }   else if (fallingObj.position.y > windowHeight) {
+                        this.fallingObjects.splice(i, 1)
+                }             
+            }
+            if(fallingObj instanceof ExtraLife) {                
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
+                if(distance < fallingObj.size + this.extraLife.size) {
+                    this.fallingObjects.splice(i, 1)
+                    console.log("Skada")
+                }   else if (fallingObj.position.y > windowHeight) {
+                        this.fallingObjects.splice(i, 1)
+                }             
             }
         }
     }

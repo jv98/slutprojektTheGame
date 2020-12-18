@@ -1,14 +1,12 @@
 
 abstract class FallingObject {
 
-    // public star: Star
-    // public badthing: BadThing
-    // public size: number
-    // public color: number
-    // public soundeffect: boolean
-    // public img: p5.Image
-    // public position: p5.Vector
-    // public speed: p5.Vector
+    // protected size: number
+    // protected color: number
+    // protected soundeffect: boolean
+    // protected img: p5.Image
+    // protected position: p5.Vector
+    // protected speed: p5.Vector
 
     constructor() {
         // this.size = #

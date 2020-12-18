@@ -14,30 +14,24 @@ class BadThing extends FallingObject{
         //this.soundeffect = boolean
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width)
-        //this.startRandom = 100
         this.position = createVector(this.startRandom, 0)
-        this.speed = 5
+        this.speed = 10
     }
 
     update() {
-        this.falling()
-    
+        this.falling()    
     }
 
     draw() {
         image(this.img, this.position.x, this.position.y, 40, 60);
-
     }
 
     falling() {
         if(this.position.y <= height) {
             if (this.position.y > height-5) {
-                this.position.y = - this.size/2;
-                this.position.x = random(0, width);
             } else {
                 this.position.y += this.speed                
             }
         }
     }
-
 }
