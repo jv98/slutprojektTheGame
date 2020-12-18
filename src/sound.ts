@@ -1,9 +1,9 @@
-class Sound{
+// class Sound{
 
-    public ljud: number
-    public soundhit: number
+//     public ljud: number
+//     public soundhit: number
 
-    soundet(){
+//     soundet(){
         
-    }
-}
+//     }
+// }
