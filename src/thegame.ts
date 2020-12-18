@@ -54,13 +54,17 @@ class TheGame {
         let i = this.fallingObjects.indexOf(fallingObj)
             
             if(fallingObj instanceof Star) {     
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
-                if(distance < fallingObj.size + this.extraLife.size) {
-                    this.fallingObjects.splice(i, 1)
-                    console.log("Poäng")
-                }  else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1)
-                }   
+                if (this.player.collision(fallingObj.position)) {
+                    this.fallingObjects.splice(i, 1);
+                    console.log("Poäng") //updatera poäng i statusbar
+                }
+                // let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
+                // if(distance < fallingObj.size + this.extraLife.size) {
+                //     
+                //     console.log("Poäng")
+                // }  else if (fallingObj.position.y > windowHeight) {
+                //     this.fallingObjects.splice(i, 1)
+                // }   
             }   
             if(fallingObj instanceof BadThing) {                
                 let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
