@@ -1,6 +1,14 @@
 //---- GLOBAL VARIABLES ----//
 let game: TheGame;
 
+interface Sounds {
+    key: p5.SundFile;
+    ouch: p5.SundFile;
+    life: p5.SundFile;
+    backgroundMusic: p5.SoundFile;
+    star: p5.SoundFile;
+}
+let sounds: Sounds;
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -10,6 +18,13 @@ function preload() {
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
+    sounds={
+        key: loadSound(''),
+        ouch: loadSound(''),
+        life: loadSound(''),
+        backgroundMusic: loadSound(''),
+        star: loadSound (''),
+    }
 }
 
 
