@@ -54,28 +54,29 @@ class TheGame {
         let i = this.fallingObjects.indexOf(fallingObj)
             
             if(fallingObj instanceof Star) {     
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
-                if(distance < fallingObj.size + this.extraLife.size) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxBucketPosition, this.player.position.y)          
+                if(distance < fallingObj.size + this.player.size) {
                     this.fallingObjects.splice(i, 1)
-                    console.log("Poäng")
+                   
                 }  else if (fallingObj.position.y > windowHeight) {
                     this.fallingObjects.splice(i, 1)
                 }   
+               
             }   
             if(fallingObj instanceof BadThing) {                
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
-                if(distance < fallingObj.size + this.extraLife.size) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxPlayerPosition, this.player.position.y)          
+                if(distance < fallingObj.size + this.player.size) {
                     this.fallingObjects.splice(i, 1)
-                    console.log("Skada")
+                    
                 }   else if (fallingObj.position.y > windowHeight) {
                         this.fallingObjects.splice(i, 1)
                 }             
             }
             if(fallingObj instanceof ExtraLife) {                
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
-                if(distance < fallingObj.size + this.extraLife.size) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxPlayerPosition, this.player.position.y)          
+                if(distance < fallingObj.size + this.player.size) {
                     this.fallingObjects.splice(i, 1)
-                    console.log("Skada")
+                   
                 }   else if (fallingObj.position.y > windowHeight) {
                         this.fallingObjects.splice(i, 1)
                 }             
