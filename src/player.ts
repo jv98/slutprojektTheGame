@@ -18,6 +18,7 @@ function rectangleOverlapsPoint(rectangle: Rectangle, point: Point): Boolean {
 }
 
 class Player {
+    private debug: Boolean;
     private playerImgLeft: p5.Image[];
     private playerImgRight: p5.Image[];
     private frameCounter: number;
@@ -25,11 +26,13 @@ class Player {
     private speed: p5.Vector;
     private characterHP: Number;
     private position: p5.Vector;
-    private hitBoxPlayerPosition: number;
-    private hitBoxBucketPosition: number;
+    //private hitBoxPlayerPosition: number;
+    //private hitBoxBucketPosition: number;
+    private bucketHitboxRectangle: Rectangle;
     private playerHitboxRectangle: Rectangle;
 
     constructor() {  
+        this.debug = true;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
@@ -40,13 +43,19 @@ class Player {
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
-        this.hitBoxBucketPosition = this.position.x + 42;
-        this.hitBoxPlayerPosition = this.position.x + 78;
+        // this.hitBoxBucketPosition = this.position.x + 42;
+        // this.hitBoxPlayerPosition = this.position.x + 78;
         this.playerHitboxRectangle = {
             x: this.position.x + 78,
             y: 630,
             width: 70,
             height: 100,
+        }
+        this.bucketHitboxRectangle = {
+            x: this.position.x + 5,
+            y: 670,
+            width: 70,
+            height: 8,
         }
     }
 
@@ -57,8 +66,7 @@ class Player {
         }
         for (let i = 1; i <= playerImgCount; i++) {
             this.playerImgRight.push(loadImage('assets/player-right' + i + '.png'));
-        }
-        
+        }   
     }
 
     movement() {
@@ -66,7 +74,7 @@ class Player {
             this.position.x -= this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgLeft[current];
-            this.hitBoxBucketPosition = this.position.x + 42;
+            this.bucketHitboxRectangle.x = this.position.x + 5;
             this.playerHitboxRectangle.x = this.position.x + 78;
             //this.hitBoxPlayerPosition = this.position.x + 78;
         }
@@ -74,7 +82,7 @@ class Player {
             this.position.x += this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgRight[current];
-            this.hitBoxBucketPosition = this.position.x + 108;
+            this.bucketHitboxRectangle.x = this.position.x + 73;
             this.playerHitboxRectangle.x = this.position.x;
             //this.hitBoxPlayerPosition = this.position.x;
         }
@@ -82,9 +90,6 @@ class Player {
 
     update() {
         this.movement();
-        if (this.collision({x: 300, y: this.position.y + 678})) {
-            console.log("Collision");
-        }
     }
 
     draw() {
@@ -93,9 +98,11 @@ class Player {
         image(this.img, this.position.x, this.position.y + 630, 150, 150);
         fill("#000000");
         circle(300, this.position.y + 630, 10);
-        // noFill();
-        // noStroke();
-        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
+        if (!this.debug) {
+            noFill();
+            noStroke();
+        }
+        // ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
         //rect(this.hitBoxPlayerPosition, this.position.y + 630, 70, 100);
         rect(
             this.playerHitboxRectangle.x,
@@ -103,9 +110,25 @@ class Player {
             this.playerHitboxRectangle.width,
             this.playerHitboxRectangle.height
         );
+
+        rect(
+            this.bucketHitboxRectangle.x,
+            this.bucketHitboxRectangle.y,
+            this.bucketHitboxRectangle.width,
+            this.bucketHitboxRectangle.height
+        );
     }
 
-    public collision(point: Point): Boolean {
-        return rectangleOverlapsPoint(this.playerHitboxRectangle, point);
+    public playerCollision(obj: any): Boolean {
+        return rectangleOverlapsPoint(this.playerHitboxRectangle, obj.position);
+    }
+
+    public bucketCollision(obj: any): Boolean {
+        const rightBottomCorner = {
+            x: obj.position.x + 40,
+            y: obj.position.y,
+        };
+        return (rectangleOverlapsPoint(this.bucketHitboxRectangle, obj.position) ||
+                rectangleOverlapsPoint(this.bucketHitboxRectangle, rightBottomCorner));
     }
 }

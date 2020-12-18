@@ -22,7 +22,7 @@ class BadThing extends FallingObject {
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
-        this.speed = 10;
+        this.speed = 3;
     }
     update() {
         this.falling();
@@ -73,6 +73,7 @@ function rectangleOverlapsPoint(rectangle, point) {
 }
 class Player {
     constructor() {
+        this.debug = true;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
@@ -83,13 +84,17 @@ class Player {
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
-        this.hitBoxBucketPosition = this.position.x + 42;
-        this.hitBoxPlayerPosition = this.position.x + 78;
         this.playerHitboxRectangle = {
             x: this.position.x + 78,
             y: 630,
             width: 70,
             height: 100,
+        };
+        this.bucketHitboxRectangle = {
+            x: this.position.x + 5,
+            y: 670,
+            width: 70,
+            height: 8,
         };
     }
     setupImages() {
@@ -106,33 +111,42 @@ class Player {
             this.position.x -= this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgLeft[current];
-            this.hitBoxBucketPosition = this.position.x + 42;
+            this.bucketHitboxRectangle.x = this.position.x + 5;
             this.playerHitboxRectangle.x = this.position.x + 78;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgRight[current];
-            this.hitBoxBucketPosition = this.position.x + 108;
+            this.bucketHitboxRectangle.x = this.position.x + 73;
             this.playerHitboxRectangle.x = this.position.x;
         }
     }
     update() {
         this.movement();
-        if (this.collision({ x: 300, y: this.position.y + 678 })) {
-            console.log("Collision");
-        }
     }
     draw() {
         this.frameCounter += 1;
         image(this.img, this.position.x, this.position.y + 630, 150, 150);
         fill("#000000");
         circle(300, this.position.y + 630, 10);
-        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
+        if (!this.debug) {
+            noFill();
+            noStroke();
+        }
         rect(this.playerHitboxRectangle.x, this.playerHitboxRectangle.y, this.playerHitboxRectangle.width, this.playerHitboxRectangle.height);
+        rect(this.bucketHitboxRectangle.x, this.bucketHitboxRectangle.y, this.bucketHitboxRectangle.width, this.bucketHitboxRectangle.height);
     }
-    collision(point) {
-        return rectangleOverlapsPoint(this.playerHitboxRectangle, point);
+    playerCollision(obj) {
+        return rectangleOverlapsPoint(this.playerHitboxRectangle, obj.position);
+    }
+    bucketCollision(obj) {
+        const rightBottomCorner = {
+            x: obj.position.x + 40,
+            y: obj.position.y,
+        };
+        return (rectangleOverlapsPoint(this.bucketHitboxRectangle, obj.position) ||
+            rectangleOverlapsPoint(this.bucketHitboxRectangle, rightBottomCorner));
     }
 }
 let game;
@@ -216,29 +230,21 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             let i = this.fallingObjects.indexOf(fallingObj);
             if (fallingObj instanceof Star) {
-                if (this.player.collision(fallingObj.position)) {
+                if (this.player.bucketCollision(fallingObj)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Poäng");
                 }
             }
             if (fallingObj instanceof BadThing) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-                if (distance < fallingObj.size + this.extraLife.size) {
+                if (this.player.playerCollision(fallingObj)) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Skada");
-                }
-                else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1);
+                    console.log("Ouch");
                 }
             }
             if (fallingObj instanceof ExtraLife) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-                if (distance < fallingObj.size + this.extraLife.size) {
+                if (this.player.playerCollision(fallingObj)) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Skada");
-                }
-                else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1);
+                    console.log("1up!!!");
                 }
             }
         }
