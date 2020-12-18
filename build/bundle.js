@@ -6,15 +6,16 @@ class GameStatusbar {
         this.score = 0;
         this.img = loadImage('assets/muteIcon.png');
         this.starImg = loadImage('assets/starPoints.png');
-        this.muteIcon = loadImage('assets/muteIcon.png');
+        this.noVolume = loadImage('assets/noVolume.png');
         this.position = new p5.Vector();
+        this.position.x = 100;
     }
     update() {
     }
     draw() {
-        image(this.img, this.position.x, this.position.y);
+        image(this.img, this.position.x, this.position.y + 10, 100, 100);
         image(this.starImg, this.position.x, this.position.y);
-        image(this.muteIcon, this.position.x, this.position.y);
+        image(this.noVolume, this.position.x, this.position.y);
         fill('black');
         textFont('Poppins');
         text("HP :" + this.score, 600, 600);
