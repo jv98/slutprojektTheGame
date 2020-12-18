@@ -56,7 +56,7 @@ class TheGame {
             if(fallingObj instanceof Star) {     
                 if (this.player.bucketCollision(fallingObj)) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Poäng") //updatera poäng i statusbar
+                    console.log("Poäng") //Add points in statusbar + sound
                 }
                 // let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
                 // if(distance < fallingObj.size + this.extraLife.size) {
@@ -69,7 +69,7 @@ class TheGame {
             if (fallingObj instanceof BadThing) {      
                 if (this.player.playerCollision(fallingObj)) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Ouch");
+                    console.log("Ouch"); // Decrease life in statusBar + sound
                 }
                 
                 // let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          
@@ -83,7 +83,7 @@ class TheGame {
             if (fallingObj instanceof ExtraLife) {             
                 if (this.player.playerCollision(fallingObj)) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("1up!!!");
+                    console.log("1up!!!"); // Add life to statusBar
                 }
                 
                 // let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y)          

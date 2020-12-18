@@ -17,6 +17,27 @@ function rectangleOverlapsPoint(rectangle: Rectangle, point: Point): Boolean {
     return false;
 }
 
+function rectangleOverlapsRect(rectangle1: Rectangle, rectangle2: Rectangle) {
+    const rightBottomCorner = {
+        x: rectangle2.x + rectangle2.width,
+        y: rectangle2.y,
+    }
+
+    const rightUpperCorner = {
+        x: rectangle2.x + rectangle2.width,
+        y: rectangle2.y + rectangle2.height,
+    }
+
+    const leftUpperCorner = {
+        x: rectangle2.x,
+        y: rectangle2.y + rectangle2.height,
+    }
+    
+    return (rectangleOverlapsPoint(rectangle1, rectangle2) ||
+            rectangleOverlapsPoint(rectangle1, rightBottomCorner) ||
+            rectangleOverlapsPoint(rectangle1, rightUpperCorner) ||
+            rectangleOverlapsPoint(rectangle1, leftUpperCorner));
+}
 class Player {
     private debug: Boolean;
     private playerImgLeft: p5.Image[];
