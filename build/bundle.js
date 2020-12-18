@@ -42,6 +42,32 @@ class BadThing extends FallingObject {
         }
     }
 }
+class ExtraLife extends FallingObject {
+    constructor() {
+        super();
+        this.size = 10;
+        this.img = loadImage('assets/1-up.png');
+        this.startRandom = width / 2;
+        this.position = createVector(this.startRandom, height / 2 - 50);
+        this.speed = 4;
+    }
+    update() {
+        image(this.img, this.position.x, this.position.y, 40, 60);
+    }
+    draw() {
+        image(this.img, this.position.x, this.position.y, 40, 60);
+    }
+    falling() {
+        if (this.position.y <= height) {
+            if (this.position.y > height - 5) {
+                this.position.x = random(0, width);
+            }
+            else {
+                this.position.y += this.speed;
+            }
+        }
+    }
+}
 let game;
 function preload() {
 }
@@ -92,12 +118,14 @@ class TheGame {
     constructor() {
         this.star = new Star();
         this.badthing = new BadThing();
+        this.extraLife = new ExtraLife();
         this.fallingObjects = [];
         this.spawnTimer = 0;
     }
     update() {
         this.star.update();
         this.badthing.update();
+        this.extraLife.update();
         this.checkCollision();
         this.spawnNewObject();
         for (const fallingObj of this.fallingObjects) {
@@ -107,6 +135,7 @@ class TheGame {
     draw() {
         this.star.draw();
         this.badthing.draw();
+        this.extraLife.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw();
         }

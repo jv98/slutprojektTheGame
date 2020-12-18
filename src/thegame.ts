@@ -2,6 +2,7 @@ class TheGame {
     // private environment: Environment;
     private star: Star;
     private badthing: BadThing;
+    private extraLife: ExtraLife;
     private fallingObjects: FallingObject[];
     private spawnTimer: number
     // private startMenu: StartMenu;
@@ -10,6 +11,7 @@ class TheGame {
     constructor() {
         this.star = new Star();
         this.badthing = new BadThing();
+        this.extraLife = new ExtraLife();
         this.fallingObjects = []
         this.spawnTimer = 0
     }
@@ -17,6 +19,7 @@ class TheGame {
     update() {
         this.star.update();
         this.badthing.update();
+        this.extraLife.update();
         this.checkCollision()
         this.spawnNewObject()
         for (const fallingObj of this.fallingObjects) {
@@ -27,6 +30,7 @@ class TheGame {
     draw() {
         this.star.draw();
         this.badthing.draw();
+        this.extraLife.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
         }
