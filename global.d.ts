@@ -5,7 +5,7 @@ import p5 = require('p5');
 import * as p5Global from 'p5/global'
 
 export = p5;
-// export as namespace p5;
+export as namespace p5;
 declare global {
     interface Window {
         p5: typeof p5,
@@ -38,7 +38,7 @@ declare global {
     function loadSound(
         path: string | Array<string> | p5.File,
         successCallback?: (sound: p5.SoundFile) => void,
-        failureCallback?: (erorr: Error) => void,
+        failureCallback?: (error: Error) => void,
         whileLoading?: (percentageLoaded: number) => void
     ): p5.SoundFile;
 }
