@@ -1,5 +1,4 @@
 "use strict";
-<<<<<<< HEAD
 class FallingObject {
     constructor() {
     }
@@ -64,7 +63,8 @@ class ExtraLife extends FallingObject {
                 this.position.y += this.speed;
             }
         }
-=======
+    }
+}
 class Player {
     constructor() {
         this.playerImgLeft = [];
@@ -77,6 +77,8 @@ class Player {
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
+        this.hitBoxBucketPosition = this.position.x + 42;
+        this.hitBoxPlayerPosition = this.position.x + 78;
     }
     setupImages() {
         const playerImgCount = 6;
@@ -92,11 +94,15 @@ class Player {
             this.position.x -= this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgLeft[current];
+            this.hitBoxBucketPosition = this.position.x + 42;
+            this.hitBoxPlayerPosition = this.position.x + 78;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgRight[current];
+            this.hitBoxBucketPosition = this.position.x + 108;
+            this.hitBoxPlayerPosition = this.position.x;
         }
     }
     update() {
@@ -104,8 +110,11 @@ class Player {
     }
     draw() {
         this.frameCounter += 1;
-        image(this.img, this.position.x, this.position.y, 150, 150);
->>>>>>> main
+        image(this.img, this.position.x, this.position.y + 630, 150, 150);
+        noFill();
+        noStroke();
+        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
+        rect(this.hitBoxPlayerPosition, this.position.y + 630, 70, 100);
     }
 }
 let game;
@@ -117,21 +126,12 @@ function setup() {
     game = new TheGame();
 }
 function draw() {
-<<<<<<< HEAD
-    background('blue');
-    fill('green');
-    stroke('white');
-    strokeWeight(10);
-    circle(width * .5, height * .5, width * 0.2);
-=======
->>>>>>> main
     game.update();
     game.draw();
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
 }
-<<<<<<< HEAD
 class Star extends FallingObject {
     constructor() {
         super();
@@ -159,13 +159,16 @@ class Star extends FallingObject {
 }
 class TheGame {
     constructor() {
+        this.player = new Player();
         this.star = new Star();
         this.badthing = new BadThing();
         this.extraLife = new ExtraLife();
         this.fallingObjects = [];
         this.spawnTimer = 0;
+        this.player = new Player();
     }
     update() {
+        this.player.update();
         this.star.update();
         this.badthing.update();
         this.extraLife.update();
@@ -176,6 +179,8 @@ class TheGame {
         }
     }
     draw() {
+        clear();
+        this.player.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw();
         }
@@ -223,22 +228,6 @@ class TheGame {
                 }
             }
         }
-=======
-class TheGame {
-    constructor() {
-        this.player = new Player();
-    }
-    update() {
-        this.player.update();
-    }
-    draw() {
-        clear();
-        this.player.draw();
-    }
-    spawnNewObject() {
-    }
-    checkCollision() {
->>>>>>> main
     }
 }
 //# sourceMappingURL=bundle.js.map
