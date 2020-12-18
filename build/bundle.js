@@ -46,9 +46,8 @@ class Player {
         this.frameCounter += 1;
         image(this.img, this.position.x, this.position.y + 630, 150, 150);
         noFill();
-        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
-        noFill();
         noStroke();
+        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
         rect(this.hitBoxPlayerPosition, this.position.y + 630, 70, 100);
     }
 }
