@@ -23,10 +23,16 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
+<<<<<<< HEAD
     // noCursor();
     
     
     game = new TheGame();
+=======
+    //noCursor();  
+    game = new TheGame();
+
+>>>>>>> main
 }
 
 
@@ -37,6 +43,7 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
+<<<<<<< HEAD
     background('blue');
     fill('green');
     stroke('white');
@@ -45,6 +52,8 @@ function draw() {
 
     
 
+=======
+>>>>>>> main
     game.update();
     game.draw();
 }

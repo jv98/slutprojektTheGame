@@ -5,6 +5,7 @@ class TheGame {
     private extraLife: ExtraLife;
     private fallingObjects: FallingObject[];
     private spawnTimer: number
+    private player = new Player();
     // private startMenu: StartMenu;
     // private gameStatusbar: GameStatusbar;
 
@@ -14,9 +15,11 @@ class TheGame {
         this.extraLife = new ExtraLife();
         this.fallingObjects = []
         this.spawnTimer = 0
+        this.player = new Player();
     }
 
     update() {
+        this.player.update();
         this.star.update();
         this.badthing.update();
         this.extraLife.update();
@@ -28,6 +31,8 @@ class TheGame {
     }
 
     draw() {
+        clear();
+        this.player.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
         }
