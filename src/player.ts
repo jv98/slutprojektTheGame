@@ -5,17 +5,19 @@ class Player {
     private img: p5.Image;
     private speed: p5.Vector;
     private characterHP: Number;
-    private position: p5.Vector;
-    private hitBoxPlayerPosition: number;
-    private hitBoxBucketPosition: number;
+    public position: p5.Vector;
+    public hitBoxPlayerPosition: number;
+    public hitBoxBucketPosition: number;
+    public size: number;
 
     constructor() {  
+        this.size = 40
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
         this.img = this.playerImgLeft[0];
-        this.position = new p5.Vector();
-        this.position.x = 500;
+        this.position = createVector(500, 650);
+        //this.position.x = 500;
         this.speed = new p5.Vector();
         this.speed.x = 7;
         this.frameCounter = 1;
@@ -61,10 +63,10 @@ class Player {
     draw() {
         this.frameCounter += 1;
 
-        image(this.img, this.position.x, this.position.y + 630, 150, 150);
+        image(this.img, this.position.x, this.position.y, 150, 150);
         noFill();
         noStroke();
-        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
-        rect(this.hitBoxPlayerPosition, this.position.y + 630, 70, 100);
+        ellipse(this.hitBoxBucketPosition, this.position.y+50, 70, 20);
+        rect(this.hitBoxPlayerPosition, this.position.y, 70, 100);
     }
 }

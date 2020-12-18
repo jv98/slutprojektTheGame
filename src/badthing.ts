@@ -15,7 +15,7 @@ class BadThing extends FallingObject{
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width)
         this.position = createVector(this.startRandom, 0)
-        this.speed = 10
+        this.speed = 6
     }
 
     update() {
