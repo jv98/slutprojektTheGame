@@ -54,7 +54,7 @@ class TheGame {
         let i = this.fallingObjects.indexOf(fallingObj)
             
             if(fallingObj instanceof Star) {     
-                if (this.player.bucketCollision(fallingObj)) {
+                if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Poäng") //Add points in statusbar + sound
                 }
@@ -67,7 +67,7 @@ class TheGame {
                 // }   
             }   
             if (fallingObj instanceof BadThing) {      
-                if (this.player.playerCollision(fallingObj)) {
+                if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Ouch"); // Decrease life in statusBar + sound
                 }
@@ -81,7 +81,7 @@ class TheGame {
                 // }             
             }
             if (fallingObj instanceof ExtraLife) {             
-                if (this.player.playerCollision(fallingObj)) {
+                if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("1up!!!"); // Add life to statusBar
                 }

@@ -23,12 +23,20 @@ class BadThing extends FallingObject {
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
         this.speed = 3;
+        this.hitbox = {
+            x: this.position.x + 7,
+            y: this.position.y + 25,
+            width: 15,
+            height: 50,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 25;
     }
     draw() {
-        image(this.img, this.position.x, this.position.y, 40, 60);
+        image(this.img, this.position.x, this.position.y, 30, 80);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.y <= height) {
@@ -48,12 +56,20 @@ class ExtraLife extends FallingObject {
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
         this.speed = 4;
+        this.hitbox = {
+            x: this.position.x + 25,
+            y: this.position.y + 20,
+            width: 30,
+            height: 30,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 20;
     }
     draw() {
         image(this.img, this.position.x, this.position.y, 80, 60);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.x <= width) {
@@ -89,9 +105,12 @@ function rectangleOverlapsRect(rectangle1, rectangle2) {
         rectangleOverlapsPoint(rectangle1, rightUpperCorner) ||
         rectangleOverlapsPoint(rectangle1, leftUpperCorner));
 }
+function drawRectFromHitbox(hitbox) {
+    rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+}
 class Player {
     constructor() {
-        this.debug = false;
+        this.debug = true;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
@@ -109,9 +128,9 @@ class Player {
             height: 100,
         };
         this.bucketHitboxRectangle = {
-            x: this.position.x + 5,
-            y: 670,
-            width: 70,
+            x: this.position.x + 13,
+            y: 680,
+            width: 60,
             height: 8,
         };
     }
@@ -129,14 +148,14 @@ class Player {
             this.position.x -= this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgLeft[current];
-            this.bucketHitboxRectangle.x = this.position.x + 5;
+            this.bucketHitboxRectangle.x = this.position.x + 13;
             this.playerHitboxRectangle.x = this.position.x + 78;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgRight[current];
-            this.bucketHitboxRectangle.x = this.position.x + 73;
+            this.bucketHitboxRectangle.x = this.position.x + 78;
             this.playerHitboxRectangle.x = this.position.x;
         }
     }
@@ -146,25 +165,20 @@ class Player {
     draw() {
         this.frameCounter += 1;
         image(this.img, this.position.x, this.position.y + 630, 150, 150);
-        fill("#000000");
+        fill("#cccccc");
         circle(300, this.position.y + 630, 10);
         if (!this.debug) {
             noFill();
             noStroke();
         }
-        rect(this.playerHitboxRectangle.x, this.playerHitboxRectangle.y, this.playerHitboxRectangle.width, this.playerHitboxRectangle.height);
-        rect(this.bucketHitboxRectangle.x, this.bucketHitboxRectangle.y, this.bucketHitboxRectangle.width, this.bucketHitboxRectangle.height);
+        drawRectFromHitbox(this.playerHitboxRectangle);
+        drawRectFromHitbox(this.bucketHitboxRectangle);
     }
-    playerCollision(obj) {
-        return rectangleOverlapsPoint(this.playerHitboxRectangle, obj.position);
+    playerCollision(hitbox) {
+        return rectangleOverlapsRect(this.playerHitboxRectangle, hitbox);
     }
-    bucketCollision(obj) {
-        const rightBottomCorner = {
-            x: obj.position.x + 40,
-            y: obj.position.y,
-        };
-        return (rectangleOverlapsPoint(this.bucketHitboxRectangle, obj.position) ||
-            rectangleOverlapsPoint(this.bucketHitboxRectangle, rightBottomCorner));
+    bucketCollision(hitbox) {
+        return rectangleOverlapsRect(this.bucketHitboxRectangle, hitbox);
     }
 }
 let game;
@@ -190,12 +204,20 @@ class Star extends FallingObject {
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
         this.speed = 2;
+        this.hitbox = {
+            x: this.position.x + 10,
+            y: this.position.y + 50,
+            width: 20,
+            height: 20,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 50;
     }
     draw() {
-        image(this.img, this.position.x, this.position.y, 40, 60);
+        image(this.img, this.position.x, this.position.y, 40, 70);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.y <= height) {
@@ -248,19 +270,19 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             let i = this.fallingObjects.indexOf(fallingObj);
             if (fallingObj instanceof Star) {
-                if (this.player.bucketCollision(fallingObj)) {
+                if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Poäng");
                 }
             }
             if (fallingObj instanceof BadThing) {
-                if (this.player.playerCollision(fallingObj)) {
+                if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Ouch");
                 }
             }
             if (fallingObj instanceof ExtraLife) {
-                if (this.player.playerCollision(fallingObj)) {
+                if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("1up!!!");
                 }
