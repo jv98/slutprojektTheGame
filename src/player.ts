@@ -123,7 +123,6 @@ class Player {
 
         image(this.img, this.position.x, this.position.y + 630, 150, 150);
         fill("#cccccc");
-        circle(300, this.position.y + 630, 10);
         if (!this.debug) {
             noFill();
             noStroke();
