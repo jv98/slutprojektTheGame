@@ -91,7 +91,7 @@ function rectangleOverlapsRect(rectangle1, rectangle2) {
 }
 class Player {
     constructor() {
-        this.debug = true;
+        this.debug = false;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();

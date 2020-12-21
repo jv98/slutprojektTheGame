@@ -53,7 +53,7 @@ class Player {
     private playerHitboxRectangle: Rectangle;
 
     constructor() {  
-        this.debug = true;
+        this.debug = false;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
