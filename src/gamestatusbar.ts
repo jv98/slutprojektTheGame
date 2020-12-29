@@ -7,6 +7,7 @@ class GameStatusbar {
     private noVolume: p5.Image; 
     private position: p5.Vector;
     private reStartGame: boolean;
+    private oneUpImg: p5.Image; 
 
 
     constructor (){
@@ -18,6 +19,7 @@ class GameStatusbar {
         this.noVolume = loadImage('assets/noVolume.png'); 
         this.position = createVector(0, height -87)
         this.reStartGame = false; 
+        this.oneUpImg =  loadImage('assets/oneUpStatusbar.png'); 
        
     }; 
 
@@ -28,21 +30,30 @@ class GameStatusbar {
 
     draw () {
         //Statusbaren 
-        fill('red')
+        fill('grey')
         rect(0, 600, width, 60);
 
-        
-        this.restartGame() 
-        this.togglePlaying() 
+
         this.pointCounter()
         this.characterHPs() 
+        fill('black')
+        textFont('Poppins'); 
+        textSize(25)
+
+        text("Restart Game", 1150, this.position.y +20);
+        image(this.img, this.position.x +1050, this.position.y -5); 
+
+        image(this.oneUpImg, this.position.x + 220, this.position.y -2); 
+        text (' '+ this.characterHP, this.position.x + 255, this.position.y +20);
+        image(this.starImg, this.position.x +100, this.position.y-5) 
+    
+        text('' + this.score, this.position.x +138, this.position.y +22) 
        
     }
 
     //on/off musiken när man trycker på knappen 
     //image(this.noVolume, this.position.x +500, this.position.y)
     togglePlaying() {
-        image(this.img, this.position.x +1050, this.position.y -5); 
         // this.playButton.mousePressed(this.togglePlaying)
     /*
         if(mouseIsPressed) { 
@@ -58,14 +69,13 @@ class GameStatusbar {
     
     // startar om spelet när man klickar på knappen 
     restartGame() {
-        fill('black')
-        textFont('Poppins'); 
-        let reStart = text("Restart Game", 1150, this.position.y +20);
+        
 
         if (mouseIsPressed) {
-            alert('hej')
+        
+            
 
-            } 
+        } 
         
 
        // } == true) {
@@ -82,17 +92,14 @@ class GameStatusbar {
 
     //Räknar poäng, + när man fångar en stjärna, - när man träffas av en spik 
     pointCounter() {
-       image(this.starImg, this.position.x +100, this.position.y-5) 
-       fill('black'); 
-       text('' + this.score, this.position.x +138, this.position.y +22) 
+       
     }
 
     // Om man förlorar ett liv 
     characterHPs() {
-        fill('black')
-        textFont('Poppins'); 
-        text("HP :"+ this.characterHP, this.position.x +250, this.position.y +20); 
-        textSize(25)
+        //fill('black')
+        //textFont('Poppins'); 
+        //text("HP :"+ this.characterHP, this.position.x +250, this.position.y +20); 
 
     }
 

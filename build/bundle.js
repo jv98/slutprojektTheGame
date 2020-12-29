@@ -75,40 +75,36 @@ class GameStatusbar {
         this.noVolume = loadImage('assets/noVolume.png');
         this.position = createVector(0, height - 87);
         this.reStartGame = false;
+        this.oneUpImg = loadImage('assets/oneUpStatusbar.png');
     }
     ;
     update() {
     }
     draw() {
-        fill('red');
+        fill('grey');
         rect(0, 600, width, 60);
-        this.restartGame();
-        this.togglePlaying();
         this.pointCounter();
         this.characterHPs();
+        fill('black');
+        textFont('Poppins');
+        textSize(25);
+        text("Restart Game", 1150, this.position.y + 20);
+        image(this.img, this.position.x + 1050, this.position.y - 5);
+        image(this.oneUpImg, this.position.x + 220, this.position.y - 2);
+        text(' ' + this.characterHP, this.position.x + 255, this.position.y + 20);
+        image(this.starImg, this.position.x + 100, this.position.y - 5);
+        text('' + this.score, this.position.x + 138, this.position.y + 22);
     }
     togglePlaying() {
-        image(this.img, this.position.x + 1050, this.position.y - 5);
     }
     ;
     restartGame() {
-        fill('black');
-        textFont('Poppins');
-        let reStart = text("Restart Game", 1150, this.position.y + 20);
         if (mouseIsPressed) {
-            alert('hej');
         }
     }
     pointCounter() {
-        image(this.starImg, this.position.x + 100, this.position.y - 5);
-        fill('black');
-        text('' + this.score, this.position.x + 138, this.position.y + 22);
     }
     characterHPs() {
-        fill('black');
-        textFont('Poppins');
-        text("HP :" + this.characterHP, this.position.x + 250, this.position.y + 20);
-        textSize(25);
     }
 }
 class Player {
