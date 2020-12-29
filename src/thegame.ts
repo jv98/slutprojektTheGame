@@ -1,28 +1,17 @@
 class TheGame {
     // private environment: Environment;
     //private player: Player;
-    // private fallingObject: FallingObject[];
+    //private fallingObject: FallingObject[];
     // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
-
-    constructor() {
-       // this.player = new Player();
-        this.gameStatusbar = new GameStatusbar(); 
-    }
-
-    update() {
-        //this.player.update();
-        this.gameStatusbar.update(); 
-    } 
-    /*
-        private star: Star;
+    private star: Star;
     private badthing: BadThing;
     private extraLife: ExtraLife;
     private fallingObjects: FallingObject[];
     private spawnTimer: number
     private player = new Player();
-    // private startMenu: StartMenu;
-    // private gameStatusbar: GameStatusbar;
+    //private startMenu: StartMenu;
+    //private gameStatusbar: GameStatusbar;
 
     constructor() {
         this.star = new Star();
@@ -31,6 +20,9 @@ class TheGame {
         this.fallingObjects = []
         this.spawnTimer = 0
         this.player = new Player();
+        //this.startMenu: StartMenu: 
+        this.gameStatusbar = new GameStatusbar(); 
+
     }
 
     update() {
@@ -40,6 +32,7 @@ class TheGame {
         this.extraLife.update();
         this.checkCollision()
         this.spawnNewObject()
+        this.gameStatusbar.update(); 
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update()
         }
@@ -47,19 +40,8 @@ class TheGame {
 
     draw() {
         clear();
-        //this.player.draw();
-        this.gameStatusbar.draw(); 
-    }
-
-    spawnNewObject() {
-
-    }
-
-    checkCollision() {
-
-    }
-
         this.player.draw();
+        this.gameStatusbar.draw(); 
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
         }
@@ -74,6 +56,7 @@ class TheGame {
         }
                 
         this.spawnTimer += deltaTime
+
     }
 
     checkCollision() {
@@ -109,5 +92,5 @@ class TheGame {
             }
         }
     } 
-    */
+    
 }

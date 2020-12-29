@@ -73,38 +73,52 @@ class GameStatusbar {
         this.img = loadImage('assets/muteIcon.png');
         this.starImg = loadImage('assets/starPoints.png');
         this.noVolume = loadImage('assets/noVolume.png');
-        this.position = new p5.Vector();
-        this.position.x = 100;
+        this.position = createVector(0, height - 87);
+        this.reStartGame = false;
     }
+    ;
     update() {
     }
     draw() {
-        image(this.img, this.position.x, this.position.y + 10, 100, 100);
-        image(this.starImg, this.position.x, this.position.y);
-        image(this.noVolume, this.position.x, this.position.y);
-        fill('black');
-        textFont('Poppins');
-        text("HP :" + this.score, 600, 600);
-        textSize(25);
-        text("Restart Game", 1000, 600);
+        fill('red');
+        rect(0, 600, width, 60);
+        this.restartGame();
+        this.togglePlaying();
+        this.pointCounter();
+        this.characterHPs();
     }
     togglePlaying() {
+        image(this.img, this.position.x + 1050, this.position.y - 5);
     }
+    ;
     restartGame() {
+        fill('black');
+        textFont('Poppins');
+        let reStart = text("Restart Game", 1150, this.position.y + 20);
+        if (mouseIsPressed) {
+            alert('hej');
+        }
     }
     pointCounter() {
+        image(this.starImg, this.position.x + 100, this.position.y - 5);
+        fill('black');
+        text('' + this.score, this.position.x + 138, this.position.y + 22);
     }
     characterHPs() {
+        fill('black');
+        textFont('Poppins');
+        text("HP :" + this.characterHP, this.position.x + 250, this.position.y + 20);
+        textSize(25);
     }
 }
 class Player {
     constructor() {
+        this.size = 40;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
         this.img = this.playerImgLeft[0];
-        this.position = new p5.Vector();
-        this.position.x = 500;
+        this.position = createVector(500, 650);
         this.speed = new p5.Vector();
         this.speed.x = 7;
         this.frameCounter = 1;
@@ -124,21 +138,31 @@ class Player {
     movement() {
         if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
             this.position.x -= this.speed.x;
-            this.img = this.imgLeft;
+            let current = Math.floor((this.frameCounter % 60) / 10);
+            this.img = this.playerImgLeft[current];
+            this.hitBoxBucketPosition = this.position.x + 42;
+            this.hitBoxPlayerPosition = this.position.x + 78;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
-            this.img = this.imgRight;
+            let current = Math.floor((this.frameCounter % 60) / 10);
+            this.img = this.playerImgRight[current];
+            this.hitBoxBucketPosition = this.position.x + 108;
+            this.hitBoxPlayerPosition = this.position.x;
         }
     }
     update() {
         this.movement();
     }
     draw() {
+        this.frameCounter += 1;
         image(this.img, this.position.x, this.position.y, 150, 150);
+        noFill();
+        noStroke();
+        ellipse(this.hitBoxBucketPosition, this.position.y + 50, 70, 20);
+        rect(this.hitBoxPlayerPosition, this.position.y, 70, 100);
     }
 }
-    * / ;
 let game;
 function preload() {
 }
@@ -182,10 +206,13 @@ class Star extends FallingObject {
 class TheGame {
     constructor() {
         this.player = new Player();
+        this.star = new Star();
+        this.badthing = new BadThing();
+        this.extraLife = new ExtraLife();
+        this.fallingObjects = [];
+        this.spawnTimer = 0;
+        this.player = new Player();
         this.gameStatusbar = new GameStatusbar();
-    }
-    update() {
-        this.gameStatusbar.update();
     }
     update() {
         this.player.update();
@@ -194,65 +221,60 @@ class TheGame {
         this.extraLife.update();
         this.checkCollision();
         this.spawnNewObject();
+        this.gameStatusbar.update();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update();
         }
     }
     draw() {
         clear();
+        this.player.draw();
         this.gameStatusbar.draw();
+        for (const fallingObj of this.fallingObjects) {
+            fallingObj.draw();
+        }
     }
     spawnNewObject() {
+        if (this.spawnTimer > 2500) {
+            this.spawnTimer = 0;
+            this.fallingObjects.push(new Star());
+            this.fallingObjects.push(new BadThing());
+            this.fallingObjects.push(new ExtraLife());
+        }
+        this.spawnTimer += deltaTime;
     }
     checkCollision() {
-    }
-}
-this.player.draw();
-for (const fallingObj of this.fallingObjects) {
-    fallingObj.draw();
-}
-spawnNewObject();
-{
-    if (this.spawnTimer > 2500) {
-        this.spawnTimer = 0;
-        this.fallingObjects.push(new Star());
-        this.fallingObjects.push(new BadThing());
-        this.fallingObjects.push(new ExtraLife());
-    }
-    this.spawnTimer += deltaTime;
-}
-checkCollision();
-{
-    for (const fallingObj of this.fallingObjects) {
-        let i = this.fallingObjects.indexOf(fallingObj);
-        if (fallingObj instanceof Star) {
-            let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-            if (distance < fallingObj.size + this.extraLife.size) {
-                this.fallingObjects.splice(i, 1);
-                console.log("Poäng");
+        for (const fallingObj of this.fallingObjects) {
+            let i = this.fallingObjects.indexOf(fallingObj);
+            if (fallingObj instanceof Star) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
+                if (distance < fallingObj.size + this.extraLife.size) {
+                    this.fallingObjects.splice(i, 1);
+                    console.log("Poäng");
+                }
+                else if (fallingObj.position.y > windowHeight) {
+                    this.fallingObjects.splice(i, 1);
+                }
             }
-            else if (fallingObj.position.y > windowHeight) {
-                this.fallingObjects.splice(i, 1);
+            if (fallingObj instanceof BadThing) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
+                if (distance < fallingObj.size + this.extraLife.size) {
+                    this.fallingObjects.splice(i, 1);
+                    console.log("Skada");
+                }
+                else if (fallingObj.position.y > windowHeight) {
+                    this.fallingObjects.splice(i, 1);
+                }
             }
-        }
-        if (fallingObj instanceof BadThing) {
-            let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-            if (distance < fallingObj.size + this.extraLife.size) {
-                this.fallingObjects.splice(i, 1);
-                console.log("Skada");
-            }
-            else if (fallingObj.position.y > windowHeight) {
-                this.fallingObjects.splice(i, 1);
-            }
-        }
-        if (fallingObj instanceof ExtraLife) {
-            let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-            if (distance < fallingObj.size + this.extraLife.size) {
-                this.fallingObjects.splice(i, 1);
-                console.log("Skada");
-            }
-            else if (fallingObj.position.y > windowHeight) {
-                this.fallingObjects.splice(i, 1);
+            if (fallingObj instanceof ExtraLife) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
+                if (distance < fallingObj.size + this.extraLife.size) {
+                    this.fallingObjects.splice(i, 1);
+                    console.log("Skada");
+                }
+                else if (fallingObj.position.y > windowHeight) {
+                    this.fallingObjects.splice(i, 1);
+                }
             }
         }
     }
