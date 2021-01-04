@@ -6,6 +6,7 @@ class Star extends FallingObject{
     public position: p5.Vector
     public speed: number
     public startRandom: number
+    public hitbox: Rectangle
 
     constructor() {
         super()
@@ -15,14 +16,22 @@ class Star extends FallingObject{
         this.startRandom = random(0, width)
         this.position = createVector(this.startRandom, 0)
         this.speed = 2
+        this.hitbox = {
+            x: this.position.x + 10,
+            y: this.position.y + 50,
+            width: 20,
+            height: 20,
+        }
     }
 
     update() {
-        this.falling()    
+        this.falling()
+        this.hitbox.y = this.position.y + 50
     }
 
     draw() {
-        image(this.img, this.position.x, this.position.y, 40, 60);
+        image(this.img, this.position.x, this.position.y, 40, 70);
+        drawRectFromHitbox(this.hitbox);
     }
 
     falling() {

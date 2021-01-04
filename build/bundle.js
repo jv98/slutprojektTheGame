@@ -22,13 +22,21 @@ class BadThing extends FallingObject {
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
-        this.speed = 10;
+        this.speed = 3;
+        this.hitbox = {
+            x: this.position.x + 7,
+            y: this.position.y + 25,
+            width: 15,
+            height: 50,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 25;
     }
     draw() {
-        image(this.img, this.position.x, this.position.y, 40, 60);
+        image(this.img, this.position.x, this.position.y, 30, 80);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.y <= height) {
@@ -48,12 +56,20 @@ class ExtraLife extends FallingObject {
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
         this.speed = 4;
+        this.hitbox = {
+            x: this.position.x + 25,
+            y: this.position.y + 20,
+            width: 30,
+            height: 30,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 20;
     }
     draw() {
         image(this.img, this.position.x, this.position.y, 80, 60);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.x <= width) {
@@ -65,8 +81,36 @@ class ExtraLife extends FallingObject {
         }
     }
 }
+function rectangleOverlapsPoint(rectangle, point) {
+    if (point.x > rectangle.x && point.x < rectangle.x + rectangle.width) {
+        return point.y > rectangle.y && point.y < rectangle.y + rectangle.height;
+    }
+    return false;
+}
+function rectangleOverlapsRect(rectangle1, rectangle2) {
+    const rightBottomCorner = {
+        x: rectangle2.x + rectangle2.width,
+        y: rectangle2.y,
+    };
+    const rightUpperCorner = {
+        x: rectangle2.x + rectangle2.width,
+        y: rectangle2.y + rectangle2.height,
+    };
+    const leftUpperCorner = {
+        x: rectangle2.x,
+        y: rectangle2.y + rectangle2.height,
+    };
+    return (rectangleOverlapsPoint(rectangle1, rectangle2) ||
+        rectangleOverlapsPoint(rectangle1, rightBottomCorner) ||
+        rectangleOverlapsPoint(rectangle1, rightUpperCorner) ||
+        rectangleOverlapsPoint(rectangle1, leftUpperCorner));
+}
+function drawRectFromHitbox(hitbox) {
+    rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+}
 class Player {
     constructor() {
+        this.debug = false;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
@@ -77,8 +121,18 @@ class Player {
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
-        this.hitBoxBucketPosition = this.position.x + 42;
-        this.hitBoxPlayerPosition = this.position.x + 78;
+        this.playerHitboxRectangle = {
+            x: this.position.x + 78,
+            y: 630,
+            width: 70,
+            height: 100,
+        };
+        this.bucketHitboxRectangle = {
+            x: this.position.x + 13,
+            y: 680,
+            width: 60,
+            height: 8,
+        };
     }
     setupImages() {
         const playerImgCount = 6;
@@ -94,15 +148,15 @@ class Player {
             this.position.x -= this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgLeft[current];
-            this.hitBoxBucketPosition = this.position.x + 42;
-            this.hitBoxPlayerPosition = this.position.x + 78;
+            this.bucketHitboxRectangle.x = this.position.x + 13;
+            this.playerHitboxRectangle.x = this.position.x + 78;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgRight[current];
-            this.hitBoxBucketPosition = this.position.x + 108;
-            this.hitBoxPlayerPosition = this.position.x;
+            this.bucketHitboxRectangle.x = this.position.x + 78;
+            this.playerHitboxRectangle.x = this.position.x;
         }
     }
     update() {
@@ -111,10 +165,19 @@ class Player {
     draw() {
         this.frameCounter += 1;
         image(this.img, this.position.x, this.position.y + 630, 150, 150);
-        noFill();
-        noStroke();
-        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
-        rect(this.hitBoxPlayerPosition, this.position.y + 630, 70, 100);
+        fill("#cccccc");
+        if (!this.debug) {
+            noFill();
+            noStroke();
+        }
+        drawRectFromHitbox(this.playerHitboxRectangle);
+        drawRectFromHitbox(this.bucketHitboxRectangle);
+    }
+    playerCollision(hitbox) {
+        return rectangleOverlapsRect(this.playerHitboxRectangle, hitbox);
+    }
+    bucketCollision(hitbox) {
+        return rectangleOverlapsRect(this.bucketHitboxRectangle, hitbox);
     }
 }
 let game;
@@ -140,12 +203,20 @@ class Star extends FallingObject {
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
         this.speed = 2;
+        this.hitbox = {
+            x: this.position.x + 10,
+            y: this.position.y + 50,
+            width: 20,
+            height: 20,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 50;
     }
     draw() {
-        image(this.img, this.position.x, this.position.y, 40, 60);
+        image(this.img, this.position.x, this.position.y, 40, 70);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.y <= height) {
@@ -198,33 +269,21 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             let i = this.fallingObjects.indexOf(fallingObj);
             if (fallingObj instanceof Star) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-                if (distance < fallingObj.size + this.extraLife.size) {
+                if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Poäng");
                 }
-                else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1);
-                }
             }
             if (fallingObj instanceof BadThing) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-                if (distance < fallingObj.size + this.extraLife.size) {
+                if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Skada");
-                }
-                else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1);
+                    console.log("Ouch");
                 }
             }
             if (fallingObj instanceof ExtraLife) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-                if (distance < fallingObj.size + this.extraLife.size) {
+                if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Skada");
-                }
-                else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1);
+                    console.log("1up!!!");
                 }
             }
         }
