@@ -1,6 +1,6 @@
 class GameStatusbar {
     private pointsCounter: number; 
-    private characterHP: number; 
+    public characterHP: number; 
     private score: number; 
     private img: p5.Image;  
     private starImg: p5.Image; 
@@ -8,7 +8,6 @@ class GameStatusbar {
     private position: p5.Vector;
     private reStartGame: boolean;
     private oneUpImg: p5.Image; 
-
 
     constructor (){
         this.pointsCounter = 0; 
@@ -19,43 +18,80 @@ class GameStatusbar {
         this.noVolume = loadImage('assets/noVolume.png'); 
         this.position = createVector(0, height -87)
         this.reStartGame = false; 
-        this.oneUpImg =  loadImage('assets/oneUpStatusbar.png'); 
-       
-    }; 
+        this.oneUpImg =  loadImage('assets/oneUpStatusbar.png');  
+    
+    }
 
     update () {
-        //this.img.update(); 
-        //this.starImg.update();
+
     } 
 
+    preload() {
+        this.img = loadImage('assets/muteIcon.png'); 
+        this.starImg = loadImage('assets/starPoints.png'); 
+        this.noVolume = loadImage('assets/noVolume.png'); 
+        this.oneUpImg =  loadImage('assets/oneUpStatusbar.png'); 
+    }
+
     draw () {
+        
         //Statusbaren 
         fill('grey')
         rect(0, 600, width, 60);
 
 
-        this.pointCounter()
-        this.characterHPs() 
+        //this.pointCounter()
+        //this.characterHPs() 
         fill('black')
         textFont('Poppins'); 
         textSize(25)
-
+        
+        //Restart Game text 
+        fill('black')
         text("Restart Game", 1150, this.position.y +20);
+
+        
+        //Music img 
         image(this.img, this.position.x +1050, this.position.y -5); 
 
+        //Stars & lives 
         image(this.oneUpImg, this.position.x + 220, this.position.y -2); 
         text (' '+ this.characterHP, this.position.x + 255, this.position.y +20);
         image(this.starImg, this.position.x +100, this.position.y-5) 
+        text('' + this.score, this.position.x +138, this.position.y +22);
+
+    }
     
-        text('' + this.score, this.position.x +138, this.position.y +22) 
-       
+
+
+  
+  clicked() {
+       let d = dist(mouseX, mouseY, this.position.x +1150, this.position.y +20) 
+       if(mouseX && mouseY == this.position.x && this.position.y ) {
+        alert('this will restart the game')
+        console.log('clicked')
+       }
+        //function startGame() 
+    }       
+    
+
+
+
+
+    /* 
+    //Räknar poäng, + när man fångar en stjärna, - när man träffas av en spik 
+    pointCounter() {
     }
 
-    //on/off musiken när man trycker på knappen 
+    // Om man förlorar ett liv eller vinner ett liv 
+    characterHPs() {
+    }
+
+        //on/off musiken när man trycker på knappen 
     //image(this.noVolume, this.position.x +500, this.position.y)
     togglePlaying() {
         // this.playButton.mousePressed(this.togglePlaying)
-    /*
+    
         if(mouseIsPressed) { 
         audio.pause();  
         audio.currentTime = 0; 
@@ -63,46 +99,9 @@ class GameStatusbar {
     else {
         audio.play(); 
     }
-    */ 
+   
     };
-    
-    
-    // startar om spelet när man klickar på knappen 
-    restartGame() {
-        
+    */ 
 
-        if (mouseIsPressed) {
-        
-            
+}
 
-        } 
-        
-
-       // } == true) {
-            //alert('vill du spela igen?' )
-            //}
-            /*
-            else if (playAgain == "ja")  {
-                alert ("Då kör vi igen!");
-                //stepOne ();
-            }*/ 
-
-
-    }
-
-    //Räknar poäng, + när man fångar en stjärna, - när man träffas av en spik 
-    pointCounter() {
-       
-    }
-
-    // Om man förlorar ett liv 
-    characterHPs() {
-        //fill('black')
-        //textFont('Poppins'); 
-        //text("HP :"+ this.characterHP, this.position.x +250, this.position.y +20); 
-
-    }
-
-    
-
-} 

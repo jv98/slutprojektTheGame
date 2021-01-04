@@ -26,9 +26,9 @@ function setup() {
     frameRate(60);
     //noCursor();  
     game = new TheGame();
+    
 
 }
-
 
 /**
  * Built in draw function in P5

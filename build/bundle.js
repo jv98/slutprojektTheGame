@@ -77,17 +77,21 @@ class GameStatusbar {
         this.reStartGame = false;
         this.oneUpImg = loadImage('assets/oneUpStatusbar.png');
     }
-    ;
     update() {
+    }
+    preload() {
+        this.img = loadImage('assets/muteIcon.png');
+        this.starImg = loadImage('assets/starPoints.png');
+        this.noVolume = loadImage('assets/noVolume.png');
+        this.oneUpImg = loadImage('assets/oneUpStatusbar.png');
     }
     draw() {
         fill('grey');
         rect(0, 600, width, 60);
-        this.pointCounter();
-        this.characterHPs();
         fill('black');
         textFont('Poppins');
         textSize(25);
+        fill('black');
         text("Restart Game", 1150, this.position.y + 20);
         image(this.img, this.position.x + 1050, this.position.y - 5);
         image(this.oneUpImg, this.position.x + 220, this.position.y - 2);
@@ -95,16 +99,12 @@ class GameStatusbar {
         image(this.starImg, this.position.x + 100, this.position.y - 5);
         text('' + this.score, this.position.x + 138, this.position.y + 22);
     }
-    togglePlaying() {
-    }
-    ;
-    restartGame() {
-        if (mouseIsPressed) {
+    clicked() {
+        let d = dist(mouseX, mouseY, this.position.x + 1150, this.position.y + 20);
+        if (mouseX && mouseY == this.position.x && this.position.y) {
+            alert('this will restart the game');
+            console.log('clicked');
         }
-    }
-    pointCounter() {
-    }
-    characterHPs() {
     }
 }
 class Player {

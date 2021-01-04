@@ -32,5 +32,7 @@ class ExtraLife extends FallingObject{
                 this.position.y += this.speed               
             }
         }
-    }
+    } 
+
+    
 }
