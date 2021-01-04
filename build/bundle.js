@@ -1,16 +1,19 @@
 "use strict";
+let game;
 function preload() {
+    const imgLogo = loadImage('./assets/logo-fs.png');
+    const poppinsBold = loadFont('./font/poppins/Poppins-Bold.ttf');
+    const poppinsLight = loadFont('./font/poppins/Poppins-ExtraLight.ttf');
+    const poppinsMedium = loadFont('./font/poppins/Poppins-Medium.ttf');
 }
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
+    game = new TheGame();
 }
 function draw() {
-    background('blue');
-    fill('green');
-    stroke('white');
-    strokeWeight(10);
-    circle(width * .5, height * .5, width * 0.2);
+    game.update();
+    game.draw();
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
