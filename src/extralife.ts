@@ -6,6 +6,7 @@ class ExtraLife extends FallingObject{
     public position: p5.Vector
     public speed: number
     public startRandom: number
+    public hitbox: Rectangle
 
     constructor() {
         super()
@@ -15,14 +16,22 @@ class ExtraLife extends FallingObject{
         this.startRandom = random(0, width)        
         this.position = createVector(this.startRandom, 0)
         this.speed = 4
+        this.hitbox = {
+            x: this.position.x + 25,
+            y: this.position.y + 20,
+            width: 30,
+            height: 30,
+        }
     }
 
     update() {
-        this.falling()    
+        this.falling()
+        this.hitbox.y = this.position.y + 20
     }
 
     draw() {
         image(this.img, this.position.x, this.position.y, 80, 60);
+        drawRectFromHitbox(this.hitbox);
     }
 
     falling() {
