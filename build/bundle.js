@@ -110,7 +110,7 @@ function drawRectFromHitbox(hitbox) {
 }
 class Player {
     constructor() {
-        this.debug = true;
+        this.debug = false;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();

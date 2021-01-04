@@ -52,13 +52,11 @@ class Player {
     private speed: p5.Vector;
     private characterHP: Number;
     private position: p5.Vector;
-    //private hitBoxPlayerPosition: number;
-    //private hitBoxBucketPosition: number;
     private bucketHitboxRectangle: Rectangle;
     private playerHitboxRectangle: Rectangle;
 
     constructor() {  
-        this.debug = true;
+        this.debug = false;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
@@ -69,8 +67,6 @@ class Player {
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
-        // this.hitBoxBucketPosition = this.position.x + 42;
-        // this.hitBoxPlayerPosition = this.position.x + 78;
         this.playerHitboxRectangle = {
             x: this.position.x + 78,
             y: 630,
@@ -102,7 +98,6 @@ class Player {
             this.img = this.playerImgLeft[current];
             this.bucketHitboxRectangle.x = this.position.x + 13;
             this.playerHitboxRectangle.x = this.position.x + 78;
-            //this.hitBoxPlayerPosition = this.position.x + 78;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
@@ -110,7 +105,6 @@ class Player {
             this.img = this.playerImgRight[current];
             this.bucketHitboxRectangle.x = this.position.x + 78;
             this.playerHitboxRectangle.x = this.position.x;
-            //this.hitBoxPlayerPosition = this.position.x;
         }
     }
 
@@ -127,8 +121,6 @@ class Player {
             noFill();
             noStroke();
         }
-        // ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
-        //rect(this.hitBoxPlayerPosition, this.position.y + 630, 70, 100);
         drawRectFromHitbox(this.playerHitboxRectangle);
         drawRectFromHitbox(this.bucketHitboxRectangle);
     }
