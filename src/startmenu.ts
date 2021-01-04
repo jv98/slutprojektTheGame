@@ -9,9 +9,9 @@ class StartMenu {
 
   constructor(menuMode: boolean, imgLogo: p5.Image, poppinsBold: p5.Font, poppinsLight: p5.Font) {
     this.menuMode = menuMode;
-    this.imgLogo = imgLogo;
-    this.poppinsBold = poppinsBold;
-    this.poppinsLight = poppinsLight;
+    this.imgLogo = loadImage('./assets/logo-fs.png');
+    this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
+    this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');;
   }
 
   draw() {
