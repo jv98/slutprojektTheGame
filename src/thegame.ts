@@ -1,5 +1,5 @@
 class TheGame {
-    // private environment: Environment;
+    private environment: Environment;
     private star: Star;
     private badthing: BadThing;
     private extraLife: ExtraLife;
@@ -16,6 +16,8 @@ class TheGame {
         this.fallingObjects = []
         this.spawnTimer = 0
         this.player = new Player();
+        this.environment = new Environment();
+        
     }
 
     update() {
@@ -29,9 +31,10 @@ class TheGame {
             fallingObj.update()
         }
     }
-
+    
     draw() {
         clear();
+        this.environment.draw();
         this.player.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
