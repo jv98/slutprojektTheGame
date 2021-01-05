@@ -69,13 +69,13 @@ class Player {
         this.characterHP = 3;
         this.playerHitboxRectangle = {
             x: this.position.x + 78,
-            y: 630,
+            y: 430,
             width: 70,
             height: 100,
         }
         this.bucketHitboxRectangle = {
             x: this.position.x + 13,
-            y: 680,
+            y: 480,
             width: 60,
             height: 8,
         }
@@ -115,7 +115,7 @@ class Player {
     draw() {
         this.frameCounter += 1;
 
-        image(this.img, this.position.x, this.position.y + 630, 150, 150);
+        image(this.img, this.position.x, this.position.y + 430, 150, 150);
         fill("#cccccc");
         if (!this.debug) {
             noFill();

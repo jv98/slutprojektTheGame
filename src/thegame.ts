@@ -27,14 +27,14 @@ class TheGame {
         this.extraLife.update();
         this.checkCollision()
         this.spawnNewObject()
-        this.environment.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update()
         }
     }
-
+    
     draw() {
         clear();
+        this.environment.draw();
         this.player.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
