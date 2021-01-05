@@ -317,6 +317,7 @@ class TheGame {
         this.fallingObjects = [];
         this.spawnTimer = 0;
         this.player = new Player();
+        this.environment = new Environment();
     }
     update() {
         this.player.update();
@@ -325,6 +326,7 @@ class TheGame {
         this.extraLife.update();
         this.checkCollision();
         this.spawnNewObject();
+        this.environment.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update();
         }
