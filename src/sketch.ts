@@ -1,5 +1,5 @@
 //---- GLOBAL VARIABLES ----//
-// let game: Game;
+let game: TheGame;
 
 /**
  * Built in preload function in P5
@@ -12,6 +12,8 @@ function preload() {
     // sound = (window as any).loadSound('../assets/mySound.wav');
 }
 
+
+
 /**
  * Built in setup function in P5
  * This is a good place to create your first class object
@@ -21,10 +23,12 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     frameRate(60);
-    // noCursor();
-    
-    // game = new Game();
+    //noCursor();  
+    game = new TheGame();
+
 }
+
+
 
 /**
  * Built in draw function in P5
@@ -32,14 +36,8 @@ function setup() {
  * you created in the setup function above
  */
 function draw() {
-    background('blue');
-    fill('green');
-    stroke('white');
-    strokeWeight(10);
-    circle(width * .5, height * .5, width * 0.2);
-
-    // game.update();
-    // game.draw();
+    game.update();
+    game.draw();
 }
 
 
