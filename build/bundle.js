@@ -161,6 +161,33 @@ class ExtraLife extends FallingObject {
         }
     }
 }
+class GameStatusbar {
+    constructor() {
+        this.pointsCounter = 0;
+        this.characterHP = 3;
+        this.score = 0;
+        this.img = loadImage('assets/musicPlay.png');
+        this.starImg = loadImage('assets/starhp.png');
+        this.noVolume = loadImage('assets/noVolume.png');
+        this.position = createVector(0, height - 87);
+        this.oneUpImg = loadImage('assets/miniOneUp.png');
+    }
+    update() {
+    }
+    draw() {
+        fill('grey');
+        rect(0, 550, width, 60);
+        fill('black');
+        textFont('Poppins');
+        textSize(25);
+        text("Restart Game", 1000, this.position.y + 20);
+        image(this.img, this.position.x + 950, this.position.y - 5);
+        image(this.oneUpImg, this.position.x + 220, this.position.y - 2);
+        text(' ' + this.characterHP, this.position.x + 255, this.position.y + 20);
+        image(this.starImg, this.position.x + 100, this.position.y - 5);
+        text('' + this.score, this.position.x + 138, this.position.y + 22);
+    }
+}
 function rectangleOverlapsPoint(rectangle, point) {
     if (point.x > rectangle.x && point.x < rectangle.x + rectangle.width) {
         return point.y > rectangle.y && point.y < rectangle.y + rectangle.height;
@@ -318,6 +345,7 @@ class TheGame {
         this.spawnTimer = 0;
         this.player = new Player();
         this.environment = new Environment();
+        this.gameStatusbar = new GameStatusbar();
     }
     update() {
         this.player.update();
@@ -329,6 +357,7 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update();
         }
+        this.gameStatusbar.update();
     }
     draw() {
         clear();
@@ -337,6 +366,7 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw();
         }
+        this.gameStatusbar.draw();
     }
     spawnNewObject() {
         if (this.spawnTimer > 2500) {
