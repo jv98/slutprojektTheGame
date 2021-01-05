@@ -22,7 +22,9 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-    createCanvas(1250, 650);
+    let cnv = createCanvas(1250, 650);
+    let x = (windowWidth - width) / 2;
+    cnv.position(x);
     frameRate(60);
     //noCursor();  
     game = new TheGame();
