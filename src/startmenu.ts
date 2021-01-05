@@ -7,15 +7,14 @@ class StartMenu {
   public poppinsBold: p5.Font;
   public poppinsLight: p5.Font;
 
-  constructor(menuMode: boolean, imgLogo: p5.Image, poppinsBold: p5.Font, poppinsLight: p5.Font) {
+  constructor(menuMode: boolean) {
     this.menuMode = menuMode;
     this.imgLogo = loadImage('./assets/logo-fs.png');
     this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
-    this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');;
+    this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
   }
 
   draw() {
-      // print(mouseX, mouseY);
       background(0);
       imageMode(CENTER)
       image(this.imgLogo, 1250 / 2, 130, 350, 170)
