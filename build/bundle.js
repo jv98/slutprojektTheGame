@@ -90,16 +90,9 @@ class GameStatusbar {
         this.starImg = loadImage('assets/starPoints.png');
         this.noVolume = loadImage('assets/noVolume.png');
         this.position = createVector(0, height - 87);
-        this.reStartGame = false;
         this.oneUpImg = loadImage('assets/oneUpStatusbar.png');
     }
     update() {
-    }
-    preload() {
-        this.img = loadImage('assets/muteIcon.png');
-        this.starImg = loadImage('assets/starPoints.png');
-        this.noVolume = loadImage('assets/noVolume.png');
-        this.oneUpImg = loadImage('assets/oneUpStatusbar.png');
     }
     draw() {
         fill('grey');
@@ -107,20 +100,12 @@ class GameStatusbar {
         fill('black');
         textFont('Poppins');
         textSize(25);
-        fill('black');
         text("Restart Game", 1150, this.position.y + 20);
         image(this.img, this.position.x + 1050, this.position.y - 5);
         image(this.oneUpImg, this.position.x + 220, this.position.y - 2);
         text(' ' + this.characterHP, this.position.x + 255, this.position.y + 20);
         image(this.starImg, this.position.x + 100, this.position.y - 5);
         text('' + this.score, this.position.x + 138, this.position.y + 22);
-    }
-    clicked() {
-        let d = dist(mouseX, mouseY, this.position.x + 1150, this.position.y + 20);
-        if (mouseX && mouseY == this.position.x && this.position.y) {
-            alert('this will restart the game');
-            console.log('clicked');
-        }
     }
 }
 function rectangleOverlapsPoint(rectangle, point) {
@@ -223,6 +208,10 @@ class Player {
 }
 let game;
 function preload() {
+    loadImage('assets/muteIcon.png');
+    loadImage('assets/starPoints.png');
+    loadImage('assets/noVolume.png');
+    loadImage('assets/oneUpStatusbar.png');
 }
 function setup() {
     createCanvas(windowWidth, windowHeight);

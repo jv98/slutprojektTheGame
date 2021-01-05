@@ -10,8 +10,6 @@ class TheGame {
     private fallingObjects: FallingObject[];
     private spawnTimer: number
     private player = new Player();
-    //private startMenu: StartMenu;
-    //private gameStatusbar: GameStatusbar;
 
     constructor() {
         this.star = new Star();
