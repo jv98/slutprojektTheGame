@@ -1,6 +1,7 @@
 //---- GLOBAL VARIABLES ----//
 let game: TheGame;
 
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -21,7 +22,7 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    createCanvas(1250, 650);
     frameRate(60);
     //noCursor();  
     game = new TheGame();
