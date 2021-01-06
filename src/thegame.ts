@@ -7,7 +7,7 @@ class TheGame {
     private spawnTimer: number
     private player = new Player();
     // private startMenu: StartMenu;
-    // private gameStatusbar: GameStatusbar;
+    private gameStatusbar: GameStatusbar;
 
     constructor() {
         this.star = new Star();
@@ -17,6 +17,7 @@ class TheGame {
         this.spawnTimer = 0
         this.player = new Player();
         this.environment = new Environment();
+        this.gameStatusbar = new GameStatusbar(); 
         
     }
 
@@ -30,6 +31,7 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update()
         }
+        this.gameStatusbar.update(); 
     }
     
     draw() {
@@ -39,6 +41,7 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
         }
+        this.gameStatusbar.draw(); 
     }
 
     spawnNewObject() {
