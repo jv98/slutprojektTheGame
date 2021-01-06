@@ -35,23 +35,23 @@ class GameStatusbar {
 
          //Restart Game text 
          fill('white')
-         textFont(this.poppinsLight); 
-         textSize(25)
+         textFont(this.poppinsBold); 
+         textSize(20)
         // const width = textWidth("Restart Game");
-         text("Restart Game", 1000, this.position.y +70);
+         text("Restart", 1120, this.position.y +80);
        
 
     
         
         //Music img 
        //rectMode(CENTER);
-        image(this.img, this.position.x +900, this.position.y +45); 
+        image(this.img, this.position.x +1050, this.position.y +55); 
 
         //Stars & lives
-        image(this.oneUpImg, this.position.x + 220, this.position.y +50); 
-        text (' '+ this.characterHP, this.position.x + 255, this.position.y +70);
-        image(this.starImg, this.position.x +95, this.position.y+45) 
-        text('' + this.score, this.position.x +138, this.position.y +73);
+        image(this.oneUpImg, this.position.x + 180, this.position.y +60); 
+        text (' '+ this.characterHP, this.position.x + 220, this.position.y +80);
+        image(this.starImg, this.position.x +80, this.position.y+55) 
+        text('' + this.score, this.position.x +125, this.position.y +80);
     }
     
 
