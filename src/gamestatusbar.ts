@@ -32,7 +32,6 @@ class GameStatusbar {
     } 
 
     draw () {
-
          //Restart Game text 
          fill('white')
          textFont(this.poppinsLight); 
