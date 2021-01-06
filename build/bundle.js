@@ -109,9 +109,9 @@ class Environment {
         curveVertex(490, 590);
         curveVertex(530, 595);
         curveVertex(570, 580);
-        curveVertex(610, 575);
-        curveVertex(650, 570);
-        curveVertex(690, 570);
+        curveVertex(610, 580);
+        curveVertex(650, 578);
+        curveVertex(690, 582);
         curveVertex(730, 575);
         curveVertex(770, 580);
         curveVertex(800, 590);
@@ -178,14 +178,14 @@ class GameStatusbar {
     }
     draw() {
         fill('white');
-        textFont(this.poppinsLight);
-        textSize(25);
-        text("Restart Game", 1000, this.position.y + 70);
-        image(this.img, this.position.x + 900, this.position.y + 45);
-        image(this.oneUpImg, this.position.x + 220, this.position.y + 50);
-        text(' ' + this.characterHP, this.position.x + 255, this.position.y + 70);
-        image(this.starImg, this.position.x + 95, this.position.y + 45);
-        text('' + this.score, this.position.x + 138, this.position.y + 73);
+        textFont(this.poppinsBold);
+        textSize(20);
+        text("Restart", 1120, this.position.y + 80);
+        image(this.img, this.position.x + 1050, this.position.y + 55);
+        image(this.oneUpImg, this.position.x + 180, this.position.y + 60);
+        text(' ' + this.characterHP, this.position.x + 220, this.position.y + 80);
+        image(this.starImg, this.position.x + 80, this.position.y + 55);
+        text('' + this.score, this.position.x + 125, this.position.y + 80);
     }
 }
 function rectangleOverlapsPoint(rectangle, point) {
@@ -230,19 +230,19 @@ class Player {
         this.characterHP = 3;
         this.playerHitboxRectangle = {
             x: this.position.x + 78,
-            y: 430,
+            y: 460,
             width: 70,
             height: 100,
         };
         this.bucketHitboxRectangle = {
             x: this.position.x + 13,
-            y: 480,
+            y: 510,
             width: 60,
             height: 8,
         };
     }
     setupImages() {
-        const playerImgCount = 6;
+        const playerImgCount = 7;
         for (let i = 1; i <= playerImgCount; i++) {
             this.playerImgLeft.push(loadImage('assets/player-left' + i + '.png'));
         }
@@ -271,7 +271,7 @@ class Player {
     }
     draw() {
         this.frameCounter += 1;
-        image(this.img, this.position.x, this.position.y + 430, 150, 150);
+        image(this.img, this.position.x, this.position.y + 460, 150, 150);
         fill("#cccccc");
         if (!this.debug) {
             noFill();
