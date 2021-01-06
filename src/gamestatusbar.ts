@@ -10,6 +10,8 @@ class GameStatusbar {
     private oneUpImg: p5.Image; 
     //private muteButton: MuteButton;
     //private resetButton: ResetButton;
+    public poppinsBold: p5.Font;
+    public poppinsLight: p5.Font;
 
     constructor (){
         this.pointsCounter = 0; 
@@ -21,6 +23,8 @@ class GameStatusbar {
         this.position = createVector(0, height -87)
         //this.reStartGame = false; 
         this.oneUpImg =  loadImage('assets/miniOneUp.png');  
+        this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
+        this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
     }
 
     update () {
@@ -28,17 +32,16 @@ class GameStatusbar {
     } 
 
     draw () {
-        //Statusbaren 
-        fill('grey')
-        rect(0, 550, width, 60);
 
-        //Restart Game text 
-        fill('black')
-        textFont('Poppins'); 
-        textSize(25)
-       // const width = textWidth("Restart Game");
-        text("Restart Game", 1000, this.position.y +20);
-        
+         //Restart Game text 
+         fill('white')
+         textFont(this.poppinsLight); 
+         textSize(25)
+        // const width = textWidth("Restart Game");
+         text("Restart Game", 1000, this.position.y +20);
+       
+
+    
         
         //Music img 
        //rectMode(CENTER);

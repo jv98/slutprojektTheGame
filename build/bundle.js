@@ -171,14 +171,14 @@ class GameStatusbar {
         this.noVolume = loadImage('assets/noVolume.png');
         this.position = createVector(0, height - 87);
         this.oneUpImg = loadImage('assets/miniOneUp.png');
+        this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
+        this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
     }
     update() {
     }
     draw() {
-        fill('grey');
-        rect(0, 550, width, 60);
-        fill('black');
-        textFont('Poppins');
+        fill('white');
+        textFont(this.poppinsLight);
         textSize(25);
         text("Restart Game", 1000, this.position.y + 20);
         image(this.img, this.position.x + 950, this.position.y - 5);
