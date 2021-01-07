@@ -5,7 +5,7 @@ class TheGame {
     private extraLife: ExtraLife;
     private fallingObjects: FallingObject[];
     private spawnTimer: number
-    private player = new Player();
+    private player: Player;
     // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
     private stuffedAnimal: StuffedAnimal;

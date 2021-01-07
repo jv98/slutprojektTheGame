@@ -350,7 +350,6 @@ class StuffedAnimal {
 }
 class TheGame {
     constructor() {
-        this.player = new Player();
         this.star = new Star();
         this.badthing = new BadThing();
         this.extraLife = new ExtraLife();
