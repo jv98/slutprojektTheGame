@@ -38,11 +38,12 @@ class TheGame {
                 fallingObj.update()
             }
         }
-        if (this.gameStatusbar.score === 10) {
+        if (this.gameStatusbar.score === 100) {
             this.stuffedAnimal.update();
+            //winning message from EndScene
         }
         if (this.gameStatusbar.characterHP == 0) {
-            //stoppa spelet
+            //losing message from EndScene
         }
         this.gameStatusbar.update(); 
     }
@@ -57,8 +58,11 @@ class TheGame {
                 fallingObj.draw()
             }
         }
+        if (this.gameStatusbar.score === 100) {
+            //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
+        }
         if (this.gameStatusbar.characterHP == 0) {
-            //stoppa spelet
+            //losing message from EndScene
         }
         this.gameStatusbar.draw(); 
         this.stuffedAnimal.draw();

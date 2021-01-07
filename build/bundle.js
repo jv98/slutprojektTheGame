@@ -376,7 +376,7 @@ class TheGame {
                 fallingObj.update();
             }
         }
-        if (this.gameStatusbar.score === 10) {
+        if (this.gameStatusbar.score === 100) {
             this.stuffedAnimal.update();
         }
         if (this.gameStatusbar.characterHP == 0) {
@@ -391,6 +391,8 @@ class TheGame {
             for (const fallingObj of this.fallingObjects) {
                 fallingObj.draw();
             }
+        }
+        if (this.gameStatusbar.score === 100) {
         }
         if (this.gameStatusbar.characterHP == 0) {
         }
