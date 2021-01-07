@@ -1,6 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: TheGame;
-
+let menuMode: boolean = true;
 
 /**
  * Built in preload function in P5
@@ -22,9 +22,7 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-    let cnv = createCanvas(1250, 650);
-    let x = (windowWidth - width) / 2;
-    cnv.position(x);
+    createCanvas(windowWidth, windowHeight);
     frameRate(60);
     //noCursor();  
     game = new TheGame();
