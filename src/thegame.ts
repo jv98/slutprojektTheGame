@@ -5,7 +5,8 @@ class TheGame {
     private extraLife: ExtraLife;
     private fallingObjects: FallingObject[];
     private spawnTimer: number
-    private player = new Player();
+    private spawnTimerHeart: number
+    private player: Player;
     // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
 
@@ -15,6 +16,7 @@ class TheGame {
         this.extraLife = new ExtraLife();
         this.fallingObjects = []
         this.spawnTimer = 0
+        this.spawnTimerHeart = 0
         this.player = new Player();
         this.environment = new Environment();
         this.gameStatusbar = new GameStatusbar(); 
@@ -28,8 +30,15 @@ class TheGame {
         this.extraLife.update();
         this.checkCollision()
         this.spawnNewObject()
-        for (const fallingObj of this.fallingObjects) {
-            fallingObj.update()
+
+        if (this.gameStatusbar.score < 100) {
+            for (const fallingObj of this.fallingObjects) {
+                fallingObj.update()
+            }
+            //fallande björnen
+        }
+        if (this.gameStatusbar.characterHP == 0) {
+            //stoppa spelet
         }
         this.gameStatusbar.update(); 
     }
@@ -38,20 +47,33 @@ class TheGame {
         clear();
         this.environment.draw();
         this.player.draw();
-        for (const fallingObj of this.fallingObjects) {
-            fallingObj.draw()
+
+        if (this.gameStatusbar.score < 100) {
+            for (const fallingObj of this.fallingObjects) {
+                fallingObj.draw()
+            }
+        }
+        if (this.gameStatusbar.characterHP == 0) {
+            //stoppa spelet
         }
         this.gameStatusbar.draw(); 
     }
 
     spawnNewObject() {
-        if (this.spawnTimer > 2500) {
+        if (this.spawnTimer > 1500) {
             this.spawnTimer = 0;
             this.fallingObjects.push(new Star());
-            this.fallingObjects.push(new BadThing());
-            this.fallingObjects.push(new ExtraLife());
+            this.fallingObjects.push(new BadThing());     
+               
         }
+        if (this.spawnTimerHeart > 15000) {
+            this.spawnTimerHeart = 0;
+            this.fallingObjects.push(new ExtraLife());    
+            
+        }
+        
                 
+        this.spawnTimerHeart += deltaTime
         this.spawnTimer += deltaTime
     }
 
@@ -63,6 +85,7 @@ class TheGame {
                 if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Poäng") 
+                    this.gameStatusbar.score = this.gameStatusbar.score + 10
                     //Add points in statusbar + soundeffect
                 }
             }   
@@ -71,6 +94,8 @@ class TheGame {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Ouch"); 
+                    this.gameStatusbar.characterHP = this.gameStatusbar.characterHP - 1
+                    this.gameStatusbar.score = this.gameStatusbar.score - 10
                     // Decrease life in statusBar + soundeffect
                 }
                 
@@ -79,6 +104,7 @@ class TheGame {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("1up!!!"); 
+                    this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1
                     // Add life to statusBar + soundeffect
                 }
                 
