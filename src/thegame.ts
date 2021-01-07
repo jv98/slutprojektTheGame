@@ -39,7 +39,7 @@ class TheGame {
             }
         }
         if (this.gameStatusbar.score === 10) {
-            this.stuffedAnimal.position.y = 500;
+            this.stuffedAnimal.update();
         }
         if (this.gameStatusbar.characterHP == 0) {
             //stoppa spelet

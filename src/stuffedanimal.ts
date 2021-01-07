@@ -8,7 +8,9 @@ class StuffedAnimal {
     }
 
     update() {
-
+        for(let i = this.position.y; i < 500; i++) {
+            this.position.y += 0.1;
+        }
     }
 
     draw() {
