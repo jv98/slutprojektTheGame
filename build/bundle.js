@@ -22,7 +22,7 @@ class BadThing extends FallingObject {
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
-        this.speed = 10;
+        this.speed = 6;
     }
     update() {
         this.falling();
@@ -67,12 +67,12 @@ class ExtraLife extends FallingObject {
 }
 class Player {
     constructor() {
+        this.size = 40;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
         this.img = this.playerImgLeft[0];
-        this.position = new p5.Vector();
-        this.position.x = 500;
+        this.position = createVector(500, 650);
         this.speed = new p5.Vector();
         this.speed.x = 7;
         this.frameCounter = 1;
@@ -110,15 +110,19 @@ class Player {
     }
     draw() {
         this.frameCounter += 1;
-        image(this.img, this.position.x, this.position.y + 630, 150, 150);
+        image(this.img, this.position.x, this.position.y, 150, 150);
         noFill();
         noStroke();
-        ellipse(this.hitBoxBucketPosition, this.position.y + 678, 70, 18);
-        rect(this.hitBoxPlayerPosition, this.position.y + 630, 70, 100);
+        ellipse(this.hitBoxBucketPosition, this.position.y + 50, 70, 20);
+        rect(this.hitBoxPlayerPosition, this.position.y, 70, 100);
     }
 }
 let game;
+let sounds;
 function preload() {
+    sounds = {
+        backgroundMusic: loadSound('../assets/music/ouch.mp3'),
+    };
 }
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -131,6 +135,10 @@ function draw() {
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+}
+function mousePressed() {
+    sounds.backgroundMusic.play();
+    console.log('hello');
 }
 class Star extends FallingObject {
     constructor() {
@@ -198,30 +206,27 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             let i = this.fallingObjects.indexOf(fallingObj);
             if (fallingObj instanceof Star) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-                if (distance < fallingObj.size + this.extraLife.size) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxBucketPosition, this.player.position.y);
+                if (distance < fallingObj.size + this.player.size) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Poäng");
                 }
                 else if (fallingObj.position.y > windowHeight) {
                     this.fallingObjects.splice(i, 1);
                 }
             }
             if (fallingObj instanceof BadThing) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-                if (distance < fallingObj.size + this.extraLife.size) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxPlayerPosition, this.player.position.y);
+                if (distance < fallingObj.size + this.player.size) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Skada");
                 }
                 else if (fallingObj.position.y > windowHeight) {
                     this.fallingObjects.splice(i, 1);
                 }
             }
             if (fallingObj instanceof ExtraLife) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.extraLife.position.x, this.extraLife.position.y);
-                if (distance < fallingObj.size + this.extraLife.size) {
+                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxPlayerPosition, this.player.position.y);
+                if (distance < fallingObj.size + this.player.size) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("Skada");
                 }
                 else if (fallingObj.position.y > windowHeight) {
                     this.fallingObjects.splice(i, 1);

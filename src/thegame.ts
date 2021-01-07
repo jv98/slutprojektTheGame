@@ -16,6 +16,8 @@ class TheGame {
         this.fallingObjects = []
         this.spawnTimer = 0
         this.player = new Player();
+
+       
     }
 
     update() {

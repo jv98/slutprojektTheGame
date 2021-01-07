@@ -1,14 +1,8 @@
 //---- GLOBAL VARIABLES ----//
 let game: TheGame;
 
-interface Sounds {
-    key: p5.SundFile;
-    ouch: p5.SundFile;
-    life: p5.SundFile;
-    backgroundMusic: p5.SoundFile;
-    star: p5.SoundFile;
-}
-let sounds: Sounds;
+let sounds: ISounds;
+
 /**
  * Built in preload function in P5
  * This is a good place to load assets such as
@@ -19,12 +13,13 @@ function preload() {
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
     sounds={
-        key: loadSound(''),
-        ouch: loadSound(''),
-        life: loadSound(''),
-        backgroundMusic: loadSound(''),
-        star: loadSound (''),
-    }
+        backgroundMusic: loadSound('../assets/music/ouch.mp3'),
+        // key: loadSound('../assets/music/background.mp3'),
+        // ouch: loadSound('../assets/music/background.mp3'),
+        // life: loadSound('../assets/music/background.mp3'),
+        // starr: loadSound ('../assets/music/background.mp3'),
+    } as ISounds
+    
 }
 
 
@@ -61,4 +56,9 @@ function draw() {
  */
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+}
+
+function mousePressed() {
+    sounds.backgroundMusic.play()
+    console.log('hello')
 }
