@@ -337,6 +337,17 @@ class Star extends FallingObject {
         }
     }
 }
+class StuffedAnimal {
+    constructor() {
+        this.img = loadImage('assets/trophy.png');
+        this.position = createVector(245, 75);
+    }
+    update() {
+    }
+    draw() {
+        image(this.img, this.position.x, this.position.y, 70, 120);
+    }
+}
 class TheGame {
     constructor() {
         this.player = new Player();
@@ -348,6 +359,7 @@ class TheGame {
         this.player = new Player();
         this.environment = new Environment();
         this.gameStatusbar = new GameStatusbar();
+        this.stuffedAnimal = new StuffedAnimal();
     }
     update() {
         this.player.update();
@@ -369,6 +381,7 @@ class TheGame {
             fallingObj.draw();
         }
         this.gameStatusbar.draw();
+        this.stuffedAnimal.draw();
     }
     spawnNewObject() {
         if (this.spawnTimer > 2500) {

@@ -8,6 +8,7 @@ class TheGame {
     private player = new Player();
     // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
+    private stuffedAnimal: StuffedAnimal;
 
     constructor() {
         this.star = new Star();
@@ -17,7 +18,8 @@ class TheGame {
         this.spawnTimer = 0
         this.player = new Player();
         this.environment = new Environment();
-        this.gameStatusbar = new GameStatusbar(); 
+        this.gameStatusbar = new GameStatusbar();
+        this.stuffedAnimal = new StuffedAnimal();
         
     }
 
@@ -42,6 +44,7 @@ class TheGame {
             fallingObj.draw()
         }
         this.gameStatusbar.draw(); 
+        this.stuffedAnimal.draw();
     }
 
     spawnNewObject() {
