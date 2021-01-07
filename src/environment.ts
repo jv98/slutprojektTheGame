@@ -66,9 +66,9 @@ class Environment {
     curveVertex(490, 590);
     curveVertex(530, 595);
     curveVertex(570, 580);
-    curveVertex(610, 575);
-    curveVertex(650, 570);
-    curveVertex(690, 570);
+    curveVertex(610, 580);
+    curveVertex(650, 578);
+    curveVertex(690, 582);
     curveVertex(730, 575);
     curveVertex(770, 580);     
     curveVertex(800, 590);  

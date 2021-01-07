@@ -1,7 +1,7 @@
 class GameStatusbar {
     private pointsCounter: number; 
     public characterHP: number; 
-    private score: number; 
+    public score: number; 
     private img: p5.Image;  
     private starImg: p5.Image; 
     //private noVolume: p5.Image; 
@@ -38,7 +38,7 @@ class GameStatusbar {
         fill('white')
         //Music img 
        //rectMode(CENTER);
-        image(this.img, this.position.x +900, this.position.y +45); 
+        image(this.img, this.position.x +1050, this.position.y +55); 
 
         //Stars & lives
         image(this.oneUpImg, this.position.x + 220, this.position.y +50); 
