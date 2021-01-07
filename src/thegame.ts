@@ -6,7 +6,6 @@ class TheGame {
     private fallingObjects: FallingObject[];
     private spawnTimer: number
     private spawnTimerHeart: number
-    private death: number
     private player: Player;
     // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
@@ -18,7 +17,6 @@ class TheGame {
         this.fallingObjects = []
         this.spawnTimer = 0
         this.spawnTimerHeart = 0
-        this.death = 0
         this.player = new Player();
         this.environment = new Environment();
         this.gameStatusbar = new GameStatusbar(); 
@@ -37,6 +35,7 @@ class TheGame {
             for (const fallingObj of this.fallingObjects) {
                 fallingObj.update()
             }
+            //fallande björnen
         }
         if (this.gameStatusbar.characterHP == 0) {
             //stoppa spelet
