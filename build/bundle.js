@@ -80,7 +80,7 @@ class Button {
     }
     circle() {
         noStroke();
-        fill('red');
+        noFill();
         ellipse(this.x, this.y, this.r);
     }
 }
@@ -202,30 +202,68 @@ class GameStatusbar {
         this.pointsCounter = 0;
         this.characterHP = 3;
         this.score = 0;
-        this.img = loadImage('assets/musicPlay.png');
         this.starImg = loadImage('assets/starhp.png');
-        this.position = createVector(0, height - 87);
         this.oneUpImg = loadImage('assets/miniOneUp.png');
+        this.position = createVector(0, height - 87);
         this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
         this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
-        this.button = new Button(1150, height - 40, 160, 'image', 'text');
+        this.button = new Button(1150, height - 20, 160, 'image', 'text');
+        this.muteButton = new MuteButton(970, height - 5, 80, 'image', 'text');
+        this.musicPlay = loadImage('assets/musicPlay.png');
     }
     update() {
         this.button.update();
+        this.muteButton.update();
     }
     draw() {
         push();
+        this.muteButton.draw();
         this.button.draw();
         textFont(this.poppinsBold);
         textAlign(CENTER, CENTER);
         textSize(20);
         fill('white');
-        image(this.img, this.position.x + 1050, this.position.y + 55);
+        image(this.musicPlay, this.position.x + 950, this.position.y + 52);
         image(this.oneUpImg, this.position.x + 220, this.position.y + 50);
         text(' ' + this.characterHP, this.position.x + 255, this.position.y + 70);
         image(this.starImg, this.position.x + 95, this.position.y + 45);
         text('' + this.score, this.position.x + 138, this.position.y + 73);
         pop();
+    }
+}
+class MuteButton {
+    constructor(x, y, r, content, type) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.content = content;
+        this.type = type;
+        this.prevMouseIsPressed = mouseIsPressed;
+        this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
+        this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
+    }
+    update() {
+        if (!this.prevMouseIsPressed && mouseIsPressed) {
+            let d = dist(mouseX, mouseY, this.x, this.y);
+            if (d < this.r) {
+                alert('hej');
+                console.log('mute music');
+            }
+        }
+        this.prevMouseIsPressed = mouseIsPressed;
+    }
+    draw() {
+        push();
+        this.circle();
+        fill('white');
+        textFont(this.poppinsLight);
+        textAlign(CENTER, CENTER);
+        pop();
+    }
+    circle() {
+        noStroke();
+        fill('red');
+        ellipse(this.x, this.y, this.r);
     }
 }
 function rectangleOverlapsPoint(rectangle, point) {
