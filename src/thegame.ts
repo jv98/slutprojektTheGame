@@ -6,7 +6,8 @@ class TheGame {
     private fallingObjects: FallingObject[];
     private spawnTimer: number
     private player = new Player();
-    // private startMenu: StartMenu;
+    private startMenu: StartMenu;
+    private menuMode: boolean;
     // private gameStatusbar: GameStatusbar;
 
     constructor() {
@@ -16,9 +17,17 @@ class TheGame {
         this.fallingObjects = []
         this.spawnTimer = 0
         this.player = new Player();
+        this.startMenu = new StartMenu();
+        this.menuMode = true;
     }
 
     update() {
+        
+        if (this.menuMode == true) {
+            if (keyCode === ENTER) {
+                this.menuMode = false;
+            }
+        }
         this.player.update();
         this.star.update();
         this.badthing.update();
@@ -28,13 +37,19 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update()
         }
+        
     }
 
     draw() {
         clear();
-        this.player.draw();
-        for (const fallingObj of this.fallingObjects) {
-            fallingObj.draw()
+        if (this.menuMode == true) {
+            this.startMenu.draw();
+        }
+        if (this.menuMode == false) {
+            this.player.draw();
+            for (const fallingObj of this.fallingObjects) {
+                fallingObj.draw()
+            }
         }
     }
 
