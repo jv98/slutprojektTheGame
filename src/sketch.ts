@@ -28,6 +28,7 @@ function setup() {
     frameRate(60);
     //noCursor();  
     game = new TheGame();
+    
 
 }
 

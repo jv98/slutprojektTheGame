@@ -48,6 +48,42 @@ class BadThing extends FallingObject {
         }
     }
 }
+class Button {
+    constructor(x, y, r, content, type) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.content = content;
+        this.type = type;
+        this.prevMouseIsPressed = mouseIsPressed;
+        this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
+        this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
+    }
+    update() {
+        if (!this.prevMouseIsPressed && mouseIsPressed) {
+            let d = dist(mouseX, mouseY, this.x, this.y);
+            if (d < this.r) {
+                console.log('restart game');
+            }
+        }
+        this.prevMouseIsPressed = mouseIsPressed;
+    }
+    draw() {
+        push();
+        this.circle();
+        fill('white');
+        textFont(this.poppinsLight);
+        textAlign(CENTER, CENTER);
+        textSize(25);
+        text("Restart Game", this.x, this.y);
+        pop();
+    }
+    circle() {
+        noStroke();
+        fill('red');
+        ellipse(this.x, this.y, this.r);
+    }
+}
 class Environment {
     constructor() {
         this.platform = loadImage('assets/bg-1250.png');
@@ -168,24 +204,28 @@ class GameStatusbar {
         this.score = 0;
         this.img = loadImage('assets/musicPlay.png');
         this.starImg = loadImage('assets/starhp.png');
-        this.noVolume = loadImage('assets/noVolume.png');
         this.position = createVector(0, height - 87);
         this.oneUpImg = loadImage('assets/miniOneUp.png');
         this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
         this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
+        this.button = new Button(1150, height - 40, 160, 'image', 'text');
     }
     update() {
+        this.button.update();
     }
     draw() {
+        push();
+        this.button.draw();
+        textFont(this.poppinsBold);
+        textAlign(CENTER, CENTER);
+        textSize(20);
         fill('white');
-        textFont(this.poppinsLight);
-        textSize(25);
-        text("Restart Game", 1000, this.position.y + 70);
         image(this.img, this.position.x + 900, this.position.y + 45);
         image(this.oneUpImg, this.position.x + 220, this.position.y + 50);
         text(' ' + this.characterHP, this.position.x + 255, this.position.y + 70);
         image(this.starImg, this.position.x + 95, this.position.y + 45);
         text('' + this.score, this.position.x + 138, this.position.y + 73);
+        pop();
     }
 }
 function rectangleOverlapsPoint(rectangle, point) {
@@ -339,7 +379,6 @@ class Star extends FallingObject {
 }
 class TheGame {
     constructor() {
-        this.player = new Player();
         this.star = new Star();
         this.badthing = new BadThing();
         this.extraLife = new ExtraLife();
