@@ -121,7 +121,7 @@ let game;
 let sounds;
 function preload() {
     sounds = {
-        backgroundMusic: loadSound('../assets/music/ouch.mp3'),
+        backgroundMusic: loadSound('../assets/music/backgroundsound.mp3'),
     };
 }
 function setup() {

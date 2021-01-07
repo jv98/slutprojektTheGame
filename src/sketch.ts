@@ -13,7 +13,7 @@ function preload() {
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
     sounds={
-        backgroundMusic: loadSound('../assets/music/ouch.mp3'),
+        backgroundMusic: loadSound('../assets/music/backgroundsound.mp3'),
         // key: loadSound('../assets/music/background.mp3'),
         // ouch: loadSound('../assets/music/background.mp3'),
         // life: loadSound('../assets/music/background.mp3'),
