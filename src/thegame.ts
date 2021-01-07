@@ -10,6 +10,8 @@ class TheGame {
     // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
     private stuffedAnimal: StuffedAnimal;
+    private startMenu: StartMenu;
+    private menuMode: boolean;
 
     constructor() {
         this.star = new Star();
@@ -22,50 +24,66 @@ class TheGame {
         this.environment = new Environment();
         this.gameStatusbar = new GameStatusbar();
         this.stuffedAnimal = new StuffedAnimal();
+        this.startMenu = new StartMenu();
+        this.menuMode = true;
         
     }
 
     update() {
-        this.player.update();
-        this.star.update();
-        this.badthing.update();
-        this.extraLife.update();
-        this.checkCollision()
-        this.spawnNewObject()
-
-        if (this.gameStatusbar.score < 100) {
-            for (const fallingObj of this.fallingObjects) {
-                fallingObj.update()
+        
+        if (this.menuMode == true) {
+            if (keyCode === ENTER) {
+                this.menuMode = false;
             }
+        } else {
+            this.player.update();
+            this.star.update();
+            this.badthing.update();
+            this.extraLife.update();
+            this.checkCollision()
+            this.spawnNewObject()
+    
+            if (this.gameStatusbar.score < 100) {
+                for (const fallingObj of this.fallingObjects) {
+                    fallingObj.update()
+                }
+            }
+            if (this.gameStatusbar.score === 100) {
+                this.stuffedAnimal.update();
+                //winning message from EndScene
+            }
+            if (this.gameStatusbar.characterHP == 0) {
+                //losing message from EndScene
+            }
+            this.gameStatusbar.update(); 
         }
-        if (this.gameStatusbar.score === 100) {
-            this.stuffedAnimal.update();
-            //winning message from EndScene
-        }
-        if (this.gameStatusbar.characterHP == 0) {
-            //losing message from EndScene
-        }
-        this.gameStatusbar.update(); 
     }
     
     draw() {
         clear();
-        this.environment.draw();
-        this.player.draw();
-
-        if (this.gameStatusbar.score < 100) {
+        
+        if (this.menuMode) {
+            this.startMenu.draw();
+        } else {
+            this.environment.draw();
+            this.player.draw();
             for (const fallingObj of this.fallingObjects) {
                 fallingObj.draw()
             }
+            if (this.gameStatusbar.score < 100) {
+                for (const fallingObj of this.fallingObjects) {
+                    fallingObj.draw()
+                }
+            }
+            if (this.gameStatusbar.score === 100) {
+                //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
+            }
+            if (this.gameStatusbar.characterHP == 0) {
+                //losing message from EndScene
+            }
+            this.gameStatusbar.draw(); 
+            this.stuffedAnimal.draw();
         }
-        if (this.gameStatusbar.score === 100) {
-            //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
-        }
-        if (this.gameStatusbar.characterHP == 0) {
-            //losing message from EndScene
-        }
-        this.gameStatusbar.draw(); 
-        this.stuffedAnimal.draw();
     }
 
     spawnNewObject() {

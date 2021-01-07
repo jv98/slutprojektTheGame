@@ -1,5 +1,6 @@
 //---- GLOBAL VARIABLES ----//
 let game: TheGame;
+let menuMode: boolean = true;
 
 
 /**
