@@ -37,7 +37,9 @@ class TheGame {
             for (const fallingObj of this.fallingObjects) {
                 fallingObj.update()
             }
-            //fallande björnen
+        }
+        if (this.gameStatusbar.score === 10) {
+            this.stuffedAnimal.position.y = 500;
         }
         if (this.gameStatusbar.characterHP == 0) {
             //stoppa spelet

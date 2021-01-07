@@ -1,6 +1,6 @@
 class StuffedAnimal {
     private img: p5.Image;
-    private position: p5.Vector;
+    public position: p5.Vector;
 
     constructor() {
         this.img = loadImage('assets/trophy.png');

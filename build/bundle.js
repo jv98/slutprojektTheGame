@@ -356,7 +356,6 @@ class TheGame {
         this.fallingObjects = [];
         this.spawnTimer = 0;
         this.spawnTimerHeart = 0;
-        this.death = 0;
         this.player = new Player();
         this.environment = new Environment();
         this.gameStatusbar = new GameStatusbar();
@@ -373,6 +372,9 @@ class TheGame {
             for (const fallingObj of this.fallingObjects) {
                 fallingObj.update();
             }
+        }
+        if (this.gameStatusbar.score === 10) {
+            this.stuffedAnimal.position.y = 500;
         }
         if (this.gameStatusbar.characterHP == 0) {
         }
