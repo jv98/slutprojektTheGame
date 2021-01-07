@@ -311,7 +311,7 @@ class Star extends FallingObject {
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
-        this.speed = 2;
+        this.speed = 4;
         this.hitbox = {
             x: this.position.x + 10,
             y: this.position.y + 50,
@@ -355,6 +355,8 @@ class TheGame {
         this.extraLife = new ExtraLife();
         this.fallingObjects = [];
         this.spawnTimer = 0;
+        this.spawnTimerHeart = 0;
+        this.death = 0;
         this.player = new Player();
         this.environment = new Environment();
         this.gameStatusbar = new GameStatusbar();
@@ -367,8 +369,12 @@ class TheGame {
         this.extraLife.update();
         this.checkCollision();
         this.spawnNewObject();
-        for (const fallingObj of this.fallingObjects) {
-            fallingObj.update();
+        if (this.gameStatusbar.score < 100) {
+            for (const fallingObj of this.fallingObjects) {
+                fallingObj.update();
+            }
+        }
+        if (this.gameStatusbar.characterHP == 0) {
         }
         this.gameStatusbar.update();
     }
@@ -376,19 +382,27 @@ class TheGame {
         clear();
         this.environment.draw();
         this.player.draw();
-        for (const fallingObj of this.fallingObjects) {
-            fallingObj.draw();
+        if (this.gameStatusbar.score < 100) {
+            for (const fallingObj of this.fallingObjects) {
+                fallingObj.draw();
+            }
+        }
+        if (this.gameStatusbar.characterHP == 0) {
         }
         this.gameStatusbar.draw();
         this.stuffedAnimal.draw();
     }
     spawnNewObject() {
-        if (this.spawnTimer > 2500) {
+        if (this.spawnTimer > 1500) {
             this.spawnTimer = 0;
             this.fallingObjects.push(new Star());
             this.fallingObjects.push(new BadThing());
+        }
+        if (this.spawnTimerHeart > 15000) {
+            this.spawnTimerHeart = 0;
             this.fallingObjects.push(new ExtraLife());
         }
+        this.spawnTimerHeart += deltaTime;
         this.spawnTimer += deltaTime;
     }
     checkCollision() {
@@ -398,18 +412,22 @@ class TheGame {
                 if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Poäng");
+                    this.gameStatusbar.score = this.gameStatusbar.score + 10;
                 }
             }
             if (fallingObj instanceof BadThing) {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Ouch");
+                    this.gameStatusbar.characterHP = this.gameStatusbar.characterHP - 1;
+                    this.gameStatusbar.score = this.gameStatusbar.score - 10;
                 }
             }
             if (fallingObj instanceof ExtraLife) {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("1up!!!");
+                    this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1;
                 }
             }
         }
