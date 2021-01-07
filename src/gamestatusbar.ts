@@ -1,7 +1,7 @@
 class GameStatusbar {
     private pointsCounter: number; 
     public characterHP: number; 
-    private score: number; 
+    public score: number; 
     private img: p5.Image;  
     private starImg: p5.Image; 
     private noVolume: p5.Image; 

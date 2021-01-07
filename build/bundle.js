@@ -311,7 +311,7 @@ class Star extends FallingObject {
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
-        this.speed = 2;
+        this.speed = 4;
         this.hitbox = {
             x: this.position.x + 10,
             y: this.position.y + 50,
@@ -339,7 +339,6 @@ class Star extends FallingObject {
 }
 class TheGame {
     constructor() {
-        this.player = new Player();
         this.star = new Star();
         this.badthing = new BadThing();
         this.extraLife = new ExtraLife();
@@ -371,11 +370,14 @@ class TheGame {
         this.gameStatusbar.draw();
     }
     spawnNewObject() {
-        if (this.spawnTimer > 2500) {
+        if (this.spawnTimer > 1500) {
             this.spawnTimer = 0;
             this.fallingObjects.push(new Star());
             this.fallingObjects.push(new BadThing());
             this.fallingObjects.push(new ExtraLife());
+        }
+        if (this.spawnTimer > 3000) {
+            this.spawnTimer = 0;
         }
         this.spawnTimer += deltaTime;
     }
@@ -386,18 +388,22 @@ class TheGame {
                 if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Poäng");
+                    this.gameStatusbar.score = this.gameStatusbar.score + 10;
                 }
             }
             if (fallingObj instanceof BadThing) {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("Ouch");
+                    this.gameStatusbar.characterHP = this.gameStatusbar.characterHP - 1;
+                    this.gameStatusbar.score = this.gameStatusbar.score - 10;
                 }
             }
             if (fallingObj instanceof ExtraLife) {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("1up!!!");
+                    this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1;
                 }
             }
         }
