@@ -9,6 +9,7 @@ class TheGame {
     private player: Player;
     // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
+    private stuffedAnimal: StuffedAnimal;
 
     constructor() {
         this.star = new Star();
@@ -19,7 +20,8 @@ class TheGame {
         this.spawnTimerHeart = 0
         this.player = new Player();
         this.environment = new Environment();
-        this.gameStatusbar = new GameStatusbar(); 
+        this.gameStatusbar = new GameStatusbar();
+        this.stuffedAnimal = new StuffedAnimal();
         
     }
 
@@ -35,10 +37,13 @@ class TheGame {
             for (const fallingObj of this.fallingObjects) {
                 fallingObj.update()
             }
-            //fallande björnen
+        }
+        if (this.gameStatusbar.score === 100) {
+            this.stuffedAnimal.update();
+            //winning message from EndScene
         }
         if (this.gameStatusbar.characterHP == 0) {
-            //stoppa spelet
+            //losing message from EndScene
         }
         this.gameStatusbar.update(); 
     }
@@ -53,10 +58,14 @@ class TheGame {
                 fallingObj.draw()
             }
         }
+        if (this.gameStatusbar.score === 100) {
+            //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
+        }
         if (this.gameStatusbar.characterHP == 0) {
-            //stoppa spelet
+            //losing message from EndScene
         }
         this.gameStatusbar.draw(); 
+        this.stuffedAnimal.draw();
     }
 
     spawnNewObject() {
