@@ -5,9 +5,10 @@ class TheGame {
     private extraLife: ExtraLife;
     private fallingObjects: FallingObject[];
     private spawnTimer: number
-    private player = new Player();
+    private player: Player;
     // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
+    private button: Button; 
 
     constructor() {
         this.star = new Star();
@@ -18,6 +19,7 @@ class TheGame {
         this.player = new Player();
         this.environment = new Environment();
         this.gameStatusbar = new GameStatusbar(); 
+        this.button = new Button(); 
         
     }
 
@@ -32,6 +34,7 @@ class TheGame {
             fallingObj.update()
         }
         this.gameStatusbar.update(); 
+        this.button.update(); 
     }
     
     draw() {
@@ -42,6 +45,7 @@ class TheGame {
             fallingObj.draw()
         }
         this.gameStatusbar.draw(); 
+        this.button.draw(); 
     }
 
     spawnNewObject() {
