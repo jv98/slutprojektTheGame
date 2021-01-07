@@ -44,6 +44,8 @@ class TheGame {
         this.gameStatusbar.draw(); 
     }
 
+
+    //TODO: hur får hjärtanen att spawna mer sällan?
     spawnNewObject() {
         if (this.spawnTimer > 1500) {
             this.spawnTimer = 0;
