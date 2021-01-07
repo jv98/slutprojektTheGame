@@ -1,6 +1,5 @@
 //---- GLOBAL VARIABLES ----//
 let game: TheGame;
-
 let sounds: ISounds;
 
 /**
@@ -31,7 +30,9 @@ function preload() {
  * in the draw function below
  */
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    let cnv = createCanvas(1250, 650);
+    let x = (windowWidth - width) / 2;
+    cnv.position(x);
     frameRate(60);
     //noCursor();  
     game = new TheGame();

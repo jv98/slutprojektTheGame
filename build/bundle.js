@@ -22,13 +22,21 @@ class BadThing extends FallingObject {
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
-        this.speed = 6;
+        this.speed = 3;
+        this.hitbox = {
+            x: this.position.x + 7,
+            y: this.position.y + 25,
+            width: 15,
+            height: 50,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 25;
     }
     draw() {
-        image(this.img, this.position.x, this.position.y, 40, 60);
+        image(this.img, this.position.x, this.position.y, 30, 80);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.y <= height) {
@@ -40,6 +48,86 @@ class BadThing extends FallingObject {
         }
     }
 }
+class Environment {
+    constructor() {
+        this.platform = loadImage('assets/bg-1250.png');
+    }
+    draw() {
+        background(this.platform);
+        strokeWeight(6);
+        point(0, 650);
+        point(0, 600);
+        point(45, 600);
+        point(90, 590);
+        point(130, 580);
+        point(170, 580);
+        point(210, 600);
+        point(250, 600);
+        point(290, 600);
+        point(330, 590);
+        point(370, 585);
+        point(410, 580);
+        point(450, 590);
+        point(490, 590);
+        point(530, 595);
+        point(570, 580);
+        point(610, 575);
+        point(650, 570);
+        point(690, 570);
+        point(730, 575);
+        point(770, 580);
+        point(800, 590);
+        point(860, 600);
+        point(920, 600);
+        point(980, 600);
+        point(1040, 600);
+        point(1100, 590);
+        point(1160, 590);
+        point(1200, 600);
+        point(1250, 600);
+        point(1250, 650);
+        strokeWeight(1);
+        fill(0);
+        beginShape();
+        curveVertex(600, 0);
+        curveVertex(0, 650);
+        curveVertex(0, 600);
+        curveVertex(0, 600);
+        curveVertex(0, 650);
+        curveVertex(0, 600);
+        curveVertex(45, 600);
+        curveVertex(90, 590);
+        curveVertex(130, 580);
+        curveVertex(170, 580);
+        curveVertex(210, 600);
+        curveVertex(250, 600);
+        curveVertex(290, 600);
+        curveVertex(330, 590);
+        curveVertex(370, 585);
+        curveVertex(410, 580);
+        curveVertex(450, 590);
+        curveVertex(490, 590);
+        curveVertex(530, 595);
+        curveVertex(570, 580);
+        curveVertex(610, 580);
+        curveVertex(650, 578);
+        curveVertex(690, 582);
+        curveVertex(730, 575);
+        curveVertex(770, 580);
+        curveVertex(800, 590);
+        curveVertex(860, 600);
+        curveVertex(920, 600);
+        curveVertex(980, 600);
+        curveVertex(1040, 600);
+        curveVertex(1100, 590);
+        curveVertex(1160, 590);
+        curveVertex(1200, 600);
+        curveVertex(1250, 600);
+        curveVertex(1250, 650);
+        curveVertex(1250, 650);
+        endShape();
+    }
+}
 class ExtraLife extends FallingObject {
     constructor() {
         super();
@@ -48,12 +136,20 @@ class ExtraLife extends FallingObject {
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
         this.speed = 4;
+        this.hitbox = {
+            x: this.position.x + 25,
+            y: this.position.y + 20,
+            width: 30,
+            height: 30,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 20;
     }
     draw() {
         image(this.img, this.position.x, this.position.y, 80, 60);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.x <= width) {
@@ -65,23 +161,88 @@ class ExtraLife extends FallingObject {
         }
     }
 }
+class GameStatusbar {
+    constructor() {
+        this.pointsCounter = 0;
+        this.characterHP = 3;
+        this.score = 0;
+        this.img = loadImage('assets/musicPlay.png');
+        this.starImg = loadImage('assets/starhp.png');
+        this.noVolume = loadImage('assets/noVolume.png');
+        this.position = createVector(0, height - 87);
+        this.oneUpImg = loadImage('assets/miniOneUp.png');
+        this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
+        this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
+    }
+    update() {
+    }
+    draw() {
+        fill('white');
+        textFont(this.poppinsBold);
+        textSize(20);
+        text("Restart", 1120, this.position.y + 80);
+        image(this.img, this.position.x + 1050, this.position.y + 55);
+        image(this.oneUpImg, this.position.x + 180, this.position.y + 60);
+        text(' ' + this.characterHP, this.position.x + 220, this.position.y + 80);
+        image(this.starImg, this.position.x + 80, this.position.y + 55);
+        text('' + this.score, this.position.x + 125, this.position.y + 80);
+    }
+}
+function rectangleOverlapsPoint(rectangle, point) {
+    if (point.x > rectangle.x && point.x < rectangle.x + rectangle.width) {
+        return point.y > rectangle.y && point.y < rectangle.y + rectangle.height;
+    }
+    return false;
+}
+function rectangleOverlapsRect(rectangle1, rectangle2) {
+    const rightBottomCorner = {
+        x: rectangle2.x + rectangle2.width,
+        y: rectangle2.y,
+    };
+    const rightUpperCorner = {
+        x: rectangle2.x + rectangle2.width,
+        y: rectangle2.y + rectangle2.height,
+    };
+    const leftUpperCorner = {
+        x: rectangle2.x,
+        y: rectangle2.y + rectangle2.height,
+    };
+    return (rectangleOverlapsPoint(rectangle1, rectangle2) ||
+        rectangleOverlapsPoint(rectangle1, rightBottomCorner) ||
+        rectangleOverlapsPoint(rectangle1, rightUpperCorner) ||
+        rectangleOverlapsPoint(rectangle1, leftUpperCorner));
+}
+function drawRectFromHitbox(hitbox) {
+    rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
+}
 class Player {
     constructor() {
-        this.size = 40;
+        this.debug = false;
         this.playerImgLeft = [];
         this.playerImgRight = [];
         this.setupImages();
         this.img = this.playerImgLeft[0];
-        this.position = createVector(500, 650);
+        this.position = new p5.Vector();
+        this.position.x = 500;
         this.speed = new p5.Vector();
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
-        this.hitBoxBucketPosition = this.position.x + 42;
-        this.hitBoxPlayerPosition = this.position.x + 78;
+        this.playerHitboxRectangle = {
+            x: this.position.x + 78,
+            y: 460,
+            width: 70,
+            height: 100,
+        };
+        this.bucketHitboxRectangle = {
+            x: this.position.x + 13,
+            y: 510,
+            width: 60,
+            height: 8,
+        };
     }
     setupImages() {
-        const playerImgCount = 6;
+        const playerImgCount = 7;
         for (let i = 1; i <= playerImgCount; i++) {
             this.playerImgLeft.push(loadImage('assets/player-left' + i + '.png'));
         }
@@ -94,15 +255,15 @@ class Player {
             this.position.x -= this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgLeft[current];
-            this.hitBoxBucketPosition = this.position.x + 42;
-            this.hitBoxPlayerPosition = this.position.x + 78;
+            this.bucketHitboxRectangle.x = this.position.x + 13;
+            this.playerHitboxRectangle.x = this.position.x + 78;
         }
         if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
             this.position.x += this.speed.x;
             let current = Math.floor((this.frameCounter % 60) / 10);
             this.img = this.playerImgRight[current];
-            this.hitBoxBucketPosition = this.position.x + 108;
-            this.hitBoxPlayerPosition = this.position.x;
+            this.bucketHitboxRectangle.x = this.position.x + 78;
+            this.playerHitboxRectangle.x = this.position.x;
         }
     }
     update() {
@@ -110,11 +271,20 @@ class Player {
     }
     draw() {
         this.frameCounter += 1;
-        image(this.img, this.position.x, this.position.y, 150, 150);
-        noFill();
-        noStroke();
-        ellipse(this.hitBoxBucketPosition, this.position.y + 50, 70, 20);
-        rect(this.hitBoxPlayerPosition, this.position.y, 70, 100);
+        image(this.img, this.position.x, this.position.y + 460, 150, 150);
+        fill("#cccccc");
+        if (!this.debug) {
+            noFill();
+            noStroke();
+        }
+        drawRectFromHitbox(this.playerHitboxRectangle);
+        drawRectFromHitbox(this.bucketHitboxRectangle);
+    }
+    playerCollision(hitbox) {
+        return rectangleOverlapsRect(this.playerHitboxRectangle, hitbox);
+    }
+    bucketCollision(hitbox) {
+        return rectangleOverlapsRect(this.bucketHitboxRectangle, hitbox);
     }
 }
 let game;
@@ -125,7 +295,9 @@ function preload() {
     };
 }
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    let cnv = createCanvas(1250, 650);
+    let x = (windowWidth - width) / 2;
+    cnv.position(x);
     frameRate(60);
     game = new TheGame();
 }
@@ -148,12 +320,20 @@ class Star extends FallingObject {
         this.startRandom = random(0, width);
         this.position = createVector(this.startRandom, 0);
         this.speed = 2;
+        this.hitbox = {
+            x: this.position.x + 10,
+            y: this.position.y + 50,
+            width: 20,
+            height: 20,
+        };
     }
     update() {
         this.falling();
+        this.hitbox.y = this.position.y + 50;
     }
     draw() {
-        image(this.img, this.position.x, this.position.y, 40, 60);
+        image(this.img, this.position.x, this.position.y, 40, 70);
+        drawRectFromHitbox(this.hitbox);
     }
     falling() {
         if (this.position.y <= height) {
@@ -174,6 +354,8 @@ class TheGame {
         this.fallingObjects = [];
         this.spawnTimer = 0;
         this.player = new Player();
+        this.environment = new Environment();
+        this.gameStatusbar = new GameStatusbar();
     }
     update() {
         this.player.update();
@@ -185,13 +367,16 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update();
         }
+        this.gameStatusbar.update();
     }
     draw() {
         clear();
+        this.environment.draw();
         this.player.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw();
         }
+        this.gameStatusbar.draw();
     }
     spawnNewObject() {
         if (this.spawnTimer > 2500) {
@@ -206,30 +391,21 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             let i = this.fallingObjects.indexOf(fallingObj);
             if (fallingObj instanceof Star) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxBucketPosition, this.player.position.y);
-                if (distance < fallingObj.size + this.player.size) {
+                if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
-                }
-                else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1);
+                    console.log("Poäng");
                 }
             }
             if (fallingObj instanceof BadThing) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxPlayerPosition, this.player.position.y);
-                if (distance < fallingObj.size + this.player.size) {
+                if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
-                }
-                else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1);
+                    console.log("Ouch");
                 }
             }
             if (fallingObj instanceof ExtraLife) {
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxPlayerPosition, this.player.position.y);
-                if (distance < fallingObj.size + this.player.size) {
+                if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
-                }
-                else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1);
+                    console.log("1up!!!");
                 }
             }
         }

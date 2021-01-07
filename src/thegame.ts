@@ -1,5 +1,5 @@
 class TheGame {
-    // private environment: Environment;
+    private environment: Environment;
     private star: Star;
     private badthing: BadThing;
     private extraLife: ExtraLife;
@@ -7,7 +7,7 @@ class TheGame {
     private spawnTimer: number
     private player = new Player();
     // private startMenu: StartMenu;
-    // private gameStatusbar: GameStatusbar;
+    private gameStatusbar: GameStatusbar;
 
     constructor() {
         this.star = new Star();
@@ -16,8 +16,9 @@ class TheGame {
         this.fallingObjects = []
         this.spawnTimer = 0
         this.player = new Player();
-
-       
+        this.environment = new Environment();
+        this.gameStatusbar = new GameStatusbar(); 
+        
     }
 
     update() {
@@ -30,14 +31,17 @@ class TheGame {
         for (const fallingObj of this.fallingObjects) {
             fallingObj.update()
         }
+        this.gameStatusbar.update(); 
     }
-
+    
     draw() {
         clear();
+        this.environment.draw();
         this.player.draw();
         for (const fallingObj of this.fallingObjects) {
             fallingObj.draw()
         }
+        this.gameStatusbar.draw(); 
     }
 
     spawnNewObject() {
@@ -56,32 +60,28 @@ class TheGame {
         let i = this.fallingObjects.indexOf(fallingObj)
             
             if(fallingObj instanceof Star) {     
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxBucketPosition, this.player.position.y)          
-                if(distance < fallingObj.size + this.player.size) {
-                    this.fallingObjects.splice(i, 1)
-                   
-                }  else if (fallingObj.position.y > windowHeight) {
-                    this.fallingObjects.splice(i, 1)
-                }   
-               
+                if (this.player.bucketCollision(fallingObj.hitbox)) {
+                    this.fallingObjects.splice(i, 1);
+                    console.log("Poäng") 
+                    //Add points in statusbar + soundeffect
+                }
             }   
-            if(fallingObj instanceof BadThing) {                
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxPlayerPosition, this.player.position.y)          
-                if(distance < fallingObj.size + this.player.size) {
-                    this.fallingObjects.splice(i, 1)
-                    
-                }   else if (fallingObj.position.y > windowHeight) {
-                        this.fallingObjects.splice(i, 1)
-                }             
+
+            if (fallingObj instanceof BadThing) {      
+                if (this.player.playerCollision(fallingObj.hitbox)) {
+                    this.fallingObjects.splice(i, 1);
+                    console.log("Ouch"); 
+                    // Decrease life in statusBar + soundeffect
+                }
+                
             }
-            if(fallingObj instanceof ExtraLife) {                
-                let distance = dist(fallingObj.position.x, fallingObj.position.y, this.player.hitBoxPlayerPosition, this.player.position.y)          
-                if(distance < fallingObj.size + this.player.size) {
-                    this.fallingObjects.splice(i, 1)
-                   
-                }   else if (fallingObj.position.y > windowHeight) {
-                        this.fallingObjects.splice(i, 1)
-                }             
+            if (fallingObj instanceof ExtraLife) {             
+                if (this.player.playerCollision(fallingObj.hitbox)) {
+                    this.fallingObjects.splice(i, 1);
+                    console.log("1up!!!"); 
+                    // Add life to statusBar + soundeffect
+                }
+                
             }
         }
     }
