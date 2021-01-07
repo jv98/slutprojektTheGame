@@ -67,9 +67,7 @@ class TheGame {
         } else {
             this.environment.draw();
             this.player.draw();
-            for (const fallingObj of this.fallingObjects) {
-                fallingObj.draw()
-            }
+
             if (this.gameStatusbar.score < 100) {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.draw()
