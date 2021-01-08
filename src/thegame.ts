@@ -42,7 +42,7 @@ class TheGame {
             this.extraLife.update();
             this.checkCollision()
             this.spawnNewObject()
-    
+            sounds.backgroundMusic.play()
             if (this.gameStatusbar.score < 100) {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.update()
