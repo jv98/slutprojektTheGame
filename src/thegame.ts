@@ -7,11 +7,13 @@ class TheGame {
     private spawnTimer: number
     private spawnTimerHeart: number
     private player: Player;
-    // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
     private stuffedAnimal: StuffedAnimal;
     private startMenu: StartMenu;
     private menuMode: boolean;
+    private endSceneWon: EndSceneWin;
+    private endSceneLost: EndSceneLost;
+    private endSceneMode: boolean;
 
     constructor() {
         this.star = new Star();
@@ -26,16 +28,24 @@ class TheGame {
         this.stuffedAnimal = new StuffedAnimal();
         this.startMenu = new StartMenu();
         this.menuMode = true;
-        
+        this.endSceneWon = new EndSceneWin();
+        this.endSceneLost = new EndSceneLost();
+        this.endSceneMode = false;
     }
 
     update() {
         
-        if (this.menuMode == true) {
+        if (this.menuMode) {
             if (keyCode === ENTER) {
                 this.menuMode = false;
             }
-        } else {
+        } else if (this.endSceneMode) {
+            if (keyCode === ENTER) {
+                this.endSceneMode = false;
+                location.reload();
+            }
+        } 
+        else {
             this.player.update();
             this.star.update();
             this.badthing.update();
@@ -51,9 +61,11 @@ class TheGame {
             if (this.gameStatusbar.score === 100) {
                 this.stuffedAnimal.update();
                 //winning message from EndScene
+                this.endSceneMode = true;
             }
             if (this.gameStatusbar.characterHP == 0) {
                 //losing message from EndScene
+                this.endSceneMode = true;
             }
             this.gameStatusbar.update(); 
         }
@@ -75,12 +87,14 @@ class TheGame {
             }
             if (this.gameStatusbar.score === 100) {
                 //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
+                this.endSceneWon.draw();
             }
             if (this.gameStatusbar.characterHP == 0) {
                 //losing message from EndScene
+                this.endSceneLost.draw();
             }
-            this.gameStatusbar.draw(); 
             this.stuffedAnimal.draw();
+            this.gameStatusbar.draw(); 
         }
     }
 
