@@ -62,6 +62,7 @@ class TheGame {
             if(fallingObj instanceof Star) {     
                 if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
+                    sounds.starr.play()
                     console.log("Poäng") 
                     //Add points in statusbar + soundeffect
                 }
@@ -70,6 +71,7 @@ class TheGame {
             if (fallingObj instanceof BadThing) {      
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
+                    sounds.ouch.play()
                     console.log("Ouch"); 
                     // Decrease life in statusBar + soundeffect
                 }
@@ -79,6 +81,7 @@ class TheGame {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("1up!!!"); 
+                    sounds.life.play()
                     // Add life to statusBar + soundeffect
                 }
                 

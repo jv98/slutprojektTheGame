@@ -291,7 +291,9 @@ let game;
 let sounds;
 function preload() {
     sounds = {
-        backgroundMusic: loadSound('../assets/music/backgroundsound.mp3'),
+        ouch: loadSound('../assets/music/ouch.mp3'),
+        life: loadSound('../assets/music/extralife.mp3'),
+        starr: loadSound('../assets/music/starsound.mp3'),
     };
 }
 function setup() {
@@ -307,10 +309,6 @@ function draw() {
 }
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
-}
-function mousePressed() {
-    sounds.backgroundMusic.play();
-    console.log('hello');
 }
 class Star extends FallingObject {
     constructor() {
@@ -393,12 +391,14 @@ class TheGame {
             if (fallingObj instanceof Star) {
                 if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
+                    sounds.starr.play();
                     console.log("Poäng");
                 }
             }
             if (fallingObj instanceof BadThing) {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
+                    sounds.ouch.play();
                     console.log("Ouch");
                 }
             }
@@ -406,6 +406,7 @@ class TheGame {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     console.log("1up!!!");
+                    sounds.life.play();
                 }
             }
         }
