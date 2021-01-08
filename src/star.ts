@@ -15,7 +15,7 @@ class Star extends FallingObject{
         this.img = loadImage('assets/star.png');
         this.startRandom = random(0, width)
         this.position = createVector(this.startRandom, 0)
-        this.speed = 2
+        this.speed = 4
         this.hitbox = {
             x: this.position.x + 10,
             y: this.position.y + 50,

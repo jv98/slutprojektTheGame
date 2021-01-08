@@ -1,20 +1,19 @@
-import p5 from "p5";
-
 class StartMenu {
 
-  public imgLogo: p5.Image;
-  public menuMode: boolean = true;
-  public poppinsBold: p5.Font;
-  public poppinsLight: p5.Font;
+  private imgLogo: p5.Image;
+  private poppinsBold: p5.Font;
+  private poppinsLight: p5.Font;
 
-  constructor(menuMode: boolean) {
-    this.menuMode = menuMode;
-    this.imgLogo = loadImage('./assets/logo-fs.png');
-    this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
-    this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
+  constructor() {
+      this.imgLogo = loadImage('./assets/logo-fs.png');
+      this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
+      this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
   }
 
+  update() {}
+
   draw() {
+    push()
       background(0);
       imageMode(CENTER)
       image(this.imgLogo, 1250 / 2, 130, 350, 170)
@@ -65,5 +64,6 @@ class StartMenu {
         1250 / 2,
         550
       );
+      pop()
     }
 }

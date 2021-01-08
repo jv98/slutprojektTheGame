@@ -1,6 +1,8 @@
 //---- GLOBAL VARIABLES ----//
 let game: TheGame;
 let sounds: ISounds;
+let menuMode: boolean = true;
+
 
 /**
  * Built in preload function in P5

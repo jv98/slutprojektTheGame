@@ -1,12 +1,12 @@
 
 class BadThing extends FallingObject{
 
-    public size: number
+    private size: number
     //public soundeffect: boolean
-    public img: p5.Image
-    public position: p5.Vector
-    public speed: number
-    public startRandom: number
+    private img: p5.Image
+    private position: p5.Vector
+    private speed: number
+    private startRandom: number
     public hitbox: Rectangle
 
     constructor() {
@@ -43,4 +43,5 @@ class BadThing extends FallingObject{
             }
         }
     }
+
 }
