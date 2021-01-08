@@ -8,7 +8,7 @@ class GameStatusbar {
     private oneUpImg: p5.Image; 
     public poppinsBold: p5.Font;
     public poppinsLight: p5.Font;
-    private button: Button; 
+    public button: restartButton; 
     private muteButton: MuteButton; 
     private musicPlay: p5.Image;  
 
@@ -24,7 +24,7 @@ class GameStatusbar {
         this.position = createVector(0, height -87)
         this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
         this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
-        this.button = new Button(1150,height -20,160,'image','text'); 
+        this.button = new restartButton(1150,height -20,160,'image','text'); 
         this.muteButton = new MuteButton(970,height -5,80,'image', 'text') 
         this.musicPlay = loadImage('assets/musicPlay.png'); 
 

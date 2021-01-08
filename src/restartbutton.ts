@@ -1,4 +1,4 @@
-class Button {
+class restartButton {
     x: number; 
     y:number; 
     r:number; 
@@ -7,6 +7,7 @@ class Button {
     prevMouseIsPressed: boolean; 
     public poppinsBold: p5.Font;
     public poppinsLight: p5.Font;
+    
 
 
     constructor(x: number, y:number, r: number, content: p5.Image|string, type:'image'|'text'){
@@ -18,14 +19,14 @@ class Button {
         this.prevMouseIsPressed = mouseIsPressed; 
         this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
         this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
+       
     }
 
     update(){
         if(!this.prevMouseIsPressed && mouseIsPressed) { 
-            let d = dist(mouseX, mouseY, this.x, this. y)
+            let d = dist(mouseX, mouseY, this.x, this.y)
             if(d < this.r){
-                console.log('restart game')
-                //restart function() 
+                game = new TheGame(); 
             }
         }
         this.prevMouseIsPressed = mouseIsPressed; 

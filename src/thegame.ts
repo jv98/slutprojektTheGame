@@ -56,8 +56,12 @@ class TheGame {
                 //losing message from EndScene
             }
             this.gameStatusbar.update(); 
-        }
+        } 
     }
+
+    
+        
+    
     
     draw() {
         clear();

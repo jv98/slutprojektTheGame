@@ -4,7 +4,7 @@ class MuteButton {
     r:number; 
     content: p5.Image | string;  
     type: 'image' | 'text'; 
-    prevMouseIsPressed: boolean; 
+    prevMuteIsPressed: boolean; 
     public poppinsBold: p5.Font;
     public poppinsLight: p5.Font;
 
@@ -16,22 +16,21 @@ class MuteButton {
         this.r = r; 
         this.content = content; 
         this.type = type; 
-        this.prevMouseIsPressed = mouseIsPressed; 
+        this.prevMuteIsPressed = mouseIsPressed; 
         this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
         this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
 
     }
 
     update(){
-        if(!this.prevMouseIsPressed && mouseIsPressed) { 
-            let d = dist(mouseX, mouseY, this.x, this. y)
-            if(d < this.r){
-                alert('hej')
+        if(!this.prevMuteIsPressed && mouseIsPressed) { 
+            let mute = dist(mouseX, mouseY, this.x, this. y)
+            if(mute < this.r){
                 console.log('mute music')
                 //mute function() 
             }
         }
-        this.prevMouseIsPressed = mouseIsPressed; 
+        this.prevMuteIsPressed = mouseIsPressed; 
 
     }
 
@@ -46,7 +45,7 @@ class MuteButton {
 
     circle(){
         noStroke();
-        fill('red'); 
+        noFill(); 
         ellipse(this.x, this.y, this.r); 
         
     }
