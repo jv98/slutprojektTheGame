@@ -29,7 +29,7 @@ class TheGame {
         this.startMenu = new StartMenu();
         this.menuMode = true;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500        
+        this.scoreToWin = 20        
     }
 
     update() {
@@ -86,6 +86,7 @@ class TheGame {
             }
                 
             if (this.gameStatusbar.score === this.scoreToWin) {
+                this.player.getWinningImg();
                 //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
             }
             if (this.gameStatusbar.characterHP == 0) {

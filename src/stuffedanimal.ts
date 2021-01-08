@@ -14,9 +14,8 @@ class StuffedAnimal {
     }
 
     draw() {
-        image(this.img, this.position.x, this.position.y, 70, 120);
-            if (this.position.y === 500) {
-                this.img.width = 0;
-            }
+        if (this.position.y <= 500) {
+            image(this.img, this.position.x, this.position.y, 70, 120);
+        }
     }
 }
