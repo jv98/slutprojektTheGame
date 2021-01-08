@@ -42,8 +42,8 @@ class TheGame {
             this.extraLife.update();
             this.checkCollision()
             this.spawnNewObject()
-            sounds.backgroundMusic.play()
             if (this.gameStatusbar.score < 100) {
+                this.playBackgroundMusic()
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.update()
                 }
@@ -82,6 +82,13 @@ class TheGame {
             this.gameStatusbar.draw(); 
             this.stuffedAnimal.draw();
         }
+    }
+
+    playBackgroundMusic() {
+        
+        if(!sounds.backgroundMusic.isPlaying()) {
+            sounds.backgroundMusic.play()
+        } 
     }
 
     spawnNewObject() {
