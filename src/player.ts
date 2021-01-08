@@ -50,10 +50,11 @@ class Player {
     private frameCounter: number;
     private img: p5.Image;
     private speed: p5.Vector;
-    private characterHP: Number;
+    private characterHP: number;
     private position: p5.Vector;
     private bucketHitboxRectangle: Rectangle;
     private playerHitboxRectangle: Rectangle;
+    private winningImg: p5.Image;
 
     constructor() {  
         this.debug = false;
@@ -67,6 +68,7 @@ class Player {
         this.speed.x = 7;
         this.frameCounter = 1;
         this.characterHP = 3;
+        this.winningImg = loadImage('assets/player-trophy.png');
         this.playerHitboxRectangle = {
             x: this.position.x + 78,
             y: 460,
@@ -131,5 +133,9 @@ class Player {
 
     public bucketCollision(hitbox: Rectangle): Boolean {
         return rectangleOverlapsRect(this.bucketHitboxRectangle, hitbox);
+    }
+
+    public getWinningImg() {
+        return image(this.winningImg, this.position.x, this.position.y + 460, 150, 150);
     }
 }

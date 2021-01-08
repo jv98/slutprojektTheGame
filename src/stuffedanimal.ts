@@ -1,5 +1,5 @@
 class StuffedAnimal {
-    private img: p5.Image;
+    public img: p5.Image;
     public position: p5.Vector;
 
     constructor() {
@@ -15,5 +15,8 @@ class StuffedAnimal {
 
     draw() {
         image(this.img, this.position.x, this.position.y, 70, 120);
+            if (this.position.y === 500) {
+                this.img.width = 0;
+            }
     }
 }
