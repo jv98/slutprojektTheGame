@@ -1,5 +1,4 @@
 interface ISounds {
-    key: p5.SoundFile;
     ouch: p5.SoundFile;
     life: p5.SoundFile;
     backgroundMusic: p5.SoundFile;

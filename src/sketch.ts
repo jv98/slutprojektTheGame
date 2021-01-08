@@ -13,7 +13,6 @@ function preload() {
     // sound = (window as any).loadSound('../assets/mySound.wav');
     sounds={
         // backgroundMusic: loadSound('../assets/music/backgroundsound.mp3'),
-        // key: loadSound('../assets/music/background.mp3'),
          ouch: loadSound('../assets/music/ouch.mp3'),
          life: loadSound('../assets/music/extralife.mp3'),
          starr: loadSound ('../assets/music/starsound.mp3'),
