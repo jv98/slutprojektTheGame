@@ -29,7 +29,7 @@ class TheGame {
         this.startMenu = new StartMenu();
         this.menuMode = true;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500        
+        this.scoreToWin = 100        
     }
 
     update() {
@@ -45,7 +45,7 @@ class TheGame {
             this.extraLife.update();
             this.checkCollision()
             this.spawnNewObject()
-    
+            this.playBackgroundMusic()
             if (this.gameStatusbar.score < this.scoreToWin) {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.update()
@@ -92,6 +92,17 @@ class TheGame {
             }
             this.gameStatusbar.draw(); 
             this.stuffedAnimal.draw();
+        }
+    }
+
+    playBackgroundMusic() {
+        
+        if(!sounds.backgroundMusic.isPlaying()) {
+            sounds.backgroundMusic.play()
+        } else if (this.gameStatusbar.score === this.scoreToWin) {
+            sounds.backgroundMusic.stop()
+        } else if (this.gameStatusbar.characterHP == 0) {
+            sounds.backgroundMusic.stop()
         }
     }
 
