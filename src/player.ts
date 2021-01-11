@@ -36,16 +36,6 @@ class Player {
         }
     }
 
-    private setupImages() {
-        const playerImgCount = 7;
-        for (let i = 1; i <= playerImgCount; i++) {
-            this.playerImgLeft.push(loadImage('assets/player-left' + i + '.png'));
-        }
-        for (let i = 1; i <= playerImgCount; i++) {
-            this.playerImgRight.push(loadImage('assets/player-right' + i + '.png'));
-        }   
-    }
-
     movement() {
         if (this.position.x > -10) {
             if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {

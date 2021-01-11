@@ -27,16 +27,6 @@ function preload() {
         playerImgMovingLeft.push(loadImage('assets/player-left' + i + '.png'));
         playerImgMovingRight.push(loadImage('assets/player-right' + i + '.png'));
     }
-
-    // playerImgMovingLeft = [loadImage('assets/player-left1.png'),
-    // loadImage('assets/player-left2.png'), loadImage('assets/player-left3.png'),
-    // loadImage('assets/player-left4.png'), loadImage('assets/player-left5.png'),
-    // loadImage('assets/player-left6.png'), loadImage('assets/player-left7.png')];
-    
-    // playerImgMovingRight = [loadImage('assets/player-right1.png'), loadImage('assets/player-right2.png'),
-    // loadImage('assets/player-right3.png'), loadImage('assets/player-right4.png'), 
-    // loadImage('assets/player-right5.png'), loadImage('assets/player-right6.png'),
-    // loadImage('assets/player-right7.png')];
 }
 
 
