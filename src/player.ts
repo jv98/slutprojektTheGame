@@ -1,48 +1,3 @@
-interface Rectangle {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-}
-
-interface Point {
-    x: number;
-    y: number;
-}
-
-function rectangleOverlapsPoint(rectangle: Rectangle, point: Point): Boolean {
-    if (point.x > rectangle.x && point.x < rectangle.x + rectangle.width){
-        return point.y > rectangle.y && point.y < rectangle.y + rectangle.height;
-    }
-    return false;
-}
-
-function rectangleOverlapsRect(rectangle1: Rectangle, rectangle2: Rectangle) {
-    const rightBottomCorner = {
-        x: rectangle2.x + rectangle2.width,
-        y: rectangle2.y,
-    }
-
-    const rightUpperCorner = {
-        x: rectangle2.x + rectangle2.width,
-        y: rectangle2.y + rectangle2.height,
-    }
-
-    const leftUpperCorner = {
-        x: rectangle2.x,
-        y: rectangle2.y + rectangle2.height,
-    }
-    
-    return (rectangleOverlapsPoint(rectangle1, rectangle2) ||
-            rectangleOverlapsPoint(rectangle1, rightBottomCorner) ||
-            rectangleOverlapsPoint(rectangle1, rightUpperCorner) ||
-            rectangleOverlapsPoint(rectangle1, leftUpperCorner));
-}
-
-function drawRectFromHitbox(hitbox: Rectangle): void {
-    rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
-}
-
 class Player {
     private debug: Boolean;
     private playerImgLeft: p5.Image[];
@@ -57,9 +12,9 @@ class Player {
 
     constructor() {  
         this.debug = false;
-        this.playerImgLeft = [];
-        this.playerImgRight = [];
-        this.setupImages();
+        this.playerImgLeft = playerImgMovingLeft;
+        this.playerImgRight = playerImgMovingRight;
+        //this.setupImages();
         this.img = this.playerImgLeft[0];
         this.position = new p5.Vector();
         this.position.x = 500;
@@ -81,30 +36,24 @@ class Player {
         }
     }
 
-    private setupImages() {
-        const playerImgCount = 7;
-        for (let i = 1; i <= playerImgCount; i++) {
-            this.playerImgLeft.push(loadImage('assets/player-left' + i + '.png'));
-        }
-        for (let i = 1; i <= playerImgCount; i++) {
-            this.playerImgRight.push(loadImage('assets/player-right' + i + '.png'));
-        }   
-    }
-
     movement() {
-        if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-            this.position.x -= this.speed.x;
-            let current = Math.floor((this.frameCounter % 60) / 10);
-            this.img = this.playerImgLeft[current];
-            this.bucketHitboxRectangle.x = this.position.x + 13;
-            this.playerHitboxRectangle.x = this.position.x + 78;
+        if (this.position.x > -10) {
+            if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+                this.position.x -= this.speed.x;
+                let current = Math.floor((this.frameCounter % 60) / 10);
+                this.img = this.playerImgLeft[current];
+                this.bucketHitboxRectangle.x = this.position.x + 13;
+                this.playerHitboxRectangle.x = this.position.x + 78;
+            }
         }
-        if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-            this.position.x += this.speed.x;
-            let current = Math.floor((this.frameCounter % 60) / 10);
-            this.img = this.playerImgRight[current];
-            this.bucketHitboxRectangle.x = this.position.x + 78;
-            this.playerHitboxRectangle.x = this.position.x;
+        if (this.position.x < 1105) {
+            if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+                this.position.x += this.speed.x;
+                let current = Math.floor((this.frameCounter % 60) / 10);
+                this.img = this.playerImgRight[current];
+                this.bucketHitboxRectangle.x = this.position.x + 78;
+                this.playerHitboxRectangle.x = this.position.x;
+            }
         }
     }
 
