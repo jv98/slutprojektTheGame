@@ -68,6 +68,10 @@ class TheGame {
         console.log(this.fallingObjects)
         
     }
+
+    
+        
+    
     
     draw() {
         clear();
