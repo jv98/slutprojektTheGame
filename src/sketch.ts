@@ -2,8 +2,8 @@
 let game: TheGame;
 let sounds: ISounds;
 let menuMode: boolean = true;
-let playerImgMovingLeft: p5.Image[];
-let playerImgMovingRight: p5.Image[];
+let playerImgMovingLeft = [] as p5.Image[];
+let playerImgMovingRight = [] as p5.Image[];
 
 
 /**
@@ -25,10 +25,8 @@ function preload() {
     const playerImgCount = 7;
     for (let i = 1; i <= playerImgCount; i++) {
         playerImgMovingLeft.push(loadImage('assets/player-left' + i + '.png'));
-    }
-    for (let i = 1; i <= playerImgCount; i++) {
         playerImgMovingRight.push(loadImage('assets/player-right' + i + '.png'));
-    }   
+    }
 
     // playerImgMovingLeft = [loadImage('assets/player-left1.png'),
     // loadImage('assets/player-left2.png'), loadImage('assets/player-left3.png'),

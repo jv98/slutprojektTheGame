@@ -12,9 +12,9 @@ class Player {
 
     constructor() {  
         this.debug = false;
-        this.playerImgLeft = [];
-        this.playerImgRight = [];
-        this.setupImages();
+        this.playerImgLeft = playerImgMovingLeft;
+        this.playerImgRight = playerImgMovingRight;
+        //this.setupImages();
         this.img = this.playerImgLeft[0];
         this.position = new p5.Vector();
         this.position.x = 500;
@@ -56,7 +56,7 @@ class Player {
                 this.playerHitboxRectangle.x = this.position.x + 78;
             }
         }
-        if (this.position.x < 1110) {
+        if (this.position.x < 1105) {
             if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
                 this.position.x += this.speed.x;
                 let current = Math.floor((this.frameCounter % 60) / 10);
