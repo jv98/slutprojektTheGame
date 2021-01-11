@@ -59,6 +59,7 @@ class TheGame {
                 //winning message from EndScene
             }
             if (this.gameStatusbar.characterHP == 0) {
+                this.fallingObjects = []
                 //losing message from EndScene
             }
             this.gameStatusbar.update(); 
@@ -90,6 +91,7 @@ class TheGame {
                 //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
             }
             if (this.gameStatusbar.characterHP == 0) {
+                this.fallingObjects = []
                 //losing message from EndScene
             }
             this.gameStatusbar.draw(); 
