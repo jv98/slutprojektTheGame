@@ -4,7 +4,7 @@ class BadThing extends FallingObject{
     private size: number
     //public soundeffect: boolean
     private img: p5.Image
-    private position: p5.Vector
+    public position: p5.Vector
     private speed: number
     private startRandom: number
     public hitbox: Rectangle

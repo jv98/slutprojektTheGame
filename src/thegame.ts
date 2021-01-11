@@ -29,7 +29,7 @@ class TheGame {
         this.startMenu = new StartMenu();
         this.menuMode = true;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500        
+        this.scoreToWin = 100        
     }
 
     update() {
@@ -45,7 +45,7 @@ class TheGame {
             this.extraLife.update();
             this.checkCollision()
             this.spawnNewObject()
-    
+            this.playBackgroundMusic()
             if (this.gameStatusbar.score < this.scoreToWin) {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.update()
@@ -63,6 +63,8 @@ class TheGame {
             }
             this.gameStatusbar.update(); 
         }
+
+        console.log(this.fallingObjects)
         
     }
     
@@ -92,6 +94,17 @@ class TheGame {
             }
             this.gameStatusbar.draw(); 
             this.stuffedAnimal.draw();
+        }
+    }
+
+    playBackgroundMusic() {
+        
+        if(!sounds.backgroundMusic.isPlaying()) {
+            sounds.backgroundMusic.play()
+        } else if (this.gameStatusbar.score === this.scoreToWin) {
+            sounds.backgroundMusic.stop()
+        } else if (this.gameStatusbar.characterHP == 0) {
+            sounds.backgroundMusic.stop()
         }
     }
 
@@ -137,33 +150,33 @@ class TheGame {
                 if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     sounds.starr.play()
-                    console.log("Poäng") 
-                    this.gameStatusbar.score = this.gameStatusbar.score + 10
-                    //Add points in statusbar + soundeffect
-                } //else if (// TODO: När objektet når skärmens nederkan ska objektet spliceas) 
+                    this.gameStatusbar.score = this.gameStatusbar.score + 10                    
+                } else if (fallingObj.position.y > height-5) {
+                    this.fallingObjects.splice(i, 1);
+                }  
             }   
 
             if (fallingObj instanceof BadThing) {      
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     sounds.ouch.play()
-                    console.log("Ouch"); 
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP - 1
                     this.gameStatusbar.score = this.gameStatusbar.score - 10
-                    // Decrease life in statusBar + soundeffect
-                } 
+                }   else if (fallingObj.position.y > height-5) {
+                    this.fallingObjects.splice(i, 1);
+                }  
                 
             }
             if (fallingObj instanceof ExtraLife) {             
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
-                    console.log("1up!!!"); 
                     sounds.life.play()
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1
-                    // Add life to statusBar + soundeffect
-                } //else if (// TODO: När objektet når skärmens nederkan ska objektet spliceas)                
-            
+                }  else if (fallingObj.position.y > height-5) {
+                    this.fallingObjects.splice(i, 1);
+                }   
             }
+
         }
     }
 }
