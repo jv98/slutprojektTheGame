@@ -29,7 +29,7 @@ class TheGame {
         this.startMenu = new StartMenu();
         this.menuMode = true;
         this.spawnInterval = 1500;
-        this.scoreToWin = 100        
+        this.scoreToWin = 10        
     }
 
     update() {
@@ -56,7 +56,10 @@ class TheGame {
 
             if (this.gameStatusbar.score === this.scoreToWin) {
                 this.stuffedAnimal.update();
-                //winning message from EndScene
+                if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
+                    console.log('win!!!')
+                    //winning message from EndScene
+                }
             }
             if (this.gameStatusbar.characterHP == 0) {
                 this.fallingObjects = []
@@ -181,7 +184,6 @@ class TheGame {
                     this.fallingObjects.splice(i, 1);
                 }   
             }
-
         }
     }
 }
