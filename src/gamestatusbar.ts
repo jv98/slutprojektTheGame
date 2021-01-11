@@ -47,11 +47,11 @@ class GameStatusbar {
        
        
         //Music img 
-        image(this.musicPlay, this.position.x +950, this.position.y +52); 
+        image(this.musicPlay, this.position.x +990, this.position.y +52); 
         //Stars & lives
-        image(this.oneUpImg, this.position.x + 220, this.position.y +50); 
-        text (' '+ this.characterHP, this.position.x + 255, this.position.y +70);
-        image(this.starImg, this.position.x +95, this.position.y+45) 
+        image(this.oneUpImg, this.position.x + 220, this.position.y +60); 
+        text (' '+ this.characterHP, this.position.x + 260, this.position.y +70);
+        image(this.starImg, this.position.x +95, this.position.y+55) 
         text('' + this.score, this.position.x +138, this.position.y +73);
         pop(); 
     }

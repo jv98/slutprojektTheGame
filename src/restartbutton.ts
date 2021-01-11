@@ -38,11 +38,11 @@ class restartButton {
         this.circle();
         //Restart Game text 
         fill('white')
-        textFont(this.poppinsLight); 
+        textFont(this.poppinsBold); 
         textAlign(CENTER, CENTER)
-        textSize(25)
+        textSize(20)
     // const width = textWidth("Restart Game");
-        text("Restart Game", this.x, this.y);
+        text("Restart", this.x, this.y);
         pop()
     }
 
