@@ -2,6 +2,8 @@
 let game: TheGame;
 let sounds: ISounds;
 let menuMode: boolean = true;
+let playerImgMovingLeft: p5.Image[];
+let playerImgMovingRight: p5.Image[];
 
 
 /**
@@ -19,15 +21,24 @@ function preload() {
          life: loadSound('../assets/music/extralife.mp3'),
          starr: loadSound ('../assets/music/starsound.mp3'),
     } as ISounds
-    const playerImgMovingLeft = [loadImage('assets/player-left1.png'),
-    loadImage('assets/player-left2.png'), loadImage('assets/player-left3.png'),
-    loadImage('assets/player-left4.png'), loadImage('assets/player-left5.png'),
-    loadImage('assets/player-left6.png'), loadImage('assets/player-left7.png')];
+
+    const playerImgCount = 7;
+    for (let i = 1; i <= playerImgCount; i++) {
+        playerImgMovingLeft.push(loadImage('assets/player-left' + i + '.png'));
+    }
+    for (let i = 1; i <= playerImgCount; i++) {
+        playerImgMovingRight.push(loadImage('assets/player-right' + i + '.png'));
+    }   
+
+    // playerImgMovingLeft = [loadImage('assets/player-left1.png'),
+    // loadImage('assets/player-left2.png'), loadImage('assets/player-left3.png'),
+    // loadImage('assets/player-left4.png'), loadImage('assets/player-left5.png'),
+    // loadImage('assets/player-left6.png'), loadImage('assets/player-left7.png')];
     
-    const playerImgMovingRight = [loadImage('assets/player-right1.png'), loadImage('assets/player-right2.png'),
-    loadImage('assets/player-right3.png'), loadImage('assets/player-right4.png'), 
-    loadImage('assets/player-right5.png'), loadImage('assets/player-right6.png'),
-    loadImage('assets/player-right7.png')];
+    // playerImgMovingRight = [loadImage('assets/player-right1.png'), loadImage('assets/player-right2.png'),
+    // loadImage('assets/player-right3.png'), loadImage('assets/player-right4.png'), 
+    // loadImage('assets/player-right5.png'), loadImage('assets/player-right6.png'),
+    // loadImage('assets/player-right7.png')];
 }
 
 
