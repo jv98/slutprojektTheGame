@@ -52,7 +52,7 @@ class GameStatusbar {
         image(this.oneUpImg, this.position.x + 220, this.position.y +60); 
         text (' '+ this.characterHP, this.position.x + 260, this.position.y +70);
         image(this.starImg, this.position.x +95, this.position.y+55) 
-        text('' + this.score, this.position.x +138, this.position.y +73);
+        text('' + this.score, this.position.x +145, this.position.y +73);
         pop(); 
     }
     

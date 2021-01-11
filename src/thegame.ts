@@ -64,9 +64,6 @@ class TheGame {
             }
             this.gameStatusbar.update(); 
         }
-
-        console.log(this.fallingObjects)
-        
     }
 
     

@@ -2,6 +2,8 @@
 let game: TheGame;
 let sounds: ISounds;
 let menuMode: boolean = true;
+let playerImgMovingLeft = [] as p5.Image[];
+let playerImgMovingRight = [] as p5.Image[];
 
 
 /**
@@ -20,6 +22,11 @@ function preload() {
          starr: loadSound ('../assets/music/starsound.mp3'),
     } as ISounds
 
+    const playerImgCount = 7;
+    for (let i = 1; i <= playerImgCount; i++) {
+        playerImgMovingLeft.push(loadImage('assets/player-left' + i + '.png'));
+        playerImgMovingRight.push(loadImage('assets/player-right' + i + '.png'));
+    }
     //Ikoner gameStatusbar 
         loadImage('assets/musicPlay.png'); 
         loadImage('assets/starhp.png'); 
