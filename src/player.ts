@@ -51,7 +51,7 @@ class Player {
     private img: p5.Image;
     private speed: p5.Vector;
     private characterHP: Number;
-    private position: p5.Vector;
+    public position: p5.Vector;
     private bucketHitboxRectangle: Rectangle;
     private playerHitboxRectangle: Rectangle;
 

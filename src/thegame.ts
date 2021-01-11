@@ -53,15 +53,17 @@ class TheGame {
             this.checkCollision()
             this.spawnNewObject()
     
-            if (this.gameStatusbar.score < 100) {
+            if (this.gameStatusbar.score < 10) {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.update()
                 }
             }
-            if (this.gameStatusbar.score === 100) {
+            if (this.gameStatusbar.score === 10) {
                 this.stuffedAnimal.update();
                 //winning message from EndScene
-                this.endSceneMode = true;
+                if(this.stuffedAnimal.position.y-500 >= this.player.position.y) {                
+                    this.endSceneMode = true;
+                }
             }
             if (this.gameStatusbar.characterHP == 0) {
                 //losing message from EndScene
@@ -76,25 +78,30 @@ class TheGame {
         
         if (this.menuMode) {
             this.startMenu.draw();
-        } else {
-            this.environment.draw();
-            this.player.draw();
+        } else {            
 
-            if (this.gameStatusbar.score < 100) {
+            if (this.gameStatusbar.score < 10) {
+                this.environment.draw();
+                this.player.draw();
+                this.stuffedAnimal.draw();
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.draw()
                 }
+                
+                this.gameStatusbar.draw(); 
             }
-            if (this.gameStatusbar.score === 100) {
-                //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
-                this.endSceneWon.draw();
+
+            if (this.gameStatusbar.score === 10) {
+                this.environment.draw();
+                this.player.draw();
+                this.stuffedAnimal.draw();
+                if(this.stuffedAnimal.position.y-500 >= this.player.position.y) {
+                    this.endSceneWon.draw();
+                }
             }
             if (this.gameStatusbar.characterHP == 0) {
-                //losing message from EndScene
                 this.endSceneLost.draw();
-            }
-            this.stuffedAnimal.draw();
-            this.gameStatusbar.draw(); 
+            }            
         }
     }
 
@@ -109,8 +116,7 @@ class TheGame {
             this.spawnTimerHeart = 0;
             this.fallingObjects.push(new ExtraLife());    
             
-        }
-        
+        }     
                 
         this.spawnTimerHeart += deltaTime
         this.spawnTimer += deltaTime
