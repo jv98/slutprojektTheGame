@@ -100,10 +100,12 @@ class TheGame {
     }
 
     playBackgroundMusic() {
-        
-        if(!sounds.backgroundMusic.isPlaying()) {
-            sounds.backgroundMusic.play()
-        } else if (this.gameStatusbar.score === this.scoreToWin) {
+        if (keyCode === ENTER) {
+            if(!sounds.backgroundMusic.isPlaying()) {
+                sounds.backgroundMusic.play()
+            } 
+        }
+        else if (this.gameStatusbar.score === this.scoreToWin) {
             sounds.backgroundMusic.stop()
         } else if (this.gameStatusbar.characterHP == 0) {
             sounds.backgroundMusic.stop()
