@@ -47,19 +47,23 @@ class Player {
     }
 
     movement() {
-        if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
-            this.position.x -= this.speed.x;
-            let current = Math.floor((this.frameCounter % 60) / 10);
-            this.img = this.playerImgLeft[current];
-            this.bucketHitboxRectangle.x = this.position.x + 13;
-            this.playerHitboxRectangle.x = this.position.x + 78;
+        if (this.position.x > -10) {
+            if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
+                this.position.x -= this.speed.x;
+                let current = Math.floor((this.frameCounter % 60) / 10);
+                this.img = this.playerImgLeft[current];
+                this.bucketHitboxRectangle.x = this.position.x + 13;
+                this.playerHitboxRectangle.x = this.position.x + 78;
+            }
         }
-        if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
-            this.position.x += this.speed.x;
-            let current = Math.floor((this.frameCounter % 60) / 10);
-            this.img = this.playerImgRight[current];
-            this.bucketHitboxRectangle.x = this.position.x + 78;
-            this.playerHitboxRectangle.x = this.position.x;
+        if (this.position.x < 1110) {
+            if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
+                this.position.x += this.speed.x;
+                let current = Math.floor((this.frameCounter % 60) / 10);
+                this.img = this.playerImgRight[current];
+                this.bucketHitboxRectangle.x = this.position.x + 78;
+                this.playerHitboxRectangle.x = this.position.x;
+            }
         }
     }
 
