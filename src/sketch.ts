@@ -19,7 +19,12 @@ function preload() {
          life: loadSound('../assets/music/extralife.mp3'),
          starr: loadSound ('../assets/music/starsound.mp3'),
     } as ISounds
-    
+
+    //Ikoner gameStatusbar 
+        loadImage('assets/musicPlay.png'); 
+        loadImage('assets/starhp.png'); 
+        loadImage('assets/miniOneUp.png'); 
+        
 }
 
 
@@ -37,6 +42,7 @@ function setup() {
     frameRate(60);
     //noCursor();  
     game = new TheGame();
+    
 
 }
 
