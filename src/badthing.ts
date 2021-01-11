@@ -1,18 +1,12 @@
 
 class BadThing extends FallingObject{
 
-    private size: number
-    //public soundeffect: boolean
-    private img: p5.Image
-    public position: p5.Vector
-    private speed: number
-    private startRandom: number
+    private startRandom: number;
     public hitbox: Rectangle
 
-    constructor() {
-        super()
-        this.size = 10
-        //this.soundeffect = boolean
+    constructor(size: number, img: p5.Image, position: p5.Vector, speed: number) {
+        super(size, img, position, speed)
+        this.size = 10;
         this.img = loadImage('assets/nail.png');
         this.startRandom = random(0, width)
         this.position = createVector(this.startRandom, 0)
@@ -35,7 +29,7 @@ class BadThing extends FallingObject{
         drawRectFromHitbox(this.hitbox);
     }
 
-    falling() {
+    falling(): void {
         if(this.position.y <= height) {
             if (this.position.y > height-5) {
             } else {
