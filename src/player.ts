@@ -11,7 +11,7 @@ class Player {
     private playerHitboxRectangle: Rectangle;
 
     constructor() {  
-        this.debug = false;
+        this.debug = true;
         this.playerImgLeft = playerImgMovingLeft;
         this.playerImgRight = playerImgMovingRight;
         //this.setupImages();
