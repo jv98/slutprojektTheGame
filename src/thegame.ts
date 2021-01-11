@@ -84,16 +84,18 @@ class TheGame {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.draw()
                 }
+                this.stuffedAnimal.draw();
             }
             if (this.gameStatusbar.score === 100) {
                 //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
                 this.endSceneWon.draw();
+                this.stuffedAnimal.draw();
             }
             if (this.gameStatusbar.characterHP == 0) {
                 //losing message from EndScene
                 this.endSceneLost.draw();
             }
-            this.stuffedAnimal.draw();
+            
             this.gameStatusbar.draw(); 
         }
     }
