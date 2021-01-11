@@ -1,4 +1,4 @@
-class restartButton {
+class RestartButton {
     x: number; 
     y:number; 
     r:number; 
@@ -50,7 +50,7 @@ class restartButton {
 
     circle(){
         noStroke();
-        noFill(); 
+        fill('red'); 
         ellipse(this.x, this.y, this.r); 
         
     }

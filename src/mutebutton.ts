@@ -25,9 +25,11 @@ class MuteButton {
     update(){
         if(!this.prevMuteIsPressed && mouseIsPressed) { 
             let mute = dist(mouseX, mouseY, this.x, this. y)
-            if(mute < this.r){
+            if(mute < this.r && sounds.backgroundMusic.isPlaying) {
+                sounds.backgroundMusic.stop()
                 console.log('mute music')
-                //mute function() 
+            } else {
+                sounds.backgroundMusic.play() 
             }
         }
         this.prevMuteIsPressed = mouseIsPressed; 
@@ -45,7 +47,7 @@ class MuteButton {
 
     circle(){
         noStroke();
-        noFill(); 
+        fill('red'); 
         ellipse(this.x, this.y, this.r); 
         
     }
