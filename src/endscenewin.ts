@@ -1,11 +1,13 @@
 class EndSceneWin {
   private imgLogo: p5.Image;
+  private playerTrophy: p5.Image;
   private poppinsBold: p5.Font;
   private poppinsMedium: p5.Font;
   private poppinsLight: p5.Font;
 
   constructor() {
       this.imgLogo = loadImage('./assets/logo-fs.png');
+      this.playerTrophy = loadImage('./assets/player-trophy.png');
       this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
       this.poppinsMedium = loadFont('./assets/poppins/Poppins-Medium.ttf');
       this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
@@ -16,6 +18,7 @@ class EndSceneWin {
     background(0);
     imageMode(CENTER)
     image(this.imgLogo, 1250 / 2, 110, 350, 170)
+    image(this.playerTrophy, 1050, 400, 250, 250)
 
     textFont(this.poppinsBold);
     fill(255);
