@@ -2,20 +2,16 @@ class RestartButton {
     x: number; 
     y:number; 
     r:number; 
-    content: p5.Image | string; 
-    type: 'image' | 'text'; 
     prevMouseIsPressed: boolean; 
     public poppinsBold: p5.Font;
     public poppinsLight: p5.Font;
     
 
 
-    constructor(x: number, y:number, r: number, content: p5.Image|string, type:'image'|'text'){
+    constructor(x: number, y:number, r: number){
         this.x = x; 
         this.y = y;  
         this.r = r; 
-        this.content = content; 
-        this.type = type; 
         this.prevMouseIsPressed = mouseIsPressed; 
         this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
         this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
@@ -38,24 +34,19 @@ class RestartButton {
     draw(){
         push()
         this.circle();
-        //Restart Game text 
         fill('white')
         textFont(this.poppinsBold); 
         textAlign(CENTER, CENTER)
         textSize(20)
-    // const width = textWidth("Restart Game");
         text("Restart", this.x, this.y);
         pop()
     }
 
     circle(){
         noStroke();
-        fill('red'); 
+        noFill(); 
         ellipse(this.x, this.y, this.r); 
-        
     }
 
-    
-    
 }
 
