@@ -20,6 +20,7 @@ function preload() {
          starr: loadSound ('../assets/music/starsound.mp3'),
     } as ISounds
     
+
 }
 
 

@@ -5,4 +5,3 @@ interface ISounds {
     starr: p5.SoundFile;
 }
 
-
