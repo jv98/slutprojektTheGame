@@ -52,9 +52,9 @@ class MuteButton {
         textAlign(CENTER, CENTER)
             //Toggles the mute picture.
             if(this.isMuted) {
-                image(images.muteImg, this.position.x +990, this.position.y +52); 
+                image(images.muteImg, this.position.x +980, this.position.y +54); 
             } else{
-                image(images.playImg, this.position.x +990, this.position.y +52); 
+                image(images.playImg, this.position.x +980, this.position.y +54); 
             }
         pop()
     }
