@@ -10,8 +10,6 @@ class StartMenu {
       this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
   }
 
-  update() {}
-
   draw() {
     push()
       background(0);

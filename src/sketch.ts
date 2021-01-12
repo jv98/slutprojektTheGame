@@ -31,11 +31,13 @@ function preload() {
         loadImage('assets/musicPlay.png'); 
         loadImage('assets/starhp.png'); 
         loadImage('assets/miniOneUp.png'); 
+        loadImage('./assets/logo-fs.png');
+        loadImage('./assets/player-trophy.png');
+        loadFont('./assets/poppins/Poppins-Bold.ttf');
+        loadFont('./assets/poppins/Poppins-Medium.ttf');
+        loadFont('./assets/poppins/Poppins-Light.ttf');
         
 }
-
-
-
 /**
  * Built in setup function in P5
  * This is a good place to create your first class object
