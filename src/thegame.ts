@@ -7,11 +7,13 @@ class TheGame {
     private spawnTimer: number
     private spawnTimerHeart: number
     private player: Player;
-    // private startMenu: StartMenu;
     private gameStatusbar: GameStatusbar;
     private stuffedAnimal: StuffedAnimal;
     private startMenu: StartMenu;
     private menuMode: boolean;
+    private endSceneWon: EndSceneWin;
+    private endSceneLost: EndSceneLost;
+    private endSceneMode: boolean;
     private spawnInterval: number
     private scoreToWin: number
 
@@ -28,17 +30,26 @@ class TheGame {
         this.stuffedAnimal = new StuffedAnimal();
         this.startMenu = new StartMenu();
         this.menuMode = true;
+        this.endSceneWon = new EndSceneWin();
+        this.endSceneLost = new EndSceneLost();
+        this.endSceneMode = false;
         this.spawnInterval = 1500;
-        this.scoreToWin = 100        
+        this.scoreToWin = 500        
     }
 
     update() {
         
-        if (this.menuMode == true) {
+        if (this.menuMode) {
             if (keyCode === ENTER) {
                 this.menuMode = false;
             }
-        } else {
+        } else if (this.endSceneMode) {
+            if (keyCode === ENTER) {
+                this.endSceneMode = false;
+                location.reload();
+            }
+        } 
+        else {
             this.player.update();
             this.star.update();
             this.badthing.update();
@@ -46,6 +57,7 @@ class TheGame {
             this.checkCollision()
             this.spawnNewObject()
             this.playBackgroundMusic()
+
             if (this.gameStatusbar.score < this.scoreToWin) {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.update()
@@ -56,46 +68,57 @@ class TheGame {
 
             if (this.gameStatusbar.score === this.scoreToWin) {
                 this.stuffedAnimal.update();
-                //winning message from EndScene
+                if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
+                    console.log('win!!!')
+                    this.endSceneMode = true;
+                    //winning message from EndScene
+                }
             }
             if (this.gameStatusbar.characterHP == 0) {
                 this.fallingObjects = []
                 //losing message from EndScene
+                this.endSceneMode = true;
             }
             this.gameStatusbar.update(); 
         }
-
-        console.log(this.fallingObjects)
-        
     }
-    
     draw() {
         clear();
         
         if (this.menuMode) {
             this.startMenu.draw();
-        } else {
-            this.environment.draw();
-            this.player.draw();
+        } else {            
 
             if (this.gameStatusbar.score < this.scoreToWin) {
+                this.environment.draw();
+                this.player.draw();
+                this.stuffedAnimal.draw();
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.draw()
                 }
+
+                this.gameStatusbar.draw(); 
+
             } 
             else if(this.gameStatusbar.score >= this.scoreToWin) {
               this.fallingObjects = []
             }
                 
             if (this.gameStatusbar.score === this.scoreToWin) {
-                //winning message from EndScene med setTimeout, så björnen hunnit falla ner.
+                this.environment.draw();
+                this.player.draw();
+                this.stuffedAnimal.draw();
+                if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
+                    this.endSceneWon.draw();
+                }
             }
             if (this.gameStatusbar.characterHP == 0) {
                 this.fallingObjects = []
+                
+                this.endSceneLost.draw();
+                
                 //losing message from EndScene
             }
-            this.gameStatusbar.draw(); 
-            this.stuffedAnimal.draw();
         }
     }
 
@@ -180,7 +203,6 @@ class TheGame {
                     this.fallingObjects.splice(i, 1);
                 }   
             }
-
         }
     }
 }
