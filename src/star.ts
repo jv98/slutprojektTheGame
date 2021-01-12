@@ -1,7 +1,6 @@
-class Star extends FallingObject{
+class Star{
 
     public size: number
-    //public soundeffect: boolean
     public img: p5.Image
     public position: p5.Vector
     public speed: number
@@ -9,9 +8,7 @@ class Star extends FallingObject{
     public hitbox: Rectangle
 
     constructor() {
-        super()
         this.size = 10
-        //this.soundeffect = boolean
         this.img = images.star;
         this.startRandom = random(0, width)
         this.position = createVector(this.startRandom, 0)

@@ -1,5 +1,5 @@
 
-class BadThing extends FallingObject{
+class BadThing{
 
     private size: number
     private img: p5.Image
@@ -9,7 +9,6 @@ class BadThing extends FallingObject{
     public hitbox: Rectangle
 
     constructor() {
-        super()
         this.size = 10
         this.img = images.badThing;
         this.startRandom = random(0, width)
