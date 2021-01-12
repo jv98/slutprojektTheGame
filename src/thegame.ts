@@ -72,12 +72,10 @@ class TheGame {
                     console.log('win!!!')
                     this.endSceneMode = true;
                     sounds.win.play()
-                    //winning message from EndScene
                 }
             }
             if (this.gameStatusbar.characterHP == 0) {
                 this.fallingObjects = []
-                //losing message from EndScene
                 this.endSceneMode = true;
             }
             this.gameStatusbar.update(); 
@@ -117,8 +115,6 @@ class TheGame {
                 this.fallingObjects = []
                 
                 this.endSceneLost.draw();
-                
-                //losing message from EndScene
             }
         }
     }

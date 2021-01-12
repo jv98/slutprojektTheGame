@@ -9,6 +9,9 @@ interface ISounds {
 interface IImages {
     logo: p5.Image;
     playerTrophy: p5.Image;
+    badThing: p5.Image;
+    star: p5.Image;
+    extraLife: p5.Image;
 }
 
 interface IFonts {
