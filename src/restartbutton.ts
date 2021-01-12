@@ -8,10 +8,10 @@ class RestartButton {
     
 
 
-    constructor(x: number, y:number, r: number){
+    constructor(x: number, y:number, width: number){
         this.x = x; 
         this.y = y;  
-        this.width = r; 
+        this.width = width; 
         this.prevMouseIsPressed = mouseIsPressed; 
         this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
         this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
@@ -24,12 +24,9 @@ class RestartButton {
             if(d < this.width){
                 game = new TheGame(); 
                 sounds.backgroundMusic.stop()
-                console.log('Restart')
-
             }
         }
         this.prevMouseIsPressed = mouseIsPressed; 
-
     }
 
     draw(){
@@ -45,7 +42,7 @@ class RestartButton {
 
     circle(){
         noStroke();
-        fill('red'); 
+        noFill(); 
         ellipse(this.x, this.y, this.width); 
     }
 
