@@ -20,6 +20,7 @@ function preload() {
          ouch: loadSound('../assets/music/ouch.mp3'),
          life: loadSound('../assets/music/extralife.mp3'),
          starr: loadSound ('../assets/music/starsound.mp3'),
+         win: loadSound('../assets/music/win.mp3')
     } as ISounds
 
     const playerImgCount = 7;

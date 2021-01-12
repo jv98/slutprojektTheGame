@@ -3,6 +3,7 @@ interface ISounds {
     life: p5.SoundFile;
     backgroundMusic: p5.SoundFile;
     starr: p5.SoundFile;
+    win: p5.SoundFile;
 }
 
 

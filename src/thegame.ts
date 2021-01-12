@@ -34,7 +34,7 @@ class TheGame {
         this.endSceneLost = new EndSceneLost();
         this.endSceneMode = false;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500        
+        this.scoreToWin = 100        
     }
 
     update() {
