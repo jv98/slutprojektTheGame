@@ -33,6 +33,9 @@ class BadThing extends FallingObject{
         drawRectFromHitbox(this.hitbox);
     }
 
+    /**
+     * Function to start the fallingobject at a random position on the gameplans width on top position
+     */
     falling() {
         if(this.position.y <= height) {
             if (this.position.y > height-5) {

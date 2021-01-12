@@ -69,7 +69,6 @@ class TheGame {
             if (this.gameStatusbar.score === this.scoreToWin) {
                 this.stuffedAnimal.update();
                 if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
-                    console.log('win!!!')
                     this.endSceneMode = true;
                     sounds.win.play()
                 }
@@ -95,9 +94,7 @@ class TheGame {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.draw()
                 }
-
                 this.gameStatusbar.draw(); 
-
             } 
             else if(this.gameStatusbar.score >= this.scoreToWin) {
               this.fallingObjects = []

@@ -1,7 +1,6 @@
 class ExtraLife extends FallingObject{
 
     public size: number
-    //public soundeffect: boolean
     public img: p5.Image
     public position: p5.Vector
     public speed: number
@@ -33,6 +32,9 @@ class ExtraLife extends FallingObject{
         drawRectFromHitbox(this.hitbox);
     }
 
+    /**
+     * Function to start the fallingobject at a random position on the gameplans width on top position
+     */
     falling() {
         if(this.position.x <= width) {
             if (this.position.x > width-5) {

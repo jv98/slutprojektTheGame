@@ -1,7 +1,6 @@
 class Star extends FallingObject{
 
     public size: number
-    //public soundeffect: boolean
     public img: p5.Image
     public position: p5.Vector
     public speed: number
@@ -11,7 +10,6 @@ class Star extends FallingObject{
     constructor() {
         super()
         this.size = 10
-        //this.soundeffect = boolean
         this.img = images.star;
         this.startRandom = random(0, width)
         this.position = createVector(this.startRandom, 0)
@@ -34,6 +32,9 @@ class Star extends FallingObject{
         drawRectFromHitbox(this.hitbox);
     }
 
+    /**
+     * Function to start the fallingobject at a random position on the gameplans width on top position
+     */
     falling() {
         if(this.position.y <= height) {
             if (this.position.y > height-5) {
