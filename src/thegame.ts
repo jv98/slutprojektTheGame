@@ -34,7 +34,7 @@ class TheGame {
         this.endSceneLost = new EndSceneLost();
         this.endSceneMode = false;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500        
+        this.scoreToWin = 500;        
     }
 
     update() {
@@ -71,6 +71,7 @@ class TheGame {
                 if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
                     console.log('win!!!')
                     this.endSceneMode = true;
+                    sounds.win.play()
                     //winning message from EndScene
                 }
             }

@@ -1,6 +1,8 @@
 //---- GLOBAL VARIABLES ----//
 let game: TheGame;
 let sounds: ISounds;
+let images: IImages;
+let fonts: IFonts;
 let menuMode: boolean = true;
 let playerImgMovingLeft = [] as p5.Image[];
 let playerImgMovingRight = [] as p5.Image[];
@@ -15,29 +17,36 @@ function preload() {
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
-    sounds={
+    sounds = {
          backgroundMusic: loadSound('../assets/music/backgroundsound.mp3'),
          ouch: loadSound('../assets/music/ouch.mp3'),
          life: loadSound('../assets/music/extralife.mp3'),
          starr: loadSound ('../assets/music/starsound.mp3'),
+         win: loadSound('../assets/music/win.mp3')
     } as ISounds
+
+    images = {
+        logo: loadImage('./assets/logo-fs.png'),
+        playerTrophy: loadImage('./assets/player-trophy.png')
+    } as IImages
+
+    fonts = {
+        poppinsBold: loadFont('./assets/poppins/Poppins-Bold.ttf'), 
+        poppinsMedium: loadFont('./assets/poppins/Poppins-Medium.ttf'), 
+        poppinsLight: loadFont('./assets/poppins/Poppins-Light.ttf') 
+    } as IFonts
 
     const playerImgCount = 7;
     for (let i = 1; i <= playerImgCount; i++) {
         playerImgMovingLeft.push(loadImage('assets/player-left' + i + '.png'));
         playerImgMovingRight.push(loadImage('assets/player-right' + i + '.png'));
     }
-    //Ikoner gameStatusbar 
+    //Icons gameStatusbar 
         loadImage('assets/musicPlay.png'); 
         loadImage('assets/starhp.png'); 
-        loadImage('assets/miniOneUp.png'); 
-        loadImage('./assets/logo-fs.png');
-        loadImage('./assets/player-trophy.png');
-        loadFont('./assets/poppins/Poppins-Bold.ttf');
-        loadFont('./assets/poppins/Poppins-Medium.ttf');
-        loadFont('./assets/poppins/Poppins-Light.ttf');
-        
+        loadImage('assets/miniOneUp.png');     
 }
+
 /**
  * Built in setup function in P5
  * This is a good place to create your first class object
