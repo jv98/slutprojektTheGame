@@ -1,6 +1,7 @@
-class ExtraLife{
+class ExtraLife extends FallingObject{
 
     public size: number
+    //public soundeffect: boolean
     public img: p5.Image
     public position: p5.Vector
     public speed: number
@@ -8,6 +9,7 @@ class ExtraLife{
     public hitbox: Rectangle
 
     constructor() {
+        super()
         this.size = 10
         this.img = images.extraLife;
         this.startRandom = random(0, width)        
