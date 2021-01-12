@@ -40,7 +40,7 @@ function preload() {
         playerImgMovingLeft.push(loadImage('assets/player-left' + i + '.png'));
         playerImgMovingRight.push(loadImage('assets/player-right' + i + '.png'));
     }
-    //Ikoner gameStatusbar 
+    //Icons gameStatusbar 
         loadImage('assets/musicPlay.png'); 
         loadImage('assets/starhp.png'); 
         loadImage('assets/miniOneUp.png');     
