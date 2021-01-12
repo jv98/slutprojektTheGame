@@ -116,6 +116,13 @@ class TheGame {
         }
     }
 
+    /**
+     * Function that starts the backgroundmusic when the game is starting
+     * It also stops the music when you win or lose the game
+     * 
+     * For the sound to work a trigger has to be used
+     * And in this case the ENTER stroke, the same to start the game.
+     */
     playBackgroundMusic() {
         if (keyCode === ENTER) {
             if(!sounds.backgroundMusic.isPlaying()) {
@@ -129,6 +136,10 @@ class TheGame {
         }
     }
 
+    /**
+     * Spawn new falling objects at a certain time
+     * The time between the falling objects decrease when the score gets higher
+     */
     spawnNewObject() {
         if (this.spawnTimer > this.spawnInterval) {
             this.spawnTimer = 0;
@@ -138,8 +149,7 @@ class TheGame {
         }
         if (this.spawnTimerHeart > 15000) {
             this.spawnTimerHeart = 0;
-            this.fallingObjects.push(new ExtraLife());    
-            
+            this.fallingObjects.push(new ExtraLife());
         }
 
         if (this.gameStatusbar.score > 50) {
@@ -157,12 +167,14 @@ class TheGame {
         if (this.gameStatusbar.score > 400) {
             this.spawnInterval = 300
         }
-        
-                
         this.spawnTimerHeart += deltaTime
         this.spawnTimer += deltaTime
     }
 
+    /**
+     * Check if the falling objects collide with anything
+     * When hit is made the object will be cleared from the array
+     */
     checkCollision() {
         for (const fallingObj of this.fallingObjects) {                 
         let i = this.fallingObjects.indexOf(fallingObj)
