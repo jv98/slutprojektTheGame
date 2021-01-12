@@ -11,8 +11,7 @@ class ExtraLife extends FallingObject{
     constructor() {
         super()
         this.size = 10
-        //this.soundeffect = boolean
-        this.img = loadImage('assets/1-up.png');
+        this.img = images.extraLife;
         this.startRandom = random(0, width)        
         this.position = createVector(this.startRandom, 0)
         this.speed = 4

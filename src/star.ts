@@ -12,7 +12,7 @@ class Star extends FallingObject{
         super()
         this.size = 10
         //this.soundeffect = boolean
-        this.img = loadImage('assets/star.png');
+        this.img = images.star;
         this.startRandom = random(0, width)
         this.position = createVector(this.startRandom, 0)
         this.speed = 4
