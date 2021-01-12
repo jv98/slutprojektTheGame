@@ -1,8 +1,8 @@
 class RestartButton {
-    x: number; 
-    y:number; 
-    width:number; 
-    prevMouseIsPressed: boolean; 
+    private x: number; 
+    private y:number; 
+    private width:number; 
+    private prevMouseIsPressed: boolean; 
 
 
     constructor(x: number, y:number, width: number){
@@ -12,6 +12,10 @@ class RestartButton {
         this.prevMouseIsPressed = mouseIsPressed; 
     }
 
+    /**
+     * Function that restarts the game when restart button is pressed. Also makes 
+     * the music stop when restarting. 
+     */
     update(){
         if(!this.prevMouseIsPressed && mouseIsPressed) { 
             let d = dist(mouseX, mouseY, this.x, this.y) *2

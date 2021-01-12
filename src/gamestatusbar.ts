@@ -12,7 +12,6 @@ class GameStatusbar {
         this.position = createVector(0, height -87)
         this.restartButton = new RestartButton(1150,height -20,160); 
         this.muteButton = new MuteButton(1000,height -5,80) 
-
     }
 
     update () {

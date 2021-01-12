@@ -31,7 +31,8 @@ function preload() {
         playImg: loadImage('assets/musicPlay.png'),
         muteImg: loadImage('assets/mute.png'), 
         starImg: loadImage('assets/starhp.png'), 
-        oneUpImg: loadImage('assets/miniOneUp.png') 
+        oneUpImg: loadImage('assets/miniOneUp.png'), 
+        platform: loadImage('assets/bg-1250.png')
 
     } as IImages
 

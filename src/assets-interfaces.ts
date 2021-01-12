@@ -13,6 +13,7 @@ interface IImages {
     muteImg: p5.Image; 
     starImg: p5.Image; 
     oneUpImg: p5.Image;
+    platform: p5.Image;
 }
 
 interface IFonts {
