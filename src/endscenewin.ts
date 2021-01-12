@@ -12,7 +12,7 @@ class EndSceneWin {
       this.poppinsMedium = loadFont('./assets/poppins/Poppins-Medium.ttf');
       this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
   }
-
+  
   draw() {
     push();
     background(0);
