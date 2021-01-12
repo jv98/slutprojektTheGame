@@ -27,7 +27,12 @@ function preload() {
 
     images = {
         logo: loadImage('./assets/logo-fs.png'),
-        playerTrophy: loadImage('./assets/player-trophy.png')
+        playerTrophy: loadImage('./assets/player-trophy.png'),
+        playImg: loadImage('assets/musicPlay.png'),
+        muteImg: loadImage('assets/mute.png'), 
+        starImg: loadImage('assets/starhp.png'), 
+        oneUpImg: loadImage('assets/miniOneUp.png') 
+
     } as IImages
 
     fonts = {

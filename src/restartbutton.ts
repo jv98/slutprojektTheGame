@@ -3,9 +3,6 @@ class RestartButton {
     y:number; 
     width:number; 
     prevMouseIsPressed: boolean; 
-    public poppinsBold: p5.Font;
-    public poppinsLight: p5.Font;
-    
 
 
     constructor(x: number, y:number, width: number){
@@ -13,9 +10,6 @@ class RestartButton {
         this.y = y;  
         this.width = width; 
         this.prevMouseIsPressed = mouseIsPressed; 
-        this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
-        this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
-       
     }
 
     update(){
@@ -33,7 +27,7 @@ class RestartButton {
         push()
         this.circle();
         fill('white')
-        textFont(this.poppinsBold); 
+        textFont(fonts.poppinsBold); 
         textAlign(CENTER, CENTER)
         textSize(20)
         text("Restart", this.x, this.y);

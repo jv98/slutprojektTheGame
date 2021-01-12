@@ -3,12 +3,8 @@ class MuteButton {
     private y:number; 
     private width:number; 
     private prevMuteIsPressed: boolean; 
-    public poppinsBold: p5.Font;
-    public poppinsLight: p5.Font;
     private isMuted: boolean;
     private position: p5.Vector;
-    private playImg: p5.Image;  
-    private muteImg: p5.Image; 
 
 
     constructor(x: number, y:number, width: number){
@@ -16,11 +12,7 @@ class MuteButton {
         this.y = y;  
         this.width = width; 
         this.prevMuteIsPressed = mouseIsPressed; 
-        this.poppinsBold = loadFont('./assets/poppins/Poppins-Bold.ttf');
-        this.poppinsLight = loadFont('./assets/poppins/Poppins-Light.ttf');
         this.isMuted = false;
-        this.playImg = loadImage('assets/musicPlay.png'); 
-        this.muteImg = loadImage('assets/mute.png'); 
         this.position = createVector(0, height -87);
 
     }
@@ -53,12 +45,12 @@ class MuteButton {
         push()
         this.circle();
         fill('white')
-        textFont(this.poppinsLight); 
+        textFont(fonts.poppinsLight); 
         textAlign(CENTER, CENTER)
             if(this.isMuted) {
-                image(this.muteImg, this.position.x +990, this.position.y +52); 
+                image(images.muteImg, this.position.x +990, this.position.y +52); 
             } else{
-                image(this.playImg, this.position.x +990, this.position.y +52); 
+                image(images.playImg, this.position.x +990, this.position.y +52); 
             }
         pop()
     }
