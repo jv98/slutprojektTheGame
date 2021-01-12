@@ -123,6 +123,7 @@ class TheGame {
         if (keyCode === ENTER) {
             if(!sounds.backgroundMusic.isPlaying()) {
                 sounds.backgroundMusic.play()
+                sounds.backgroundMusic.setVolume(0.1);
             } 
         }
         else if (this.gameStatusbar.score === this.scoreToWin) {
@@ -174,6 +175,7 @@ class TheGame {
                 if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     sounds.starr.play()
+                    sounds.starr.setVolume(0.1);
                     this.gameStatusbar.score = this.gameStatusbar.score + 10                    
                 } else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);
@@ -184,6 +186,7 @@ class TheGame {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     sounds.ouch.play()
+                    sounds.ouch.setVolume(0.1);
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP - 1
                     this.gameStatusbar.score = this.gameStatusbar.score - 10
                 }   else if (fallingObj.position.y > height-5) {
@@ -195,6 +198,7 @@ class TheGame {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     sounds.life.play()
+                    sounds.life.setVolume(0.1);
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1
                 }  else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);
