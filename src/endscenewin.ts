@@ -1,5 +1,5 @@
 class EndSceneWin {
-
+  
   draw() {
     push();
     background(0);
