@@ -34,7 +34,7 @@ class TheGame {
         this.endSceneLost = new EndSceneLost();
         this.endSceneMode = false;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500        
+        this.scoreToWin = 500;        
     }
 
     update() {
@@ -71,12 +71,11 @@ class TheGame {
                 if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
                     console.log('win!!!')
                     this.endSceneMode = true;
-                    //winning message from EndScene
+                    sounds.win.play()
                 }
             }
             if (this.gameStatusbar.characterHP == 0) {
                 this.fallingObjects = []
-                //losing message from EndScene
                 this.endSceneMode = true;
             }
             this.gameStatusbar.update(); 
@@ -116,8 +115,6 @@ class TheGame {
                 this.fallingObjects = []
                 
                 this.endSceneLost.draw();
-                
-                //losing message from EndScene
             }
         }
     }
@@ -126,6 +123,7 @@ class TheGame {
         if (keyCode === ENTER) {
             if(!sounds.backgroundMusic.isPlaying()) {
                 sounds.backgroundMusic.play()
+                sounds.backgroundMusic.setVolume(0.1);
             } 
         }
         else if (this.gameStatusbar.score === this.scoreToWin) {
@@ -177,6 +175,7 @@ class TheGame {
                 if (this.player.bucketCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     sounds.starr.play()
+                    sounds.starr.setVolume(0.1);
                     this.gameStatusbar.score = this.gameStatusbar.score + 10                    
                 } else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);
@@ -187,6 +186,7 @@ class TheGame {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     sounds.ouch.play()
+                    sounds.ouch.setVolume(0.1);
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP - 1
                     this.gameStatusbar.score = this.gameStatusbar.score - 10
                 }   else if (fallingObj.position.y > height-5) {
@@ -198,6 +198,7 @@ class TheGame {
                 if (this.player.playerCollision(fallingObj.hitbox)) {
                     this.fallingObjects.splice(i, 1);
                     sounds.life.play()
+                    sounds.life.setVolume(0.1);
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1
                 }  else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);

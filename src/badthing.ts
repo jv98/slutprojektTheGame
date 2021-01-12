@@ -2,7 +2,6 @@
 class BadThing extends FallingObject{
 
     private size: number
-    //public soundeffect: boolean
     private img: p5.Image
     public position: p5.Vector
     private speed: number
@@ -12,8 +11,7 @@ class BadThing extends FallingObject{
     constructor() {
         super()
         this.size = 10
-        //this.soundeffect = boolean
-        this.img = loadImage('assets/nail.png');
+        this.img = images.badThing;
         this.startRandom = random(0, width)
         this.position = createVector(this.startRandom, 0)
         this.speed = 3;
