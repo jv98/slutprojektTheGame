@@ -14,6 +14,9 @@ interface IImages {
     starImg: p5.Image; 
     oneUpImg: p5.Image;
     platform: p5.Image;
+    badThing: p5.Image;
+    star: p5.Image;
+    extraLife: p5.Image;
 }
 
 interface IFonts {

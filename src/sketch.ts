@@ -32,8 +32,10 @@ function preload() {
         muteImg: loadImage('assets/mute.png'), 
         starImg: loadImage('assets/starhp.png'), 
         oneUpImg: loadImage('assets/miniOneUp.png'), 
-        platform: loadImage('assets/bg-1250.png')
-
+        platform: loadImage('assets/bg-1250.png'),
+        badThing: loadImage('assets/nail.png'),
+        star: loadImage('assets/star.png'),
+        extraLife: loadImage('assets/1-up.png')
     } as IImages
 
     fonts = {
