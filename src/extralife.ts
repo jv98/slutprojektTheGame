@@ -7,7 +7,7 @@ class ExtraLife extends FallingObject{
         const img = images.extraLife;
         const startRandom = random(0, width)        
         const position = createVector(startRandom, 0)
-        const speed = 4
+        const speed = 5
         super(size, img, position, speed)
         this.hitbox = {
             x: this.position.x + 25,
