@@ -26,13 +26,4 @@ class ExtraLife extends FallingObject{
         image(this.img, this.position.x, this.position.y, 80, 60);
         drawRectFromHitbox(this.hitbox);
     }
-
-    falling(): void {
-        if(this.position.x <= width) {
-            if (this.position.x > width-5) {
-            } else {
-                this.position.y += this.speed               
-            }
-        }
-    }
 }
