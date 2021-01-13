@@ -1,20 +1,15 @@
 
 class BadThing extends FallingObject{
 
-    private size: number
-    private img: p5.Image
-    public position: p5.Vector
-    private speed: number
-    private startRandom: number
     public hitbox: Rectangle
 
     constructor() {
-        super()
-        this.size = 10
-        this.img = images.badThing;
-        this.startRandom = random(0, width)
-        this.position = createVector(this.startRandom, 0)
-        this.speed = 3;
+        const size = 10;
+        const img = images.badThing;
+        const startRandom = random(0, width)
+        const position = createVector(startRandom, 0)
+        const speed = 3;
+        super(size, img, position, speed)
         this.hitbox = {
             x: this.position.x + 7,
             y: this.position.y + 25,
@@ -33,7 +28,7 @@ class BadThing extends FallingObject{
         drawRectFromHitbox(this.hitbox);
     }
 
-    falling() {
+    falling(): void {
         if(this.position.y <= height) {
             if (this.position.y > height-5) {
             } else {

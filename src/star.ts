@@ -1,21 +1,14 @@
 class Star extends FallingObject{
-
-    public size: number
-    //public soundeffect: boolean
-    public img: p5.Image
-    public position: p5.Vector
-    public speed: number
-    public startRandom: number
+    
     public hitbox: Rectangle
 
     constructor() {
-        super()
-        this.size = 10
-        //this.soundeffect = boolean
-        this.img = images.star;
-        this.startRandom = random(0, width)
-        this.position = createVector(this.startRandom, 0)
-        this.speed = 4
+        const size = 10
+        const img = images.star;
+        const startRandom = random(0, width)
+        const position = createVector(startRandom, 0)
+        const speed = 4
+        super(size, img, position, speed)
         this.hitbox = {
             x: this.position.x + 10,
             y: this.position.y + 50,
@@ -34,7 +27,7 @@ class Star extends FallingObject{
         drawRectFromHitbox(this.hitbox);
     }
 
-    falling() {
+    falling(): void {
         if(this.position.y <= height) {
             if (this.position.y > height-5) {
             } else {
