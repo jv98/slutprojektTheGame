@@ -4,7 +4,7 @@ class Star extends FallingObject{
 
     constructor() {
         const size = 10
-        const img = loadImage('assets/star.png');
+        const img = images.star;
         const startRandom = random(0, width)
         const position = createVector(startRandom, 0)
         const speed = 4

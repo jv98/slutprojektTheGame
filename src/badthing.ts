@@ -5,7 +5,7 @@ class BadThing extends FallingObject{
 
     constructor() {
         const size = 10;
-        const img = loadImage('assets/nail.png');
+        const img = images.badThing;
         const startRandom = random(0, width)
         const position = createVector(startRandom, 0)
         const speed = 3;
