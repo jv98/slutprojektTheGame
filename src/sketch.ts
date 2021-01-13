@@ -22,7 +22,8 @@ function preload() {
          ouch: loadSound('../assets/music/ouch.mp3'),
          life: loadSound('../assets/music/extralife.mp3'),
          starr: loadSound ('../assets/music/starsound.mp3'),
-         win: loadSound('../assets/music/win.mp3')
+         win: loadSound('../assets/music/win.mp3'),
+         lose: loadSound('../assets/music/lose.mp3')
     } as ISounds
 
     images = {
