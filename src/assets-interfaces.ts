@@ -4,6 +4,7 @@ interface ISounds {
     backgroundMusic: p5.SoundFile;
     starr: p5.SoundFile;
     win: p5.SoundFile;
+    lose: p5.SoundFile;
 }
 
 interface IImages {
