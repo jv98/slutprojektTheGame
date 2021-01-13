@@ -27,14 +27,4 @@ class BadThing extends FallingObject{
         image(this.img, this.position.x, this.position.y, 30, 80);
         drawRectFromHitbox(this.hitbox);
     }
-
-    falling(): void {
-        if(this.position.y <= height) {
-            if (this.position.y > height-5) {
-            } else {
-                this.position.y += this.speed                
-            }
-        }
-    }
-
 }

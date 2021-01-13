@@ -19,8 +19,17 @@ abstract class FallingObject {
     draw() {
     }
 
+    /**
+     * falling function for the falling objects in the game
+     * If the certain height isn't met, it will fall
+     */
     falling(): void {
-        //fallande function
+        if(this.position.y <= height) {
+            if (this.position.y > height-5) {
+            } else {
+                this.position.y += this.speed               
+            }
+        }
     }
 
 }

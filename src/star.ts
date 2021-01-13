@@ -26,13 +26,4 @@ class Star extends FallingObject{
         image(this.img, this.position.x, this.position.y, 40, 70);
         drawRectFromHitbox(this.hitbox);
     }
-
-    falling(): void {
-        if(this.position.y <= height) {
-            if (this.position.y > height-5) {
-            } else {
-                this.position.y += this.speed               
-            }
-        }
-    }
 }
