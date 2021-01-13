@@ -1,20 +1,14 @@
 class ExtraLife extends FallingObject{
 
-    public size: number
-    //public soundeffect: boolean
-    public img: p5.Image
-    public position: p5.Vector
-    public speed: number
-    public startRandom: number
     public hitbox: Rectangle
 
     constructor() {
-        super()
-        this.size = 10
-        this.img = images.extraLife;
-        this.startRandom = random(0, width)        
-        this.position = createVector(this.startRandom, 0)
-        this.speed = 4
+        const size = 10
+        const img = images.extraLife;
+        const startRandom = random(0, width)        
+        const position = createVector(startRandom, 0)
+        const speed = 4
+        super(size, img, position, speed)
         this.hitbox = {
             x: this.position.x + 25,
             y: this.position.y + 20,
@@ -33,7 +27,7 @@ class ExtraLife extends FallingObject{
         drawRectFromHitbox(this.hitbox);
     }
 
-    falling() {
+    falling(): void {
         if(this.position.x <= width) {
             if (this.position.x > width-5) {
             } else {

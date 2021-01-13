@@ -34,7 +34,7 @@ class TheGame {
         this.endSceneLost = new EndSceneLost();
         this.endSceneMode = false;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500;        
+        this.scoreToWin = 20;        
     }
 
     update() {
@@ -71,11 +71,16 @@ class TheGame {
                 if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
                     this.endSceneMode = true;
                     sounds.win.play()
+                    sounds.win.setVolume(0.1);
+
+
                 }
             }
             if (this.gameStatusbar.characterHP == 0) {
                 this.fallingObjects = []
                 this.endSceneMode = true;
+                sounds.lose.play()
+                sounds.lose.setVolume(0.2);
             }
             this.gameStatusbar.update(); 
         }
@@ -122,7 +127,7 @@ class TheGame {
     playBackgroundMusic() {
         if (keyCode === ENTER) {
             if(!sounds.backgroundMusic.isPlaying()) {
-                sounds.backgroundMusic.play()
+                sounds.backgroundMusic.loop()
                 sounds.backgroundMusic.setVolume(0.1);
             } 
         }
