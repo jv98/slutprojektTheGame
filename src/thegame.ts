@@ -14,16 +14,16 @@ class TheGame {
     private endSceneWon: EndSceneWin;
     private endSceneLost: EndSceneLost;
     private endSceneMode: boolean;
-    private spawnInterval: number
-    private scoreToWin: number
+    private spawnInterval: number;
+    private scoreToWin: number;
 
     constructor() {
         this.star = new Star();
         this.badthing = new BadThing();
         this.extraLife = new ExtraLife();
-        this.fallingObjects = []
-        this.spawnTimer = 0
-        this.spawnTimerHeart = 0
+        this.fallingObjects = [];
+        this.spawnTimer = 0;
+        this.spawnTimerHeart = 0;
         this.player = new Player();
         this.environment = new Environment();
         this.gameStatusbar = new GameStatusbar();
@@ -54,22 +54,21 @@ class TheGame {
             this.star.update();
             this.badthing.update();
             this.extraLife.update();
-            this.checkCollision()
-            this.spawnNewObject()
-            this.playBackgroundMusic()
+            this.checkCollision();
+            this.spawnNewObject();
+            this.playBackgroundMusic();
 
             if (this.gameStatusbar.score < this.scoreToWin) {
                 for (const fallingObj of this.fallingObjects) {
                     fallingObj.update()
                 }
-            } else if(this.gameStatusbar.score >= this.scoreToWin) {
+            } else if (this.gameStatusbar.score >= this.scoreToWin) {
                 this.fallingObjects = []
             }
 
             if (this.gameStatusbar.score === this.scoreToWin) {
                 this.stuffedAnimal.update();
                 if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
-                    console.log('win!!!')
                     this.endSceneMode = true;
                     sounds.win.play()
                     sounds.win.setVolume(0.1);
@@ -86,6 +85,7 @@ class TheGame {
             this.gameStatusbar.update(); 
         }
     }
+
     draw() {
         clear();
         
@@ -104,7 +104,7 @@ class TheGame {
                 this.gameStatusbar.draw(); 
 
             } 
-            else if(this.gameStatusbar.score >= this.scoreToWin) {
+            else if (this.gameStatusbar.score >= this.scoreToWin) {
               this.fallingObjects = []
             }
                 
@@ -112,7 +112,7 @@ class TheGame {
                 this.environment.draw();
                 this.player.draw();
                 this.stuffedAnimal.draw();
-                if (this.player.playerCollision(this.stuffedAnimal.hitbox)){
+                if (this.player.playerCollision(this.stuffedAnimal.hitbox)) {
                     this.endSceneWon.draw();
                 }
             }
