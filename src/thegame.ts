@@ -72,11 +72,16 @@ class TheGame {
                     console.log('win!!!')
                     this.endSceneMode = true;
                     sounds.win.play()
+                    sounds.win.setVolume(0.1);
+
+
                 }
             }
             if (this.gameStatusbar.characterHP == 0) {
                 this.fallingObjects = []
                 this.endSceneMode = true;
+                sounds.lose.play()
+                sounds.lose.setVolume(0.2);
             }
             this.gameStatusbar.update(); 
         }
@@ -122,7 +127,7 @@ class TheGame {
     playBackgroundMusic() {
         if (keyCode === ENTER) {
             if(!sounds.backgroundMusic.isPlaying()) {
-                sounds.backgroundMusic.play()
+                sounds.backgroundMusic.loop()
                 sounds.backgroundMusic.setVolume(0.1);
             } 
         }
