@@ -72,10 +72,12 @@ class Player {
     }
 
     public playerCollision(hitbox: Rectangle): Boolean {
-        return rectangleOverlapsRect(this.playerHitboxRectangle, hitbox);
+        return rectangleOverlapsRect(this.playerHitboxRectangle, hitbox) || 
+        rectangleOverlapsRect(hitbox, this.playerHitboxRectangle);
     }
 
     public bucketCollision(hitbox: Rectangle): Boolean {
-        return rectangleOverlapsRect(this.bucketHitboxRectangle, hitbox);
+        return rectangleOverlapsRect(this.bucketHitboxRectangle, hitbox) || 
+        rectangleOverlapsRect(hitbox, this.bucketHitboxRectangle);
     }
 }
