@@ -2,7 +2,7 @@ class Environment {
 
     draw() {
         background(images.platform);
-        strokeWeight(6);
+        strokeWeight(0);
         point(0, 650);
         point(0, 600);
         point(45, 600);
