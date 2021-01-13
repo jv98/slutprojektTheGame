@@ -35,7 +35,7 @@ function preload() {
         platform: loadImage('assets/bg-1250.png'),
         badThing: loadImage('assets/nail.png'),
         star: loadImage('assets/star.png'),
-        extraLife: loadImage('assets/1-up.png')
+        extraLife: loadImage('assets/1-up.png'),
     } as IImages
 
     fonts = {
@@ -44,11 +44,8 @@ function preload() {
         poppinsLight: loadFont('./assets/poppins/Poppins-Light.ttf') 
     } as IFonts
 
-    const playerImgCount = 7;
-    for (let i = 1; i <= playerImgCount; i++) {
-        playerImgMovingLeft.push(loadImage('assets/player-left' + i + '.png'));
-        playerImgMovingRight.push(loadImage('assets/player-right' + i + '.png'));
-    }
+   setupPlayerImages();
+
     //Icons gameStatusbar 
         loadImage('assets/musicPlay.png'); 
         loadImage('assets/starhp.png'); 

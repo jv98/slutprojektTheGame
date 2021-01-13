@@ -5,7 +5,6 @@ class Player {
     private frameCounter: number;
     private img: p5.Image;
     private speed: p5.Vector;
-    private characterHP: Number;
     public position: p5.Vector;
     private bucketHitboxRectangle: Rectangle;
     private playerHitboxRectangle: Rectangle;
@@ -14,14 +13,12 @@ class Player {
         this.debug = false;
         this.playerImgLeft = playerImgMovingLeft;
         this.playerImgRight = playerImgMovingRight;
-        //this.setupImages();
         this.img = this.playerImgLeft[0];
         this.position = new p5.Vector();
         this.position.x = 500;
         this.speed = new p5.Vector();
         this.speed.x = 7;
         this.frameCounter = 1;
-        this.characterHP = 3;
         this.playerHitboxRectangle = {
             x: this.position.x + 78,
             y: 460,

@@ -24,3 +24,11 @@ interface IFonts {
     poppinsMedium: p5.Font;
     poppinsLight: p5.Font;
 }
+
+function setupPlayerImages() {
+    const playerImgCount = 7;
+    for (let i = 1; i <= playerImgCount; i++) {
+        playerImgMovingLeft.push(loadImage('assets/player-left' + i + '.png'));
+        playerImgMovingRight.push(loadImage('assets/player-right' + i + '.png'));
+    }
+}
