@@ -153,9 +153,9 @@ class TheGame {
             if (this.spawnTimerHeart > 15000) {
                 this.spawnTimerHeart = 0;
                 this.fallingObjects.push(new ExtraLife());   
-            }
+            } 
         }
-        
+
         if (this.gameStatusbar.characterHP === 1) {
             if (this.spawnTimerHeart > 5000) {
                 this.spawnTimerHeart = 0;
