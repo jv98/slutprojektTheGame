@@ -5,7 +5,7 @@ class ExtraLife extends FallingObject{
     constructor() {
         const size = 10
         const img = images.extraLife;
-        const startRandom = random(0, width)        
+        const startRandom = random(15, width-50)        
         const position = createVector(startRandom, 0)
         const speed = 4
         super(size, img, position, speed)

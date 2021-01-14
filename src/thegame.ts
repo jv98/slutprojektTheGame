@@ -139,34 +139,34 @@ class TheGame {
     }
 
     spawnNewObject() {
+        const multiplier = 1.6
+        const fasterSpawnTime = 1000 - this.gameStatusbar.score*multiplier
+
         if (this.spawnTimer > this.spawnInterval) {
             this.spawnTimer = 0;
             this.fallingObjects.push(new Star());
             this.fallingObjects.push(new BadThing());     
                
         }
-        if (this.spawnTimerHeart > 15000) {
-            this.spawnTimerHeart = 0;
-            this.fallingObjects.push(new ExtraLife());    
-            
+
+        if (this.gameStatusbar.characterHP > 1) {
+            if (this.spawnTimerHeart > 15000) {
+                this.spawnTimerHeart = 0;
+                this.fallingObjects.push(new ExtraLife());   
+            } 
         }
 
+        if (this.gameStatusbar.characterHP === 1) {
+            if (this.spawnTimerHeart > 5000) {
+                this.spawnTimerHeart = 0;
+                this.fallingObjects.push(new ExtraLife());   
+            }
+        }
+       
         if (this.gameStatusbar.score > 50) {
-            this.spawnInterval = 1000
+            this.spawnInterval = fasterSpawnTime
+            console.log(this.spawnInterval)
         }
-
-        if (this.gameStatusbar.score > 100) {
-            this.spawnInterval = 750
-        }
-
-        if (this.gameStatusbar.score > 250) {
-            this.spawnInterval = 500
-        }
-
-        if (this.gameStatusbar.score > 400) {
-            this.spawnInterval = 300
-        }
-        
                 
         this.spawnTimerHeart += deltaTime
         this.spawnTimer += deltaTime

@@ -62,7 +62,8 @@ function preload() {
 function setup() {
     let cnv = createCanvas(1250, 650);
     let x = (windowWidth - width) / 2;
-    cnv.position(x);
+    let y = (windowHeight - height) / 2;
+    cnv.position(x,y);
     frameRate(60);
     //noCursor();  
     game = new TheGame();
