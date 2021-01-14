@@ -206,7 +206,7 @@ class TheGame {
                     sounds.life.play()
                     sounds.life.setVolume(0.1);
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1;
-                    this.player.changeSpeedForSeconds(7, 5);
+                    this.player.changeSpeedForSeconds(6, 5);
                 }  else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);
                 }   

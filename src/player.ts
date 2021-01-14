@@ -4,7 +4,7 @@ class Player {
     private playerImgRight: p5.Image[];
     private frameCounter: number;
     private img: p5.Image;
-    public speed: p5.Vector;
+    private speed: p5.Vector;
     public position: p5.Vector;
     private bucketHitboxRectangle: Rectangle;
     private playerHitboxRectangle: Rectangle;
