@@ -20,8 +20,8 @@ class RestartButton {
         if(!this.prevMouseIsPressed && mouseIsPressed) { 
             let d = dist(mouseX, mouseY, this.x, this.y) *2
             if(d < this.width){
-                game = new TheGame(); 
                 sounds.backgroundMusic.stop()
+                game = new TheGame();
             }
         }
         this.prevMouseIsPressed = mouseIsPressed; 

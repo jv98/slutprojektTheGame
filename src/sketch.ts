@@ -3,7 +3,6 @@ let game: TheGame;
 let sounds: ISounds;
 let images: IImages;
 let fonts: IFonts;
-let menuMode: boolean = true;
 let playerImgMovingLeft = [] as p5.Image[];
 let playerImgMovingRight = [] as p5.Image[];
 
@@ -17,7 +16,7 @@ function preload() {
     // Tyvärr har jag inte fått till den globala typningen för
     // inladdningen av ljud men fungerar bra enligt nedan..
     // sound = (window as any).loadSound('../assets/mySound.wav');
-    sounds = {
+    sounds = {  // kör musikne in till spletet och hittar den i music mappen
          backgroundMusic: loadSound('../assets/music/backgroundsound.mp3'),
          ouch: loadSound('../assets/music/ouch.mp3'),
          life: loadSound('../assets/music/extralife.mp3'),

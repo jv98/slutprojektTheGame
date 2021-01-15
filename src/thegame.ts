@@ -34,19 +34,18 @@ class TheGame {
         this.endSceneLost = new EndSceneLost();
         this.endSceneMode = false;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500;        
+        this.scoreToWin = 500; 
     }
 
     update() {
         
         if (this.menuMode) {
-            if (keyCode === ENTER) {
+            if (keyIsDown(ENTER)) {
                 this.menuMode = false;
             }
         } else if (this.endSceneMode) {
-            if (keyCode === ENTER) {
-                this.endSceneMode = false;
-                location.reload();
+            if (keyIsDown(ENTER)) {
+                game = new TheGame();
             }
         } 
         else {
