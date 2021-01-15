@@ -34,19 +34,18 @@ class TheGame {
         this.endSceneLost = new EndSceneLost();
         this.endSceneMode = false;
         this.spawnInterval = 1500;
-        this.scoreToWin = 500;        
+        this.scoreToWin = 500; 
     }
 
     update() {
         
         if (this.menuMode) {
-            if (keyCode === ENTER) {
+            if (keyIsDown(ENTER)) {
                 this.menuMode = false;
             }
         } else if (this.endSceneMode) {
-            if (keyCode === ENTER) {
-                this.endSceneMode = false;
-                location.reload();
+            if (keyIsDown(ENTER)) {
+                game = new TheGame();
             }
         } 
         else {
@@ -139,34 +138,34 @@ class TheGame {
     }
 
     spawnNewObject() {
+        const multiplier = 1.6
+        const fasterSpawnTime = 1000 - this.gameStatusbar.score*multiplier
+
         if (this.spawnTimer > this.spawnInterval) {
             this.spawnTimer = 0;
             this.fallingObjects.push(new Star());
             this.fallingObjects.push(new BadThing());     
                
         }
-        if (this.spawnTimerHeart > 15000) {
-            this.spawnTimerHeart = 0;
-            this.fallingObjects.push(new ExtraLife());    
-            
+
+        if (this.gameStatusbar.characterHP > 1) {
+            if (this.spawnTimerHeart > 15000) {
+                this.spawnTimerHeart = 0;
+                this.fallingObjects.push(new ExtraLife());   
+            } 
         }
 
+        if (this.gameStatusbar.characterHP === 1) {
+            if (this.spawnTimerHeart > 5000) {
+                this.spawnTimerHeart = 0;
+                this.fallingObjects.push(new ExtraLife());   
+            }
+        }
+       
         if (this.gameStatusbar.score > 50) {
-            this.spawnInterval = 1000
+            this.spawnInterval = fasterSpawnTime
+            console.log(this.spawnInterval)
         }
-
-        if (this.gameStatusbar.score > 100) {
-            this.spawnInterval = 750
-        }
-
-        if (this.gameStatusbar.score > 250) {
-            this.spawnInterval = 500
-        }
-
-        if (this.gameStatusbar.score > 400) {
-            this.spawnInterval = 300
-        }
-        
                 
         this.spawnTimerHeart += deltaTime
         this.spawnTimer += deltaTime
@@ -193,7 +192,8 @@ class TheGame {
                     sounds.ouch.play()
                     sounds.ouch.setVolume(0.1);
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP - 1
-                    this.gameStatusbar.score = this.gameStatusbar.score - 10
+                    this.gameStatusbar.score = this.gameStatusbar.score - 10;
+                    this.player.changeSpeedForSeconds(4, 2);
                 }   else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);
                 }  
@@ -204,7 +204,8 @@ class TheGame {
                     this.fallingObjects.splice(i, 1);
                     sounds.life.play()
                     sounds.life.setVolume(0.1);
-                    this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1
+                    this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1;
+                    this.player.changeSpeedForSeconds(12, 5);
                 }  else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);
                 }   

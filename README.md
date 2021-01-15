@@ -35,4 +35,24 @@ Typings för de globala variablerna relaterat till p5.sound fungerar tyvärr int
 ## TODO
 Lägg till ytterliggare information som är specifikt för ert projekt!
 
+## Falling star
+
+# Spelbeskrivning
+Willow är en liten tjej som precis tappat bort sin käraste ägodel, sitt favoritgosedjur. Hon måste nu fånga stjärnorna som faller för att hennes önskan om att få tillbaka sitt gosedjur ska slå in. ​ ​
+
+I det här spelet kontrollerar du Willow och hjälper henne samla stjärnorna. Men stjärnor är inte det enda som faller från himlen. Du måste också hjälpa Willow att undvika de sylvassa fallande spikarna. Träffas hon av en spik försvinner ett liv. Om du är extra alert kan du hinna fånga bonusliv som också faller från himlen emellanåt. ​​
+
+När dina liv tar slut är spelet över, har du då samlat tillräckligt många stjärnor slår Willows önskan in och hon får tillbaka sitt gosedjur. 
+
+# Skapare av spelet
+Amanda - 
+Jacob -
+Malin -
+Moa -
+Nicklas -
+Oliver -
+
+# Spellänk
+[Testa spelet](Länk)
+
 **LYCKA TILL!**

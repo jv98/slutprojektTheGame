@@ -1,3 +1,4 @@
+//hanter ljud med interface och musiken
 interface ISounds {
     ouch: p5.SoundFile;
     life: p5.SoundFile;
