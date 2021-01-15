@@ -47,7 +47,7 @@ När dina liv tar slut är spelet över, har du då samlat tillräckligt många 
 # Skapare av spelet
 Amanda - 
 Jacob -
-Malin -
+[Malin](https://github.com/msmalinosterberg) -
 Moa -
 Nicklas -
 Oliver -
