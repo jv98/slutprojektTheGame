@@ -8,6 +8,7 @@ class Player {
     public position: p5.Vector;
     private bucketHitboxRectangle: Rectangle;
     private playerHitboxRectangle: Rectangle;
+    private speedIncreaseFrames: number;
 
     constructor() {  
         this.debug = false;
@@ -19,6 +20,7 @@ class Player {
         this.speed = new p5.Vector();
         this.speed.x = 7;
         this.frameCounter = 1;
+        this.speedIncreaseFrames = -1;
         this.playerHitboxRectangle = {
             x: this.position.x + 78,
             y: 460,
@@ -34,6 +36,12 @@ class Player {
     }
 
     movement() {
+        if (this.speedIncreaseFrames > 0) {
+            this.speedIncreaseFrames--;
+        } else if (this.speedIncreaseFrames === 0) {
+            this.speed.x = 7;
+            this.speedIncreaseFrames = -1;
+        }
         if (this.position.x > -10) {
             if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
                 this.position.x -= this.speed.x;
@@ -79,5 +87,10 @@ class Player {
     public bucketCollision(hitbox: Rectangle): Boolean {
         return rectangleOverlapsRect(this.bucketHitboxRectangle, hitbox) || 
         rectangleOverlapsRect(hitbox, this.bucketHitboxRectangle);
+    }
+
+    public changeSpeedForSeconds(speedChange: number, seconds: number) {
+        this.speedIncreaseFrames = seconds * 60;
+        this.speed.x = speedChange;
     }
 }
