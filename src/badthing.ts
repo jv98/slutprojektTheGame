@@ -8,7 +8,7 @@ class BadThing extends FallingObject{
         const img = images.badThing;
         const startRandom = random(15, width-50) 
         const position = createVector(startRandom, 0)
-        const speed = Math.random()*4+3
+        const speed = Math.random()*5+4;
         super(size, img, position, speed)
         this.hitbox = {
             x: this.position.x + 7,
