@@ -39,6 +39,7 @@ class TheGame {
 
     update() {
         
+        // Gamecontroller
         if (this.menuMode) {
             if (keyCode === ENTER) {
                 this.menuMode = false;
@@ -89,6 +90,7 @@ class TheGame {
     draw() {
         clear();
         
+        //Gamecontroller
         if (this.menuMode) {
             this.startMenu.draw();
         } else {            
@@ -124,6 +126,9 @@ class TheGame {
         }
     }
 
+    /**
+     * Handle backgroundmusic at start, lose and win
+     */
     playBackgroundMusic() {
         if (keyCode === ENTER) {
             if(!sounds.backgroundMusic.isPlaying()) {
@@ -138,6 +143,11 @@ class TheGame {
         }
     }
 
+    /**
+     * Spawns new fallingobjects
+     * multiplier: Multiplies the star point
+     * fasterSpawnTime: decreases spawntime with the gamescore*multiplier
+     */
     spawnNewObject() {
         const multiplier = 1.6
         const fasterSpawnTime = 1000 - this.gameStatusbar.score*multiplier
@@ -172,6 +182,9 @@ class TheGame {
         this.spawnTimer += deltaTime
     }
 
+    /**
+     * Function that checks if collosion is made per fallingobjects type and object
+     */
     checkCollision() {
         for (const fallingObj of this.fallingObjects) {                 
         let i = this.fallingObjects.indexOf(fallingObj)
