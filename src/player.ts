@@ -12,14 +12,14 @@ class Player {
     private environment: Environment;
 
     constructor(environment: Environment) {  
-        this.debug = false;
+        this.debug = true;
         this.environment = environment;
         this.playerImgLeft = playerImgMovingLeft;
         this.playerImgRight = playerImgMovingRight;
         this.img = this.playerImgLeft[0];
         this.position = new p5.Vector();
         this.position.x = 500;
-        this.position.y = this.environment.getGroundYPosition(this.position.x + 75);
+        this.position.y = this.environment.getGroundYPosition(this.position.x + 80);
         this.speed = new p5.Vector();
         this.speed.x = 7;
         this.frameCounter = 1;
@@ -58,7 +58,7 @@ class Player {
         if (this.position.x < 1105) {
             if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
                 this.position.x += this.speed.x;
-                this.position.y = this.environment.getGroundYPosition(this.position.x + 50);
+                this.position.y = this.environment.getGroundYPosition(this.position.x + 100);
                 let current = Math.floor((this.frameCounter % 60) / 10);
                 this.img = this.playerImgRight[current];
                 this.bucketHitboxRectangle.x = this.position.x + 78;

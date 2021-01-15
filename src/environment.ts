@@ -58,7 +58,7 @@ class Environment {
 
     public getGroundYPosition(x: number) {
         for (let i = 1; i < this.ground.length; i++) {
-            if (this.ground[i].x > x) {
+            if (this.ground[i].x >= x) {
                 const leftPoint = this.ground[i - 1];
                 const rightPoint = this.ground[i];
                 const distX = rightPoint.x - leftPoint.x;
