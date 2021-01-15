@@ -5,6 +5,7 @@ class Environment {
         this.ground = [
             createVector(600, 0),
             createVector(0, 650),
+            createVector(0, 650),
             createVector(0, 600),
             createVector(0, 600),
             createVector(0, 650),
@@ -65,7 +66,6 @@ class Environment {
                 const diff = normalizedX / distX;
                 const distY = rightPoint.y - leftPoint.y;
                 const averageY = leftPoint.y - distY * diff;
-                console.log(averageY)
                 return averageY;
             }
         }

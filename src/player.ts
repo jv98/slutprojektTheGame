@@ -12,7 +12,7 @@ class Player {
     private environment: Environment;
 
     constructor(environment: Environment) {  
-        this.debug = false;
+        this.debug = true;
         this.environment = environment;
         this.playerImgLeft = playerImgMovingLeft;
         this.playerImgRight = playerImgMovingRight;
@@ -32,7 +32,7 @@ class Player {
         }
         this.bucketHitboxRectangle = {
             x: this.position.x + 13,
-            y: 510,
+            y: 500,
             width: 60,
             height: 8,
         }

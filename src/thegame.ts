@@ -138,6 +138,12 @@ class TheGame {
         }
     }
 
+    /**
+     * Spawns new fallingobjects
+     * multiplier: Multiplier for the star point
+     * fasterSpawnTime: decreases spawntime with the gamescore*multiplier
+     */
+
     spawnNewObject() {
         const multiplier = 1.6
         const fasterSpawnTime = 1000 - this.gameStatusbar.score*multiplier
@@ -171,6 +177,10 @@ class TheGame {
         this.spawnTimerHeart += deltaTime
         this.spawnTimer += deltaTime
     }
+
+    /**
+     * Function that checks if collosion is made per fallingobjects type and object
+     */
 
     checkCollision() {
         for (const fallingObj of this.fallingObjects) {                 

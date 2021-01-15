@@ -44,15 +44,26 @@ I det här spelet kontrollerar du Willow och hjälper henne samla stjärnorna. M
 
 När dina liv tar slut är spelet över, har du då samlat tillräckligt många stjärnor slår Willows önskan in och hon får tillbaka sitt gosedjur. 
 
+## Features
+Stjärna ger X poäng
+Spik tar 1 liv, minus Stjärnas poäng samt gör spelaren långsammare några sekunder
+Hjärta ger 1 i liv samt boostar speed i några sekunder
+Objektens fallhastighet är random mellan 4-9
+Objektens start är random på x-axeln i top
+
+Stjärnor och Spikar har en respawn tid på 1.5 sekunder
+När 50 poäng är samlat blir respawn tiden 1 sekund men den kommer även sjunka ju mer poäng du samlar.
+
+Liv har en respawn tid på 15 sekunder.
+När man bara har 1 liv, kommer hjärtan falla var 5 sekund
+Så fort man får ett hjärta återgår respawn till 15 sekunder.
 # Skapare av spelet
-Amanda - 
-Jacob -
-Malin -
-Moa -
-Nicklas -
-Oliver -
+[Amanda](https://github.com/amandasamuelsson) 
+[Jacob](https://github.com/jv98)
+[Malin](https://github.com/msmalinosterberg)
+[Moa](https://github.com/stonetwix)
+[Nicklas](https://github.com/Nicklas-Holmqvist)
+[Oliver](https://github.com/olivernygren)
 
 # Spellänk
-[Testa spelet](Länk)
-
-**LYCKA TILL!**
+[Testa spelet](https://falling-stars.netlify.app/)
