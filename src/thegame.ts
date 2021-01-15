@@ -24,8 +24,8 @@ class TheGame {
         this.fallingObjects = [];
         this.spawnTimer = 0;
         this.spawnTimerHeart = 0;
-        this.player = new Player();
         this.environment = new Environment();
+        this.player = new Player(this.environment);
         this.gameStatusbar = new GameStatusbar();
         this.stuffedAnimal = new StuffedAnimal();
         this.startMenu = new StartMenu();
@@ -137,6 +137,12 @@ class TheGame {
         }
     }
 
+    /**
+     * Spawns new fallingobjects
+     * multiplier: Multiplier for the star point
+     * fasterSpawnTime: decreases spawntime with the gamescore*multiplier
+     */
+
     spawnNewObject() {
         const multiplier = 1.6
         const fasterSpawnTime = 1000 - this.gameStatusbar.score*multiplier
@@ -170,6 +176,10 @@ class TheGame {
         this.spawnTimerHeart += deltaTime
         this.spawnTimer += deltaTime
     }
+
+    /**
+     * Function that checks if collosion is made per fallingobjects type and object
+     */
 
     checkCollision() {
         for (const fallingObj of this.fallingObjects) {                 

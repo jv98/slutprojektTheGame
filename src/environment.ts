@@ -1,79 +1,74 @@
 class Environment {
+    private ground: p5.Vector[];
+
+    constructor() {
+        this.ground = [
+            createVector(600, 0),
+            createVector(0, 650),
+            createVector(0, 650),
+            createVector(0, 600),
+            createVector(0, 600),
+            createVector(0, 650),
+            createVector(0, 600),
+            createVector(45, 600),
+            createVector(90, 590),
+            createVector(130, 580),
+            createVector(170, 580),
+            createVector(210, 600),
+            createVector(250, 600),
+            createVector(290, 600),
+            createVector(330, 590),
+            createVector(370, 585),
+            createVector(410, 580),
+            createVector(450, 590),
+            createVector(490, 590),
+            createVector(530, 595),
+            createVector(570, 580),
+            createVector(610, 580),
+            createVector(650, 578),
+            createVector(690, 582),
+            createVector(730, 575),
+            createVector(770, 580),     
+            createVector(800, 590),  
+            createVector(860, 600),
+            createVector(920, 600),
+            createVector(980, 600),
+            createVector(1040, 600),
+            createVector(1100, 590),
+            createVector(1160, 590),
+            createVector(1200, 600),
+            createVector(1250, 600),
+            createVector(1250, 650),    
+            createVector(1250, 650),     
+        ];
+    }
 
     draw() {
         background(images.platform);
-        strokeWeight(0);
-        point(0, 650);
-        point(0, 600);
-        point(45, 600);
-        point(90, 590);
-        point(130, 580);
-        point(170, 580);
-        point(210, 600);
-        point(250, 600);
-        point(290, 600);
-        point(330, 590);
-        point(370, 585);
-        point(410, 580);
-        point(450, 590);
-        point(490, 590);
-        point(530, 595);
-        point(570, 580);
-        point(610, 575);
-        point(650, 570);
-        point(690, 570);
-        point(730, 575);
-        point(770, 580);     
-        point(800, 590);  
-        point(860, 600);
-        point(920, 600);
-        point(980, 600);
-        point(1040, 600);
-        point(1100, 590);
-        point(1160, 590);
-        point(1200, 600);
-        point(1250, 600);
-        point(1250, 650);
         strokeWeight(1);
         
         fill(0);
         beginShape();
-        curveVertex(600, 0);
-        curveVertex(0, 650);
-        curveVertex(0, 600);
-        curveVertex(0, 600);
-        curveVertex(0, 650);
-        curveVertex(0, 600);
-        curveVertex(45, 600);
-        curveVertex(90, 590);
-        curveVertex(130, 580);
-        curveVertex(170, 580);
-        curveVertex(210, 600);
-        curveVertex(250, 600);
-        curveVertex(290, 600);
-        curveVertex(330, 590);
-        curveVertex(370, 585);
-        curveVertex(410, 580);
-        curveVertex(450, 590);
-        curveVertex(490, 590);
-        curveVertex(530, 595);
-        curveVertex(570, 580);
-        curveVertex(610, 580);
-        curveVertex(650, 578);
-        curveVertex(690, 582);
-        curveVertex(730, 575);
-        curveVertex(770, 580);     
-        curveVertex(800, 590);  
-        curveVertex(860, 600);
-        curveVertex(920, 600);
-        curveVertex(980, 600);
-        curveVertex(1040, 600);
-        curveVertex(1100, 590);
-        curveVertex(1160, 590);
-        curveVertex(1200, 600);
-        curveVertex(1250, 600);
-        curveVertex(1250, 650);    
-        curveVertex(1250, 650);    
+        for (const point of this.ground) {
+            curveVertex(point.x, point.y);
+        }
+           
         endShape();
     }
+
+    public getGroundYPosition(x: number) {
+        for (let i = 1; i < this.ground.length; i++) {
+            if (this.ground[i].x >= x) {
+                const leftPoint = this.ground[i - 1];
+                const rightPoint = this.ground[i];
+                const distX = rightPoint.x - leftPoint.x;
+                const normalizedX = x - leftPoint.x;
+                const diff = normalizedX / distX;
+                const distY = rightPoint.y - leftPoint.y;
+                const averageY = leftPoint.y - distY * diff;
+                return averageY;
+            }
+        }
+        return 0;
+    } 
 }

@@ -9,14 +9,17 @@ class Player {
     private bucketHitboxRectangle: Rectangle;
     private playerHitboxRectangle: Rectangle;
     private speedIncreaseFrames: number;
+    private environment: Environment;
 
-    constructor() {  
+    constructor(environment: Environment) {  
         this.debug = false;
+        this.environment = environment;
         this.playerImgLeft = playerImgMovingLeft;
         this.playerImgRight = playerImgMovingRight;
         this.img = this.playerImgLeft[0];
         this.position = new p5.Vector();
         this.position.x = 500;
+        this.position.y = this.environment.getGroundYPosition(this.position.x + 80);
         this.speed = new p5.Vector();
         this.speed.x = 7;
         this.frameCounter = 1;
@@ -29,7 +32,7 @@ class Player {
         }
         this.bucketHitboxRectangle = {
             x: this.position.x + 13,
-            y: 510,
+            y: 500,
             width: 60,
             height: 8,
         }
@@ -45,6 +48,7 @@ class Player {
         if (this.position.x > -10) {
             if (keyIsDown(LEFT_ARROW) || keyIsDown(65)) {
                 this.position.x -= this.speed.x;
+                this.position.y = this.environment.getGroundYPosition(this.position.x + 110);
                 let current = Math.floor((this.frameCounter % 60) / 10);
                 this.img = this.playerImgLeft[current];
                 this.bucketHitboxRectangle.x = this.position.x + 13;
@@ -54,6 +58,7 @@ class Player {
         if (this.position.x < 1105) {
             if (keyIsDown(RIGHT_ARROW) || keyIsDown(68)) {
                 this.position.x += this.speed.x;
+                this.position.y = this.environment.getGroundYPosition(this.position.x + 100);
                 let current = Math.floor((this.frameCounter % 60) / 10);
                 this.img = this.playerImgRight[current];
                 this.bucketHitboxRectangle.x = this.position.x + 78;
@@ -69,7 +74,7 @@ class Player {
     draw() {
         this.frameCounter += 1;
 
-        image(this.img, this.position.x, this.position.y + 460, 150, 150);
+        image(this.img, this.position.x, this.position.y - 290 + 150, 150, 150);
         fill("#cccccc");
         if (!this.debug) {
             noFill();
