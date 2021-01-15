@@ -24,8 +24,8 @@ class TheGame {
         this.fallingObjects = [];
         this.spawnTimer = 0;
         this.spawnTimerHeart = 0;
-        this.player = new Player();
         this.environment = new Environment();
+        this.player = new Player(this.environment);
         this.gameStatusbar = new GameStatusbar();
         this.stuffedAnimal = new StuffedAnimal();
         this.startMenu = new StartMenu();
