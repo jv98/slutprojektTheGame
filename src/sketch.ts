@@ -3,7 +3,6 @@ let game: TheGame;
 let sounds: ISounds;
 let images: IImages;
 let fonts: IFonts;
-let menuMode: boolean = true;
 let playerImgMovingLeft = [] as p5.Image[];
 let playerImgMovingRight = [] as p5.Image[];
 
