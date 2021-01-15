@@ -1,5 +1,7 @@
 <html>
     <head>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
         <style>
             html,
             body {
@@ -12,6 +14,17 @@
                 margin: 0;
                 background: white;
             }
+            #p5_loading h1 {
+                font-family: 'Poppins';
+                color: white;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: 100%;
+                letter-spacing: 5px;
+                font-size: 3rem;
+            }
         </style>
 
         <script src="https://cdn.jsdelivr.net/npm/p5@1.1.9/lib/p5.js"></script>
@@ -19,6 +32,9 @@
         <script src="build/bundle.js"></script>
     </head>
     <body>
+        <div id="p5_loading">
+            <h1>LOADIIIIING...</h1>
+        </div>
         <!-- Code injected via JavaScript -->
     </body>
 </html>
