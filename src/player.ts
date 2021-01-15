@@ -12,7 +12,7 @@ class Player {
     private environment: Environment;
 
     constructor(environment: Environment) {  
-        this.debug = true;
+        this.debug = false;
         this.environment = environment;
         this.playerImgLeft = playerImgMovingLeft;
         this.playerImgRight = playerImgMovingRight;
