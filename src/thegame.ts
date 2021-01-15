@@ -194,7 +194,7 @@ class TheGame {
                     sounds.ouch.setVolume(0.1);
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP - 1
                     this.gameStatusbar.score = this.gameStatusbar.score - 10;
-                    this.player.changeSpeedForSeconds(-3, 2);
+                    this.player.changeSpeedForSeconds(4, 2);
                 }   else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);
                 }  
@@ -206,7 +206,7 @@ class TheGame {
                     sounds.life.play()
                     sounds.life.setVolume(0.1);
                     this.gameStatusbar.characterHP = this.gameStatusbar.characterHP + 1;
-                    this.player.changeSpeedForSeconds(5, 5);
+                    this.player.changeSpeedForSeconds(12, 5);
                 }  else if (fallingObj.position.y > height-5) {
                     this.fallingObjects.splice(i, 1);
                 }   

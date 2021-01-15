@@ -91,6 +91,6 @@ class Player {
 
     public changeSpeedForSeconds(speedChange: number, seconds: number) {
         this.speedIncreaseFrames = seconds * 60;
-        this.speed.x += speedChange;
+        this.speed.x = speedChange;
     }
 }
